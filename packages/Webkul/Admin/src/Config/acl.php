@@ -54,7 +54,10 @@ return [
     ], [
         'key' => 'sales.orders.view',
         'name' => 'admin::app.acl.view',
-        'route' => 'admin.sales.orders.view',
+        'route' => [
+            'admin.sales.orders.view',
+            'admin.sales.orders.export',
+        ],
         'sort' => 2,
     ], [
         'key' => 'sales.orders.cancel',

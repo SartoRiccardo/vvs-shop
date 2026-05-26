@@ -55,6 +55,8 @@ Route::prefix('sales')->group(function () {
         Route::post('comment/{order_id}', 'comment')->name('admin.sales.orders.comment');
 
         Route::get('search', 'search')->name('admin.sales.orders.search');
+
+        Route::get('export', 'export')->name('admin.sales.orders.export');
     });
 
     /**

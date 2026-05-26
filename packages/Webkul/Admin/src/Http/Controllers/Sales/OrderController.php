@@ -5,9 +5,11 @@ namespace Webkul\Admin\Http\Controllers\Sales;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\View\View;
+use Webkul\Sales\Models\Order;
 use Webkul\Admin\DataGrids\Sales\OrderDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Resources\AddressResource;
@@ -223,6 +225,37 @@ class OrderController extends Controller
      *
      * @return JsonResponse
      */
+    public function export(): \Symfony\Component\HttpFoundation\StreamedResponse
+    {
+        $request = request()->validate([
+            'start' => ['nullable', 'date'],
+            'end'   => ['nullable', 'date', 'after_or_equal:start'],
+        ]);
+
+        $query = Order::with([
+            'items',
+            'addresses',
+            'payment',
+            'customer',
+        ])->orderBy('created_at', 'desc');
+
+        if (! empty($request['start'])) {
+            $query->whereDate('created_at', '>=', Carbon::parse($request['start'])->startOfDay());
+        }
+
+        if (! empty($request['end'])) {
+            $query->whereDate('created_at', '<=', Carbon::parse($request['end'])->endOfDay());
+        }
+
+        $orders = $query->get();
+
+        $filename = 'orders-'.now()->format('Y-m-d').'.json';
+
+        return response()->streamDownload(function () use ($orders) {
+            echo $orders->toJson();
+        }, $filename, ['Content-Type' => 'application/json']);
+    }
+
     public function search()
     {
         $orders = $this->orderRepository->scopeQuery(function ($query) {

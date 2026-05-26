@@ -10,7 +10,7 @@
         </p>
 
         <div class="flex items-center gap-x-2.5">
-            <x-admin::datagrid.export src="{{ route('admin.sales.orders.index') }}" />
+            <v-orders-export></v-orders-export>
 
             {!! view_render_event('bagisto.admin.sales.orders.create.before') !!}
 
@@ -320,6 +320,90 @@
                             });
                     },
                 }
+            });
+        </script>
+        <script
+            type="text/x-template"
+            id="v-orders-export-template"
+        >
+            <div>
+                <x-admin::modal ref="exportModal">
+                    <x-slot:toggle>
+                        <button class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800">
+                            <span class="icon-admin-export text-xl text-gray-600"></span>
+                            @lang('admin::app.export.export')
+                        </button>
+                    </x-slot>
+
+                    <x-slot:header>
+                        <p class="text-lg font-bold text-gray-800 dark:text-white">
+                            @lang('admin::app.export.download')
+                        </p>
+                    </x-slot>
+
+                    <x-slot:content>
+                        <div class="grid grid-cols-2 gap-4">
+                            <x-admin::form.control-group class="!mb-0">
+                                <x-admin::form.control-group.label>
+                                    Start Date
+                                </x-admin::form.control-group.label>
+                                <x-admin::form.control-group.control
+                                    type="date"
+                                    ::name="'start'"
+                                    v-model="start"
+                                />
+                            </x-admin::form.control-group>
+
+                            <x-admin::form.control-group class="!mb-0">
+                                <x-admin::form.control-group.label>
+                                    End Date
+                                </x-admin::form.control-group.label>
+                                <x-admin::form.control-group.control
+                                    type="date"
+                                    ::name="'end'"
+                                    v-model="end"
+                                />
+                            </x-admin::form.control-group>
+                        </div>
+                    </x-slot>
+
+                    <x-slot:footer>
+                        <x-admin::button
+                            button-type="button"
+                            class="primary-button"
+                            title="Export JSON"
+                            @click="download"
+                        />
+                    </x-slot>
+                </x-admin::modal>
+            </div>
+        </script>
+
+        <script type="module">
+            app.component('v-orders-export', {
+                template: '#v-orders-export-template',
+
+                data() {
+                    return {
+                        start: '',
+                        end: '',
+                    };
+                },
+
+                methods: {
+                    download() {
+                        const params = new URLSearchParams();
+
+                        if (this.start) params.set('start', this.start);
+                        if (this.end)   params.set('end', this.end);
+
+                        const url = '{{ route('admin.sales.orders.export') }}' + (params.toString() ? '?' + params.toString() : '');
+
+                        window.location.href = url;
+
+                        this.$refs.exportModal.toggle();
+                    },
+                },
             });
         </script>
     @endPushOnce
