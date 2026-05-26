@@ -1922,6 +1922,27 @@ return [
             ],
         ],
     ], [
+        'key' => 'sales.carriers.poste_italiane',
+        'name' => 'Poste Italiane',
+        'info' => 'Poste Italiane (Economy, Expres, Tracked). Rates managed via database.',
+        'sort' => 3,
+        'fields' => [
+            [
+                'name' => 'title',
+                'title' => 'Title',
+                'type' => 'text',
+                'default' => 'Poste Italiane',
+                'channel_based' => true,
+                'locale_based' => true,
+            ], [
+                'name' => 'active',
+                'title' => 'Status',
+                'type' => 'boolean',
+                'channel_based' => true,
+                'locale_based' => false,
+            ],
+        ],
+    ], [
         'key' => 'sales.payment_methods',
         'name' => 'admin::app.configuration.index.sales.payment-methods.page-title',
         'info' => 'admin::app.configuration.index.sales.payment-methods.info',

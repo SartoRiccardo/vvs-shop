@@ -90,6 +90,7 @@
             "Webkul\\Notification\\": "packages/Webkul/Notification/src",
             "Webkul\\PayU\\": "packages/Webkul/PayU/src",
             "Webkul\\Payment\\": "packages/Webkul/Payment/src",
+            "Webkul\\PosteShipping\\": "packages/Webkul/PosteShipping/src",
             "Webkul\\Paypal\\": "packages/Webkul/Paypal/src",
             "Webkul\\Product\\": "packages/Webkul/Product/src",
             "Webkul\\RMA\\": "packages/Webkul/RMA/src",
