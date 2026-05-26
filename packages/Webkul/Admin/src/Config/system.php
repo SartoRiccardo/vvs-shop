@@ -1940,6 +1940,11 @@ return [
                 'type' => 'boolean',
                 'channel_based' => true,
                 'locale_based' => false,
+            ], [
+                'name' => 'manage_link',
+                'title' => 'Services & Rates',
+                'type' => 'blade',
+                'path' => 'poste_shipping::configuration.manage-link',
             ],
         ],
     ], [
