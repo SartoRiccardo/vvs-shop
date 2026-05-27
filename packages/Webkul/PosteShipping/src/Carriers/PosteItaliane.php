@@ -31,7 +31,7 @@ class PosteItaliane extends AbstractShipping
         }
 
         $countryCode = $address->country;
-        $cartWeightKg = $cart->items->sum(fn ($item) => (float) $item->weight * $item->quantity);
+        $cartWeightKg = $cart->items->sum(fn ($item) => (float) $item->weight * $item->quantity) + 0.1;
 
         // One query: join through country_zones → zones → services, filter by
         // country + weight + active service, pick cheapest band per service.
