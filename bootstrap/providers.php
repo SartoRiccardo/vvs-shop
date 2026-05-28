@@ -38,19 +38,20 @@ use Webkul\Sitemap\Providers\SitemapServiceProvider;
 use Webkul\SocialLogin\Providers\SocialLoginServiceProvider;
 use Webkul\SocialShare\Providers\SocialShareServiceProvider;
 use Webkul\Stripe\Providers\StripeServiceProvider;
+use Webkul\SubscriberTags\Providers\SubscriberTagsServiceProvider;
 use Webkul\Tax\Providers\TaxServiceProvider;
 use Webkul\Theme\Providers\ThemeServiceProvider;
 use Webkul\User\Providers\UserServiceProvider;
 
 return [
-    /**
-     * Application service providers.
-     */
+        /**
+         * Application service providers.
+         */
     AppServiceProvider::class,
 
-    /**
-     * Webkul's service providers.
-     */
+        /**
+         * Webkul's service providers.
+         */
     AdminServiceProvider::class,
     AttributeServiceProvider::class,
     BookingProductServiceProvider::class,
@@ -82,6 +83,7 @@ return [
     RazorpayServiceProvider::class,
     RuleServiceProvider::class,
     SalesServiceProvider::class,
+    SubscriberTagsServiceProvider::class,
     ShippingServiceProvider::class,
     ShopServiceProvider::class,
     SitemapServiceProvider::class,
