@@ -3,13 +3,14 @@
         @lang('admin::app.marketing.communications.subscribers.index.title')
     </x-slot>
 
-    <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
-        <p class="text-xl font-bold text-gray-800 dark:text-white">
-            @lang('admin::app.marketing.communications.subscribers.index.title')
-        </p>
-    </div>
-
     <v-subscribers>
+        <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
+            <p class="text-xl font-bold text-gray-800 dark:text-white">
+                @lang('admin::app.marketing.communications.subscribers.index.title')
+            </p>
+            <div class="primary-button">Add Subscriber</div>
+        </div>
+
         <!-- DataGrid Shimmer -->
         <x-admin::shimmer.datagrid />
     </v-subscribers>
@@ -20,6 +21,13 @@
             id="v-subscribers-template"
         >
             <div>
+                <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
+                    <p class="text-xl font-bold text-gray-800 dark:text-white">
+                        @lang('admin::app.marketing.communications.subscribers.index.title')
+                    </p>
+                    <div class="primary-button" @click="$refs.addModal.toggle()">Add Subscriber</div>
+                </div>
+
                 <x-admin::datagrid
                     :src="route('admin.marketing.communications.subscribers.index')"
                     ref="datagrid"
@@ -78,6 +86,39 @@
                     </template>
                 </x-admin::datagrid>
 
+                <!-- Add Subscriber Modal -->
+                <x-admin::form v-slot="{ meta, errors, handleSubmit }" as="div">
+                    <form @submit="handleSubmit($event, create)" ref="addForm">
+                        <x-admin::modal ref="addModal">
+                            <x-slot:header>
+                                <p class="text-lg font-bold text-gray-800 dark:text-white">Add Subscriber</p>
+                            </x-slot>
+                            <x-slot:content>
+                                <x-admin::form.control-group class="!mb-0">
+                                    <x-admin::form.control-group.label class="required">Email</x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="email"
+                                        rules="required|email"
+                                        label="Email"
+                                        placeholder="someone@example.com"
+                                    />
+                                    <x-admin::form.control-group.error control-name="email" />
+                                </x-admin::form.control-group>
+                            </x-slot>
+                            <x-slot:footer>
+                                <x-admin::button
+                                    button-type="submit"
+                                    class="primary-button"
+                                    title="Add"
+                                    ::loading="isLoading"
+                                    ::disabled="isLoading"
+                                />
+                            </x-slot>
+                        </x-admin::modal>
+                    </form>
+                </x-admin::form>
+
                 <x-admin::form
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
@@ -131,7 +172,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Subscribed -->
-                                <x-admin::form.control-group class="!mb-0">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.marketing.communications.subscribers.index.edit.subscribed')
                                     </x-admin::form.control-group.label>
@@ -159,6 +200,25 @@
 
                                     <x-admin::form.control-group.error control-name="is_subscribed" />
                                 </x-admin::form.control-group>
+
+                                <!-- Tags -->
+                                <x-admin::form.control-group class="!mb-0">
+                                    <x-admin::form.control-group.label>Tags</x-admin::form.control-group.label>
+                                    <div class="flex flex-wrap gap-2" v-if="allTags.length">
+                                        <label
+                                            v-for="tag in allTags"
+                                            :key="tag.id"
+                                            class="flex cursor-pointer items-center gap-1.5 rounded-full border px-3 py-1 text-sm transition-all"
+                                            :class="selectedTagIds.includes(tag.id)
+                                                ? 'border-blue-500 bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300'
+                                                : 'border-gray-300 text-gray-600 dark:border-gray-700 dark:text-gray-400'"
+                                        >
+                                            <input type="checkbox" class="hidden" :value="tag.id" v-model="selectedTagIds" />
+                                            @{{ tag.name }}
+                                        </label>
+                                    </div>
+                                    <p v-else class="text-sm text-gray-400">No tags defined yet.</p>
+                                </x-admin::form.control-group>
                             </x-slot>
 
                             <!-- Modal Footer -->
@@ -185,7 +245,8 @@
                 data() {
                     return {
                         selectedSubscriber: {},
-
+                        allTags: [],
+                        selectedTagIds: [],
                         isLoading: false,
                     }
                 },
@@ -207,31 +268,44 @@
                 },
 
                 methods: {
-                    update(params, { resetForm, setErrors  }) {
+                    create(params, { resetForm, setErrors }) {
                         this.isLoading = true;
 
-                        let formData = new FormData(this.$refs.subscriberCreateForm);
+                        this.$axios.post("{{ route('admin.marketing.communications.subscribers.store') }}", new FormData(this.$refs.addForm))
+                            .then(response => {
+                                this.isLoading = false;
+                                this.$refs.addModal.toggle();
+                                this.$refs.datagrid.get();
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                                resetForm();
+                            })
+                            .catch(error => {
+                                this.isLoading = false;
+                                if (error.response.status == 422) setErrors(error.response.data.errors);
+                            });
+                    },
 
+                    update(params, { resetForm, setErrors }) {
+                        this.isLoading = true;
+
+                        const id = this.selectedSubscriber.id;
+                        const formData = new FormData(this.$refs.subscriberCreateForm);
                         formData.append('_method', 'put');
 
-                        this.$axios.post("{{ route('admin.marketing.communications.subscribers.update') }}", formData)
-                        .then((response) => {
+                        Promise.all([
+                            this.$axios.post("{{ route('admin.marketing.communications.subscribers.update') }}", formData),
+                            this.$axios.put(`/admin/marketing/communications/subscribers/${id}/tags`, { tag_ids: this.selectedTagIds }),
+                        ])
+                        .then(([response]) => {
                             this.isLoading = false;
-
                             this.$refs.groupCreateModal.close();
-
                             this.$refs.datagrid.get();
-
                             this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
-
                             resetForm();
                         })
                         .catch(error => {
                             this.isLoading = false;
-
-                            if (error.response.status == 422) {
-                                setErrors(error.response.data.errors);
-                            }
+                            if (error.response?.status == 422) setErrors(error.response.data.errors);
                         });
                     },
 
@@ -239,6 +313,12 @@
                         this.$axios.get(url)
                             .then((response) => {
                                 this.selectedSubscriber = response.data.data;
+
+                                this.$axios.get(`/admin/marketing/communications/subscribers/${this.selectedSubscriber.id}/tags`)
+                                    .then(r => {
+                                        this.allTags = r.data.all;
+                                        this.selectedTagIds = r.data.selected;
+                                    });
 
                                 this.$refs.groupCreateModal.toggle();
                             })

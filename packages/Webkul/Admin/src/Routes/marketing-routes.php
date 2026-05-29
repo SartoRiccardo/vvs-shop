@@ -130,6 +130,8 @@ Route::prefix('marketing')->group(function () {
         Route::controller(SubscriptionController::class)->prefix('subscribers')->group(function () {
             Route::get('', 'index')->name('admin.marketing.communications.subscribers.index');
 
+            Route::post('', 'store')->name('admin.marketing.communications.subscribers.store');
+
             Route::get('edit/{id}', 'edit')->name('admin.marketing.communications.subscribers.edit');
 
             Route::put('edit', 'update')->name('admin.marketing.communications.subscribers.update');

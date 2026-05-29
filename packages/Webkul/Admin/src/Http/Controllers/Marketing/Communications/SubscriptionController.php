@@ -32,6 +32,25 @@ class SubscriptionController extends Controller
     }
 
     /**
+     * Store a newly created subscriber.
+     */
+    public function store(): JsonResponse
+    {
+        $this->validate(request(), [
+            'email' => 'required|email|unique:subscribers_list,email',
+        ]);
+
+        $this->subscribersListRepository->create([
+            'email'         => request('email'),
+            'is_subscribed' => true,
+            'token'         => uniqid(),
+            'channel_id'    => core()->getCurrentChannel()->id,
+        ]);
+
+        return response()->json(['message' => 'Subscriber added.']);
+    }
+
+    /**
      * Subscriber Details
      */
     public function edit(int $id): JsonResponse
