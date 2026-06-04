@@ -54,6 +54,16 @@
             <directory suffix="Test.php">packages/Webkul/Shop/tests/Feature</directory>
         </testsuite>
 
+        <!-- PosteShipping package testsuites. -->
+        <testsuite name="PosteShipping Feature Test">
+            <directory suffix="Test.php">packages/Webkul/PosteShipping/tests/Feature</directory>
+        </testsuite>
+
+        <!-- FedExShipping package testsuites. -->
+        <testsuite name="FedExShipping Feature Test">
+            <directory suffix="Test.php">packages/Webkul/FedExShipping/tests/Feature</directory>
+        </testsuite>
+
         <!-- Stripe package testsuites. -->
         <testsuite name="Stripe Unit Test">
             <directory suffix="Test.php">packages/Webkul/Stripe/tests/Unit</directory>

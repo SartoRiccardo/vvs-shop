@@ -1,6 +1,8 @@
 <?php
 
 use Webkul\Admin\Tests\AdminTestCase;
+use Webkul\FedExShipping\Tests\FedExShippingTestCase;
+use Webkul\PosteShipping\Tests\PosteShippingTestCase;
 use Webkul\Core\Tests\CoreTestCase;
 use Webkul\Customer\Tests\CustomerTestCase;
 use Webkul\DataGrid\Tests\DataGridTestCase;
@@ -34,6 +36,8 @@ uses(PayUTestCase::class)->in('../packages/Webkul/PayU/tests');
 uses(RazorpayTestCase::class)->in('../packages/Webkul/Razorpay/tests');
 uses(ShopTestCase::class)->in('../packages/Webkul/Shop/tests');
 uses(StripeTestCase::class)->in('../packages/Webkul/Stripe/tests');
+uses(PosteShippingTestCase::class)->in('../packages/Webkul/PosteShipping/tests');
+uses(FedExShippingTestCase::class)->in('../packages/Webkul/FedExShipping/tests');
 
 /*
 |--------------------------------------------------------------------------

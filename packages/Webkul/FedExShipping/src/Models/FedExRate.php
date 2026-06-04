@@ -10,6 +10,8 @@ class FedExRate extends Model
 
     public $timestamps = false;
 
+    protected $guarded = [];
+
     protected $casts = [
         'weight_max'   => 'float',
         'flat_rate'    => 'float',

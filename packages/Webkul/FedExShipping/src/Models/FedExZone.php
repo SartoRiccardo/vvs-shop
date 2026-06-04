@@ -9,4 +9,6 @@ class FedExZone extends Model
     protected $table = 'fedex_ficp_zones';
 
     public $timestamps = false;
+
+    protected $guarded = [];
 }

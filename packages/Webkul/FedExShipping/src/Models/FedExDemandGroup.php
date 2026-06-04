@@ -10,6 +10,8 @@ class FedExDemandGroup extends Model
 
     public $timestamps = false;
 
+    protected $guarded = [];
+
     protected $casts = [
         'base_rate'    => 'float',
         'per_kg_rate'  => 'float',

@@ -10,6 +10,8 @@ class FedExDemandCountry extends Model
 
     public $timestamps = false;
 
+    protected $guarded = [];
+
     public function group()
     {
         return $this->belongsTo(FedExDemandGroup::class, 'group_id');

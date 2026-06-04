@@ -122,7 +122,9 @@
             "Webkul\\PayU\\Tests\\": "packages/Webkul/PayU/tests",
             "Webkul\\Razorpay\\Tests\\": "packages/Webkul/Razorpay/tests",
             "Webkul\\Shop\\Tests\\": "packages/Webkul/Shop/tests",
-            "Webkul\\Stripe\\Tests\\": "packages/Webkul/Stripe/tests"
+            "Webkul\\Stripe\\Tests\\": "packages/Webkul/Stripe/tests",
+            "Webkul\\PosteShipping\\Tests\\": "packages/Webkul/PosteShipping/tests",
+            "Webkul\\FedExShipping\\Tests\\": "packages/Webkul/FedExShipping/tests"
         }
     },
     "scripts": {
