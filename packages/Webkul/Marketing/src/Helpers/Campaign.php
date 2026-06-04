@@ -60,25 +60,25 @@ class Campaign
      */
     public function getEmailAddresses($campaign)
     {
+        if ($campaign->filter_by_tags) {
+            if ($campaign->subscriberTags->isEmpty()) {
+                return [];
+            }
+
+            $tagIds = $campaign->subscriberTags->pluck('id');
+
+            return TaggedSubscribersList::whereHas(
+                'tags', fn ($q) => $q->whereIn('subscriber_tags.id', $tagIds)
+            )->where('is_subscribed', 1)->pluck('email')->unique()->toArray();
+        }
+
         if ($campaign->customer_group->code === 'guest') {
             $customerGroupEmails = TaggedSubscribersList::whereNull('customer_id');
         } else {
             $customerGroupEmails = $campaign->customer_group->customers()->where('subscribed_to_news_letter', 1);
         }
 
-        $emails = array_unique($customerGroupEmails->pluck('email')->toArray());
-
-        if ($campaign->filter_by_tags && $campaign->subscriberTags->isNotEmpty()) {
-            $tagIds = $campaign->subscriberTags->pluck('id');
-
-            $taggedEmails = TaggedSubscribersList::whereHas(
-                'tags', fn ($q) => $q->whereIn('subscriber_tags.id', $tagIds)
-            )->where('is_subscribed', 1)->pluck('email')->toArray();
-
-            $emails = array_values(array_intersect($emails, $taggedEmails));
-        }
-
-        return $emails;
+        return array_unique($customerGroupEmails->pluck('email')->toArray());
     }
 
     /**

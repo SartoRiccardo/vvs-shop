@@ -197,34 +197,36 @@
                         </x-admin::form.control-group>
 
                         <!-- Customer Group -->
-                        <x-admin::form.control-group>
-                            <x-admin::form.control-group.label class="required">
-                                @lang('admin::app.marketing.communications.campaigns.edit.customer-group')
-                            </x-admin::form.control-group.label>
+                        @php $filterActive = old('filter_by_tags', $campaign->filter_by_tags); @endphp
+                        <div id="customer-group-field" class="{{ $filterActive ? 'hidden' : '' }}">
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.marketing.communications.campaigns.edit.customer-group')
+                                </x-admin::form.control-group.label>
 
-                            @php $selectedOption = old('customer_group_id') ?: $campaign->customer_group_id @endphp
+                                @php $selectedOption = old('customer_group_id') ?: $campaign->customer_group_id @endphp
 
-                            <x-admin::form.control-group.control
-                                type="select"
-                                class="mb-1 cursor-pointer"
-                                name="customer_group_id"
-                                rules="required"
-                                :value="$campaign->customer_group_id"
-                                :label="trans('admin::app.marketing.communications.campaigns.edit.customer-group')"
-                            >
-                                @foreach (app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)
-                                    <option
-                                        value="{{ $customerGroup->id }}"
-                                        {{ $selectedOption == $customerGroup->id ? 'selected' : '' }}
-                                        v-pre
-                                    >
-                                        {{ $customerGroup->name }}
-                                    </option>
-                                @endforeach
-                            </x-admin::form.control-group.control>
+                                <x-admin::form.control-group.control
+                                    type="select"
+                                    class="mb-1 cursor-pointer"
+                                    name="customer_group_id"
+                                    :value="$campaign->customer_group_id"
+                                    :label="trans('admin::app.marketing.communications.campaigns.edit.customer-group')"
+                                >
+                                    @foreach (app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)
+                                        <option
+                                            value="{{ $customerGroup->id }}"
+                                            {{ $selectedOption == $customerGroup->id ? 'selected' : '' }}
+                                            v-pre
+                                        >
+                                            {{ $customerGroup->name }}
+                                        </option>
+                                    @endforeach
+                                </x-admin::form.control-group.control>
 
-                            <x-admin::form.control-group.error control-name="customer_group_id" />
-                        </x-admin::form.control-group>
+                                <x-admin::form.control-group.error control-name="customer_group_id" />
+                            </x-admin::form.control-group>
+                        </div>
 
                         <!-- Filter by Subscriber Tags -->
                         <x-admin::form.control-group>
@@ -238,9 +240,9 @@
                                     id="filter_by_tags_toggle"
                                     name="filter_by_tags"
                                     value="1"
-                                    {{ old('filter_by_tags', $campaign->filter_by_tags) ? 'checked' : '' }}
+                                    {{ $filterActive ? 'checked' : '' }}
                                     class="rounded border-gray-300"
-                                    onchange="document.getElementById('tag-filter-section').classList.toggle('hidden', !this.checked)"
+                                    onchange="var on=this.checked; document.getElementById('tag-filter-section').classList.toggle('hidden',!on); document.getElementById('customer-group-field').classList.toggle('hidden',on);"
                                 >
                                 <span class="text-sm text-gray-600 dark:text-gray-400">Only send to subscribers with specific tags</span>
                             </label>

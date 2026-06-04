@@ -66,7 +66,7 @@ class CampaignController extends Controller
             'marketing_template_id' => 'required',
             'marketing_event_id' => 'required',
             'channel_id' => 'required',
-            'customer_group_id' => 'required',
+            'customer_group_id' => request()->boolean('filter_by_tags') ? 'nullable' : 'required',
             'status' => 'sometimes|required|in:0,1',
         ]);
 
@@ -117,7 +117,7 @@ class CampaignController extends Controller
             'marketing_template_id' => 'required',
             'marketing_event_id' => 'required',
             'channel_id' => 'required',
-            'customer_group_id' => 'required',
+            'customer_group_id' => request()->boolean('filter_by_tags') ? 'nullable' : 'required',
         ]);
 
         Event::dispatch('marketing.campaigns.update.before', $id);
