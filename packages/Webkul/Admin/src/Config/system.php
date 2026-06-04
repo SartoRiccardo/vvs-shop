@@ -1948,6 +1948,27 @@ return [
             ],
         ],
     ], [
+        'key' => 'sales.carriers.fedex_ficp',
+        'name' => 'FedEx International Connect Plus',
+        'info' => 'FedEx FICP — tracked international delivery. Rates calculated from DB tariff tables.',
+        'sort' => 4,
+        'fields' => [
+            [
+                'name'         => 'title',
+                'title'        => 'Title',
+                'type'         => 'text',
+                'default'      => 'FedEx International Connect Plus',
+                'channel_based' => true,
+                'locale_based' => true,
+            ], [
+                'name'         => 'active',
+                'title'        => 'Status',
+                'type'         => 'boolean',
+                'channel_based' => true,
+                'locale_based' => false,
+            ],
+        ],
+    ], [
         'key' => 'sales.payment_methods',
         'name' => 'admin::app.configuration.index.sales.payment-methods.page-title',
         'info' => 'admin::app.configuration.index.sales.payment-methods.info',

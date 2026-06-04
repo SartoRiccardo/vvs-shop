@@ -21,7 +21,7 @@ class PosteMiniBoxExpresSeeder extends Seeder
     {
         $service = PosteService::firstOrCreate(
             ['name' => 'PostMiniBox Expres'],
-            ['description' => 'Poste Italiane PostMiniBox Expres', 'active' => true]
+            ['description' => 'Poste Italiane PostMiniBox Expres 🔎 This shipping method has full tracking', 'active' => true]
         );
 
         $this->seedZone($service, 'Europa', 'European countries', $this->europaCountries(), [

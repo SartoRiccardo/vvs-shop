@@ -21,7 +21,7 @@ class PosteMiniBoxEconomySeeder extends Seeder
     {
         $service = PosteService::firstOrCreate(
             ['name' => 'PostMiniBox Economy'],
-            ['description' => 'Poste Italiane PostMiniBox Economy', 'active' => true]
+            ['description' => 'Poste Italiane PostMiniBox Economy ⚠️ This shipping method is untracked', 'active' => true]
         );
 
         $this->seedZone($service, 'Europa', 'European countries', $this->europaCountries(), [
