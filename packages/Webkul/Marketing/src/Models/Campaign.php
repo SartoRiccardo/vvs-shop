@@ -5,10 +5,12 @@ namespace Webkul\Marketing\Models;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Webkul\Core\Models\ChannelProxy;
 use Webkul\Customer\Models\CustomerGroupProxy;
 use Webkul\Marketing\Contracts\Campaign as CampaignContract;
 use Webkul\Marketing\Database\Factories\CampaignFactory;
+use Webkul\SubscriberTags\Models\SubscriberTag;
 
 class Campaign extends Model implements CampaignContract
 {
@@ -35,6 +37,11 @@ class Campaign extends Model implements CampaignContract
         'marketing_template_id',
         'spooling',
         'marketing_event_id',
+        'filter_by_tags',
+    ];
+
+    protected $casts = [
+        'filter_by_tags' => 'boolean',
     ];
 
     /**
@@ -67,6 +74,11 @@ class Campaign extends Model implements CampaignContract
     public function email_template()
     {
         return $this->belongsTo(TemplateProxy::modelClass(), 'marketing_template_id');
+    }
+
+    public function subscriberTags(): BelongsToMany
+    {
+        return $this->belongsToMany(SubscriberTag::class, 'campaign_subscriber_tag', 'campaign_id', 'tag_id');
     }
 
     /**

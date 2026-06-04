@@ -10,6 +10,7 @@ use Webkul\Admin\DataGrids\Marketing\Communications\CampaignDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Marketing\Repositories\CampaignRepository;
 use Webkul\Marketing\Repositories\TemplateRepository;
+use Webkul\SubscriberTags\Models\SubscriberTag;
 
 class CampaignController extends Controller
 {
@@ -21,7 +22,8 @@ class CampaignController extends Controller
     public function __construct(
         protected CampaignRepository $campaignRepository,
         protected TemplateRepository $templateRepository,
-    ) {}
+    ) {
+    }
 
     /**
      * Display a listing of the resource.
@@ -46,7 +48,9 @@ class CampaignController extends Controller
     {
         $templates = $this->templateRepository->findByField('status', 'active');
 
-        return view('admin::marketing.communications.campaigns.create', compact('templates'));
+        $tags = SubscriberTag::all();
+
+        return view('admin::marketing.communications.campaigns.create', compact('templates', 'tags'));
     }
 
     /**
@@ -68,7 +72,12 @@ class CampaignController extends Controller
 
         Event::dispatch('marketing.campaigns.create.before');
 
-        $campaign = $this->campaignRepository->create($validatedData);
+        $campaign = $this->campaignRepository->create([
+            ...$validatedData,
+            'filter_by_tags' => request()->boolean('filter_by_tags'),
+        ]);
+
+        $campaign->subscriberTags()->sync(request()->input('subscriber_tag_ids', []));
 
         Event::dispatch('marketing.campaigns.create.after', $campaign);
 
@@ -88,7 +97,11 @@ class CampaignController extends Controller
 
         $templates = $this->templateRepository->findByField('status', 'active');
 
-        return view('admin::marketing.communications.campaigns.edit', compact('campaign', 'templates'));
+        $tags = SubscriberTag::all();
+
+        $selectedTagIds = $campaign->subscriberTags->pluck('id')->toArray();
+
+        return view('admin::marketing.communications.campaigns.edit', compact('campaign', 'templates', 'tags', 'selectedTagIds'));
     }
 
     /**
@@ -112,7 +125,10 @@ class CampaignController extends Controller
         $campaign = $this->campaignRepository->update([
             ...$validatedData,
             'status' => request()->input('status') ? 1 : 0,
+            'filter_by_tags' => request()->boolean('filter_by_tags'),
         ], $id);
+
+        $campaign->subscriberTags()->sync(request()->input('subscriber_tag_ids', []));
 
         Event::dispatch('marketing.campaigns.update.after', $campaign);
 

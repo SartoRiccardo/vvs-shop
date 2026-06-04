@@ -4,7 +4,7 @@ namespace Webkul\Marketing\Helpers;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
-use Webkul\Core\Models\SubscribersList;
+use Webkul\SubscriberTags\Models\SubscribersList as TaggedSubscribersList;
 use Webkul\Marketing\Mail\NewsletterMail;
 use Webkul\Marketing\Repositories\CampaignRepository;
 use Webkul\Marketing\Repositories\EventRepository;
@@ -61,12 +61,24 @@ class Campaign
     public function getEmailAddresses($campaign)
     {
         if ($campaign->customer_group->code === 'guest') {
-            $customerGroupEmails = SubscribersList::whereNull('customer_id');
+            $customerGroupEmails = TaggedSubscribersList::whereNull('customer_id');
         } else {
             $customerGroupEmails = $campaign->customer_group->customers()->where('subscribed_to_news_letter', 1);
         }
 
-        return array_unique($customerGroupEmails->pluck('email')->toArray());
+        $emails = array_unique($customerGroupEmails->pluck('email')->toArray());
+
+        if ($campaign->filter_by_tags && $campaign->subscriberTags->isNotEmpty()) {
+            $tagIds = $campaign->subscriberTags->pluck('id');
+
+            $taggedEmails = TaggedSubscribersList::whereHas(
+                'tags', fn ($q) => $q->whereIn('subscriber_tags.id', $tagIds)
+            )->where('is_subscribed', 1)->pluck('email')->toArray();
+
+            $emails = array_values(array_intersect($emails, $taggedEmails));
+        }
+
+        return $emails;
     }
 
     /**

@@ -226,6 +226,39 @@
                             <x-admin::form.control-group.error control-name="customer_group_id" />
                         </x-admin::form.control-group>
 
+                        <!-- Filter by Subscriber Tags -->
+                        <x-admin::form.control-group>
+                            <x-admin::form.control-group.label>
+                                Filter by Subscriber Tags
+                            </x-admin::form.control-group.label>
+
+                            <label class="flex cursor-pointer items-center gap-2">
+                                <input
+                                    type="checkbox"
+                                    id="filter_by_tags_toggle"
+                                    name="filter_by_tags"
+                                    value="1"
+                                    {{ old('filter_by_tags', $campaign->filter_by_tags) ? 'checked' : '' }}
+                                    class="rounded border-gray-300"
+                                    onchange="document.getElementById('tag-filter-section').classList.toggle('hidden', !this.checked)"
+                                >
+                                <span class="text-sm text-gray-600 dark:text-gray-400">Only send to subscribers with specific tags</span>
+                            </label>
+                        </x-admin::form.control-group>
+
+                        <div id="tag-filter-section" class="{{ old('filter_by_tags', $campaign->filter_by_tags) ? '' : 'hidden' }} mb-4">
+                            <p class="mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Tags</p>
+
+                            @if ($tags->isEmpty())
+                                <p class="text-sm text-gray-400">No tags defined yet.</p>
+                            @else
+                                <v-campaign-tag-filter
+                                    :tags="{{ json_encode($tags->map(fn ($t) => ['id' => $t->id, 'name' => $t->name])) }}"
+                                    :initial-selected="{{ json_encode(array_map('intval', old('subscriber_tag_ids', $selectedTagIds))) }}"
+                                />
+                            @endif
+                        </div>
+
                         <!-- Status -->
                         <x-admin::form.control-group class="!mb-0">
                             <x-admin::form.control-group.label>
@@ -263,5 +296,45 @@
     </x-admin::form>
 
     {!! view_render_event('bagisto.admin.marketing.communications.campaigns.edit.after', ['campaign' => $campaign]) !!}
+
+
+    @pushOnce('scripts')
+        <script type="text/x-template" id="v-campaign-tag-filter-template">
+            <div class="flex flex-wrap gap-2">
+                <input v-for="id in selectedIds" :key="id" type="hidden" name="subscriber_tag_ids[]" :value="id">
+                <span
+                    v-for="tag in tags"
+                    :key="tag.id"
+                    @click="toggle(tag.id)"
+                    class="cursor-pointer rounded-full border px-3 py-1 text-sm transition-all"
+                    :class="selectedIds.includes(tag.id)
+                        ? 'border-blue-500 bg-blue-50 text-blue-700'
+                        : 'border-gray-300 text-gray-600'"
+                >
+                    @{{ tag.name }}
+                </span>
+            </div>
+        </script>
+
+        <script type="module">
+            app.component('v-campaign-tag-filter', {
+                template: '#v-campaign-tag-filter-template',
+                props: {
+                    tags: { type: Array, default: () => [] },
+                    initialSelected: { type: Array, default: () => [] },
+                },
+                data() {
+                    return { selectedIds: [...this.initialSelected] };
+                },
+                methods: {
+                    toggle(id) {
+                        const idx = this.selectedIds.indexOf(id);
+                        if (idx === -1) this.selectedIds.push(id);
+                        else this.selectedIds.splice(idx, 1);
+                    },
+                },
+            });
+        </script>
+    @endPushOnce
 
 </x-admin::layouts>
