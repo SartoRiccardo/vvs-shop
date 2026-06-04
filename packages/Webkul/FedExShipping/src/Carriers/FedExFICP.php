@@ -69,7 +69,7 @@ class FedExFICP extends AbstractShipping
 
         $demandSurcharge = max($demandGroup->base_rate, $billableWeight * $demandGroup->per_kg_rate);
 
-        $fuelPct = (float) ($settings['fuel_surcharge_rate'] ?? 0.48);
+        $fuelPct = (float) ($this->getConfigData('fuel_surcharge_percentage') ?? 49.25) / 100;
         if ($zone->is_european_zone) {
             $fuelPct *= 1 - (float) ($settings['eu_fuel_discount'] ?? 0.50);
         }

@@ -16,6 +16,8 @@ class FedExSetting extends Model
 
     public $timestamps = false;
 
+    protected $guarded = [];
+
     public static function get(string $key, mixed $default = null): mixed
     {
         return static::find($key)?->value ?? $default;

@@ -1966,6 +1966,18 @@ return [
                 'type'         => 'boolean',
                 'channel_based' => true,
                 'locale_based' => false,
+            ], [
+                'name'         => 'fuel_surcharge_percentage',
+                'title'        => 'Fuel Surcharge %',
+                'type'         => 'text',
+                'default'      => '49.25',
+                'channel_based' => false,
+                'locale_based' => false,
+            ], [
+                'name'  => 'manage_link',
+                'title' => 'Zones & Rates',
+                'type'  => 'blade',
+                'path'  => 'fedex_shipping::configuration.manage-link',
             ],
         ],
     ], [
