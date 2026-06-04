@@ -24,6 +24,7 @@ use Webkul\MagicAI\Providers\MagicAIServiceProvider;
 use Webkul\Marketing\Providers\MarketingServiceProvider;
 use Webkul\Notification\Providers\NotificationServiceProvider;
 use Webkul\Payment\Providers\PaymentServiceProvider;
+use Webkul\FedExShipping\Providers\FedExShippingServiceProvider;
 use Webkul\PosteShipping\Providers\PosteShippingServiceProvider;
 use Webkul\Paypal\Providers\PaypalServiceProvider;
 use Webkul\PayU\Providers\PayUServiceProvider;
@@ -77,6 +78,7 @@ return [
     PayUServiceProvider::class,
     PaymentServiceProvider::class,
     PaypalServiceProvider::class,
+    FedExShippingServiceProvider::class,
     PosteShippingServiceProvider::class,
     ProductServiceProvider::class,
     RMAServiceProvider::class,
