@@ -282,6 +282,7 @@ abstract class DataGrid
             url: $massAction['url'],
             options: $massAction['options'] ?? [],
             type: $massAction['type'] ?? 'default',
+            prompt: $massAction['prompt'] ?? null,
         );
 
         $this->dispatchEvent('mass_actions.add.after', [$this, $this->massActions[count($this->massActions) - 1]]);

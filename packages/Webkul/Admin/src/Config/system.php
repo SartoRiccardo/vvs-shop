@@ -1834,6 +1834,26 @@ return [
                 'type' => 'textarea',
                 'channel_based' => true,
                 'locale_based' => true,
+            ], [
+                'name' => 'codice_fiscale',
+                'title' => 'admin::app.configuration.index.sales.shipping-setting.origin.codice-fiscale',
+                'type' => 'text',
+                'channel_based' => true,
+            ], [
+                'name' => 'email',
+                'title' => 'admin::app.configuration.index.sales.shipping-setting.origin.email',
+                'type' => 'text',
+                'channel_based' => true,
+            ], [
+                'name' => 'iban',
+                'title' => 'admin::app.configuration.index.sales.shipping-setting.origin.iban',
+                'type' => 'text',
+                'channel_based' => true,
+            ], [
+                'name' => 'bank_name',
+                'title' => 'admin::app.configuration.index.sales.shipping-setting.origin.bank-name',
+                'type' => 'text',
+                'channel_based' => true,
             ],
         ],
     ], [

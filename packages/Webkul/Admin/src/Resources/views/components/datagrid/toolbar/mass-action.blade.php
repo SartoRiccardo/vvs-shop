@@ -182,17 +182,17 @@
                     const method = action.method.toLowerCase();
 
                     this.$emitter.emit('open-confirm-modal', {
-                        agree: () => {
+                        input: action.prompt ?? null,
+                        agree: (inputValue) => {
                             if (action.type === 'download') {
                                 this.$axios[method](action.url, {
                                         indices: this.massActions.indices,
+                                        ...(action.prompt ? { prompt_value: inputValue } : {}),
                                     }, {
                                         responseType: 'blob',
                                     })
                                     .then(response => {
-                                        const disposition = response.headers['content-disposition'] ?? '';
-                                        const match = disposition.match(/filename="([^"]+)"/);
-                                        const filename = match ? match[1] : 'download';
+                                        const filename = response.headers['x-filename'] ?? 'download';
 
                                         const url = URL.createObjectURL(new Blob([response.data]));
                                         const a = document.createElement('a');

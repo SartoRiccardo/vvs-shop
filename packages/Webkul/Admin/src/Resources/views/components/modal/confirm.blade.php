@@ -46,6 +46,19 @@
                                 @{{ message }}
                             </div>
 
+                            <div v-if="inputConfig" class="px-4 pb-3">
+                                <label class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                    @{{ inputConfig.label }}
+                                </label>
+
+                                <input
+                                    v-model="inputValue"
+                                    :type="inputConfig.type ?? 'text'"
+                                    :min="inputConfig.min"
+                                    class="w-full rounded-md border px-3 py-1.5 text-sm text-gray-800 focus:border-blue-500 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+                                />
+                            </div>
+
                             <div class="flex justify-end gap-2.5 px-4 py-2.5">
                                 <button type="button" class="transparent-button" @click="disagree">
                                     @{{ options.btnDisagree }}
@@ -79,6 +92,10 @@
                         btnAgree: '',
                     },
 
+                    inputConfig: null,
+
+                    inputValue: '',
+
                     agreeCallback: null,
 
                     disagreeCallback: null,
@@ -97,6 +114,7 @@
                         btnDisagree: "@lang('admin::app.components.modal.confirm.disagree-btn')",
                         btnAgree: "@lang('admin::app.components.modal.confirm.agree-btn')",
                     },
+                    input = null,
                     agree = () => {},
                     disagree = () => {},
                 }) {
@@ -109,6 +127,10 @@
                     this.message = message;
 
                     this.options = options;
+
+                    this.inputConfig = input;
+
+                    this.inputValue = input?.default ?? '';
 
                     this.agreeCallback = agree;
 
@@ -128,7 +150,7 @@
 
                     document.body.style.overflow = 'auto';
 
-                    this.agreeCallback();
+                    this.agreeCallback(this.inputValue);
                 },
 
                 registerGlobalEvents() {

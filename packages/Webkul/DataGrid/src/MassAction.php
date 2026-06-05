@@ -17,6 +17,7 @@ class MassAction
         public mixed $url,
         public array $options = [],
         public string $type = 'default',
+        public ?array $prompt = null,
     ) {
     }
 
@@ -26,12 +27,13 @@ class MassAction
     public function toArray()
     {
         return [
-            'icon' => $this->icon,
-            'title' => $this->title,
-            'method' => $this->method,
-            'url' => $this->url,
+            'icon'    => $this->icon,
+            'title'   => $this->title,
+            'method'  => $this->method,
+            'url'     => $this->url,
             'options' => $this->options,
-            'type' => $this->type,
+            'type'    => $this->type,
+            'prompt'  => $this->prompt,
         ];
     }
 }

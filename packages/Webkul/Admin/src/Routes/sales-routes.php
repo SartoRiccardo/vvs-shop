@@ -36,6 +36,8 @@ Route::prefix('sales')->group(function () {
         Route::post('mass-update/state', 'massUpdateState')->name('admin.sales.invoices.mass_update.state');
 
         Route::post('compact', 'compactInvoice')->name('admin.sales.invoices.compact');
+
+        Route::post('electronic', 'electronicInvoice')->name('admin.sales.invoices.electronic');
     });
 
     /**

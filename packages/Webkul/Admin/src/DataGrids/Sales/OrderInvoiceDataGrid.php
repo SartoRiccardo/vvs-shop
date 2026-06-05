@@ -162,10 +162,22 @@ class OrderInvoiceDataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('sales.invoices.view')) {
             $this->addMassAction([
-                'title' => trans('admin::app.sales.invoices.index.datagrid.compact-invoice'),
-                'url' => route('admin.sales.invoices.compact'),
+                'title'  => trans('admin::app.sales.invoices.index.datagrid.compact-invoice'),
+                'url'    => route('admin.sales.invoices.compact'),
                 'method' => 'POST',
-                'type' => 'download',
+                'type'   => 'download',
+            ]);
+
+            $this->addMassAction([
+                'title'  => trans('admin::app.sales.invoices.index.datagrid.electronic-invoices'),
+                'url'    => route('admin.sales.invoices.electronic'),
+                'method' => 'POST',
+                'type'   => 'download',
+                'prompt' => [
+                    'label' => trans('admin::app.sales.invoices.index.datagrid.electronic-invoices-start'),
+                    'type'  => 'number',
+                    'min'   => 1,
+                ],
             ]);
         }
 

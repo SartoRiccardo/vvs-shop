@@ -8,6 +8,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
 use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Sales\OrderInvoiceDataGrid;
+use Webkul\Admin\Helpers\ElectronicInvoice;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Requests\MassUpdateRequest;
 use Webkul\Core\Traits\PDFHandler;
@@ -170,7 +171,44 @@ class InvoiceController extends Controller
             view('admin::sales.invoices.compact', compact('invoices'))->render()
         )
             ->header('Content-Type', 'text/html; charset=utf-8')
-            ->header('Content-Disposition', 'attachment; filename="' . $filename . '"');
+            ->header('Content-Disposition', 'attachment; filename="' . $filename . '"')
+            ->header('X-Filename', $filename);
+    }
+
+    /**
+     * Generate FatturaElettronica XML zip for the selected invoices.
+     */
+    public function electronicInvoice(Request $request): \Symfony\Component\HttpFoundation\BinaryFileResponse
+    {
+        $request->validate([
+            'indices'   => ['required', 'array'],
+            'indices.*' => ['integer'],
+        ]);
+
+        $invoices = $this->invoiceRepository->findWhereIn('id', $request->input('indices'));
+
+        $seq = (int) $request->input('prompt_value', 1);
+
+        $zip = new \ZipArchive();
+        $tmpPath = tempnam(sys_get_temp_dir(), 'fatture_') . '.zip';
+        $zip->open($tmpPath, \ZipArchive::CREATE);
+
+        foreach ($invoices as $invoice) {
+            $zip->addFromString(
+                ElectronicInvoice::filename($invoice, $seq),
+                ElectronicInvoice::generate($invoice, $seq),
+            );
+            $seq++;
+        }
+
+        $zip->close();
+
+        $filename = 'fatture_' . now()->format('Ymd_His') . '.zip';
+
+        return response()->download($tmpPath, $filename, [
+            'Content-Type' => 'application/zip',
+            'X-Filename'   => $filename,
+        ])->deleteFileAfterSend(true);
     }
 
     /**
