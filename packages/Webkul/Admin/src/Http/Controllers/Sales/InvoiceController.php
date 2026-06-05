@@ -152,6 +152,28 @@ class InvoiceController extends Controller
     }
 
     /**
+     * Generate a compact multi-copy HTML invoice sheet for printing.
+     */
+    public function compactInvoice(Request $request): Response
+    {
+        $request->validate([
+            'indices'   => ['required', 'array'],
+            'indices.*' => ['integer'],
+        ]);
+
+        $invoices = $this->invoiceRepository
+            ->findWhereIn('id', $request->input('indices'));
+
+        $filename = 'invoices_' . now()->format('Ymd_His') . '.html';
+
+        return response(
+            view('admin::sales.invoices.compact', compact('invoices'))->render()
+        )
+            ->header('Content-Type', 'text/html; charset=utf-8')
+            ->header('Content-Disposition', 'attachment; filename="' . $filename . '"');
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @return Response

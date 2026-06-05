@@ -34,6 +34,8 @@ Route::prefix('sales')->group(function () {
         Route::get('print/{id}', 'printInvoice')->name('admin.sales.invoices.print');
 
         Route::post('mass-update/state', 'massUpdateState')->name('admin.sales.invoices.mass_update.state');
+
+        Route::post('compact', 'compactInvoice')->name('admin.sales.invoices.compact');
     });
 
     /**

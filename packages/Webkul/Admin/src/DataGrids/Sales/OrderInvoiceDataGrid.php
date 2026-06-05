@@ -89,7 +89,7 @@ class OrderInvoiceDataGrid extends DataGrid
                 $dueDate = Carbon::parse($row->created_at)->addDays((int) $dueDuration);
 
                 if ($row->state == Invoice::STATUS_PAID) {
-                    return '<p class="label-active">'.trans('admin::app.sales.invoices.index.datagrid.paid').'</p>';
+                    return '<p class="label-active">' . trans('admin::app.sales.invoices.index.datagrid.paid') . '</p>';
                 }
 
                 if (
@@ -104,7 +104,7 @@ class OrderInvoiceDataGrid extends DataGrid
                         $extra = trans('admin::app.sales.invoices.index.datagrid.overdue-by', ['count' => abs($daysLeft)]);
                     }
 
-                    return '<div class="flex flex-col gap-1"><p class="label-pending">'.trans('admin::app.sales.invoices.index.datagrid.pending').'</p><p class="block text-xs italic leading-5 text-red-600 dark:text-gray-300">'.$extra.'</p></div>';
+                    return '<div class="flex flex-col gap-1"><p class="label-pending">' . trans('admin::app.sales.invoices.index.datagrid.pending') . '</p><p class="block text-xs italic leading-5 text-red-600 dark:text-gray-300">' . $extra . '</p></div>';
                 }
 
                 if ($row->state == Invoice::STATUS_OVERDUE) {
@@ -116,7 +116,7 @@ class OrderInvoiceDataGrid extends DataGrid
                         $extra = '';
                     }
 
-                    return '<div class="flex flex-col gap-1"><p class="label-canceled">'.trans('admin::app.sales.invoices.index.datagrid.overdue').'</p><p class="block text-xs italic leading-5 text-red-600 dark:text-gray-300">'.$extra.'</p></div>';
+                    return '<div class="flex flex-col gap-1"><p class="label-canceled">' . trans('admin::app.sales.invoices.index.datagrid.overdue') . '</p><p class="block text-xs italic leading-5 text-red-600 dark:text-gray-300">' . $extra . '</p></div>';
                 }
 
                 return $row->state;
@@ -160,6 +160,15 @@ class OrderInvoiceDataGrid extends DataGrid
      */
     public function prepareMassActions()
     {
+        if (bouncer()->hasPermission('sales.invoices.view')) {
+            $this->addMassAction([
+                'title' => trans('admin::app.sales.invoices.index.datagrid.compact-invoice'),
+                'url' => route('admin.sales.invoices.compact'),
+                'method' => 'POST',
+                'type' => 'download',
+            ]);
+        }
+
         $this->addMassAction([
             'title' => trans('admin::app.sales.invoices.index.datagrid.update-status'),
             'url' => route('admin.sales.invoices.mass_update.state'),

@@ -652,6 +652,7 @@ return [
                     'grand-total' => 'Grand Total',
                     'id' => 'ID',
                     'invoice-date' => 'Invoice Date',
+                    'compact-invoice' => 'Generate Compact Invoice',
                     'mass-update-success' => 'Selected invoice updated successfully.',
                     'order-id' => 'Order ID',
                     'overdue' => 'Overdue',

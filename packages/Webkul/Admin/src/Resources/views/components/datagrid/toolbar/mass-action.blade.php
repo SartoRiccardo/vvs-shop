@@ -183,6 +183,32 @@
 
                     this.$emitter.emit('open-confirm-modal', {
                         agree: () => {
+                            if (action.type === 'download') {
+                                this.$axios[method](action.url, {
+                                        indices: this.massActions.indices,
+                                    }, {
+                                        responseType: 'blob',
+                                    })
+                                    .then(response => {
+                                        const disposition = response.headers['content-disposition'] ?? '';
+                                        const match = disposition.match(/filename="([^"]+)"/);
+                                        const filename = match ? match[1] : 'download';
+
+                                        const url = URL.createObjectURL(new Blob([response.data]));
+                                        const a = document.createElement('a');
+                                        a.href = url;
+                                        a.download = filename;
+                                        a.click();
+                                        URL.revokeObjectURL(url);
+                                    })
+                                    .catch(() => {
+                                        this.$emitter.emit('add-flash', { type: 'error', message: 'Download failed.' });
+                                    });
+
+                                this.massActions.indices = [];
+                                return;
+                            }
+
                             switch (method) {
                                 case 'post':
                                 case 'put':

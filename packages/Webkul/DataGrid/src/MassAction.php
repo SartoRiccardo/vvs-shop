@@ -16,7 +16,9 @@ class MassAction
         public string $method,
         public mixed $url,
         public array $options = [],
-    ) {}
+        public string $type = 'default',
+    ) {
+    }
 
     /**
      * Convert to an array.
@@ -29,6 +31,7 @@ class MassAction
             'method' => $this->method,
             'url' => $this->url,
             'options' => $this->options,
+            'type' => $this->type,
         ];
     }
 }
