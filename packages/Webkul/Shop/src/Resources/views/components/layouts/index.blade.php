@@ -90,6 +90,10 @@
 
         {!! view_render_event('bagisto.shop.layout.head.after') !!}
 
+        @if(env('PLAUSIBLE_DOMAIN') && env('PLAUSIBLE_URL'))
+            <script defer data-domain="{{ env('PLAUSIBLE_DOMAIN') }}" src="{{ env('PLAUSIBLE_URL') }}/js/script.js"></script>
+        @endif
+
     </head>
 
     <body>
