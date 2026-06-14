@@ -3,6 +3,7 @@
 namespace Webkul\Installer\Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Webkul\FedExShipping\Database\Seeders\FedExFICPSeeder;
 use Webkul\Installer\Database\Seeders\Attribute\DatabaseSeeder as AttributeSeeder;
 use Webkul\Installer\Database\Seeders\Category\DatabaseSeeder as CategorySeeder;
 use Webkul\Installer\Database\Seeders\CMS\DatabaseSeeder as CMSSeeder;
@@ -13,6 +14,9 @@ use Webkul\Installer\Database\Seeders\RMA\DatabaseSeeder as RMASeeder;
 use Webkul\Installer\Database\Seeders\Shop\ThemeCustomizationTableSeeder as ShopSeeder;
 use Webkul\Installer\Database\Seeders\SocialLogin\DatabaseSeeder as SocialLoginSeeder;
 use Webkul\Installer\Database\Seeders\User\DatabaseSeeder as UserSeeder;
+use Webkul\PosteShipping\Database\Seeders\PosteItalianeSeeder;
+use Webkul\PosteShipping\Database\Seeders\PosteMiniBoxEconomySeeder;
+use Webkul\PosteShipping\Database\Seeders\PosteMiniBoxExpresSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -43,5 +47,13 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class, false, ['parameters' => $parameters]);
 
         $this->call(RMASeeder::class, false, ['parameters' => $parameters]);
+
+        $this->call(FedExFICPSeeder::class);
+
+        $this->call(PosteItalianeSeeder::class);
+
+        $this->call(PosteMiniBoxEconomySeeder::class);
+
+        $this->call(PosteMiniBoxExpresSeeder::class);
     }
 }
