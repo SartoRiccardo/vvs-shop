@@ -1,0 +1,34 @@
+services:
+    mysql:
+        image: mysql/mysql-server:8.0
+        ports:
+            - '3308:3306'
+        environment:
+            MYSQL_ROOT_PASSWORD: secret
+            MYSQL_ROOT_HOST: '%'
+            MYSQL_DATABASE: vvs_shop
+            MYSQL_USER: bagisto
+            MYSQL_PASSWORD: secret
+        volumes:
+            - dev-mysql:/var/lib/mysql
+        healthcheck:
+            test: [CMD, mysqladmin, ping, -psecret]
+            retries: 3
+            timeout: 5s
+
+    redis:
+        image: redis:alpine
+        ports:
+            - '6380:6379'
+        volumes:
+            - dev-redis:/data
+        healthcheck:
+            test: [CMD, redis-cli, ping]
+            retries: 3
+            timeout: 5s
+
+volumes:
+    dev-mysql:
+        driver: local
+    dev-redis:
+        driver: local
