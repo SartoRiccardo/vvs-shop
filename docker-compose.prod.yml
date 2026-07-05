@@ -5,17 +5,7 @@ services:
       dockerfile: docker/production/Dockerfile
     ports:
       - "80:80"
-    environment:
-      APP_URL: "${APP_URL:-http://localhost}"
-      APP_KEY: "${APP_KEY}"
-      APP_DEBUG: "false"
-      DB_HOST: mysql
-      DB_PORT: 3306
-      DB_DATABASE: "${DB_DATABASE:-bagisto}"
-      DB_USERNAME: "${DB_USERNAME:-bagisto}"
-      DB_PASSWORD: "${DB_PASSWORD:-secret}"
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
+    env_file: .env
     volumes:
       - app-storage:/var/www/bagisto/storage/app
     depends_on:
