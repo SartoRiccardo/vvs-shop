@@ -63,5 +63,10 @@ php artisan migrate --force --no-interaction
 log "Caching config/routes/views..."
 php artisan optimize
 
+# Migrate/optimize run as root, so anything they wrote in storage/bootstrap
+# cache needs handing back to www-data before php-fpm (running as www-data)
+# tries to write to the same files.
+chown -R www-data:www-data storage bootstrap/cache
+
 log "Starting supervisor..."
 exec "$@"
