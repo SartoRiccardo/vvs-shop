@@ -58,6 +58,11 @@ COPY docker/production/supervisord.conf /etc/supervisor/conf.d/bagisto.conf
 RUN rm -f /etc/nginx/sites-enabled/default /etc/nginx/conf.d/default.conf
 
 RUN mkdir -p /run/php /var/log/supervisor bootstrap/cache \
+        storage/framework/cache/data \
+        storage/framework/sessions \
+        storage/framework/testing \
+        storage/framework/views \
+        storage/logs \
     && chown -R www-data:www-data /var/www/bagisto \
     && chmod -R 775 storage bootstrap/cache \
     && find storage bootstrap/cache -type d -exec chmod g+s {} +
