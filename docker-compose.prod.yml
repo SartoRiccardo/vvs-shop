@@ -5,7 +5,7 @@ services:
       dockerfile: docker/production/Dockerfile
     ports:
       - "80:80"
-    env_file: .env
+    env_file: .env.api
     volumes:
       - app-storage:/var/www/bagisto/storage/app
     depends_on:
@@ -19,11 +19,7 @@ services:
 
   mysql:
     image: mysql:8.0
-    environment:
-      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD:-rootsecret}"
-      MYSQL_DATABASE: "${DB_DATABASE:-bagisto}"
-      MYSQL_USER: "${DB_USERNAME:-bagisto}"
-      MYSQL_PASSWORD: "${DB_PASSWORD:-secret}"
+    env_file: .env.mysql
     volumes:
       - mysql-data:/var/lib/mysql
     healthcheck:
