@@ -62,7 +62,7 @@
             },
 
             mounted() {
-                this.$axios.get(`/admin/catalog/products/${this.productId}/subscriber-tags`)
+                this.$axios.get(`/admin/catalog/products/${this.productId}/tags/subscriber`)
                     .then(r => {
                         this.allTags    = r.data.all;
                         this.selectedIds = r.data.selected;
@@ -73,7 +73,7 @@
             methods: {
                 save() {
                     this.isSaving = true;
-                    this.$axios.put(`/admin/catalog/products/${this.productId}/subscriber-tags`, {
+                    this.$axios.put(`/admin/catalog/products/${this.productId}/tags/subscriber`, {
                         tag_ids: this.selectedIds,
                     })
                     .then(r => {

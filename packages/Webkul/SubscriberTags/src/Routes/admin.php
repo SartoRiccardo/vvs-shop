@@ -23,8 +23,16 @@ Route::prefix('admin/marketing/communications')->middleware(['web', 'admin'])->g
     });
 });
 
-// Product <-> tags (nested under catalog for clarity)
-Route::prefix('admin/catalog/products/{productId}/subscriber-tags')->middleware(['web', 'admin'])->controller(ProductTagController::class)->group(function () {
+// Product <-> tags (nested under catalog for clarity).
+//
+// This must NOT be a plain `products/{productId}/{staticSegment}` shape:
+// Bagisto's core ProductController already registers a wildcard route of that
+// exact shape (`products/{id}/{attribute_id}`, used for attribute file
+// downloads) before this package's routes load, and Laravel matches routes
+// in registration order — the core wildcard silently swallows any 2-segment
+// path here regardless of the literal segment name. Adding a third static
+// segment keeps this route's shape from ever overlapping with it.
+Route::prefix('admin/catalog/products/{productId}/tags/subscriber')->middleware(['web', 'admin'])->controller(ProductTagController::class)->group(function () {
     Route::get('', 'index')->name('admin.catalog.products.subscriber_tags.index');
     Route::put('', 'update')->name('admin.catalog.products.subscriber_tags.update');
 });

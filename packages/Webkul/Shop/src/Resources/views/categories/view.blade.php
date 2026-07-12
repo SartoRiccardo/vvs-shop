@@ -66,12 +66,12 @@
             id="v-category-template"
         >
             <div class="container px-[60px] max-lg:px-8 max-md:px-4">
-                <div class="flex items-start gap-10 max-lg:gap-5 md:mt-10">
+                <div class="flex flex-col items-start gap-10 max-lg:gap-5 md:mt-10 md:flex-row">
                     <!-- Product Listing Filters -->
                     @include('shop::categories.filters')
 
                     <!-- Product Listing Container -->
-                    <div class="flex-1">
+                    <div class="w-full flex-1">
                         <!-- Desktop Product Listing Toolbar -->
                         <div class="max-md:hidden">
                             @include('shop::categories.toolbar')
