@@ -4638,6 +4638,8 @@ return [
                         'subscription' => 'Allow Newsletter Subscription',
                         'title' => 'Newsletter Subscription',
                         'title-info' => '"Newsletter information" contains updates, offers, or content shared regularly through emails to subscribers, keeping them informed and engaged.',
+                        'footer-title' => 'Footer Newsletter Title',
+                        'footer-subtitle' => 'Footer Newsletter Subtitle',
                     ],
 
                     'email' => [

@@ -4635,6 +4635,8 @@ return [
                         'subscription' => 'Permitir Assinatura de Newsletter',
                         'title' => 'Assinatura de Newsletter',
                         'title-info' => '"Informações de newsletter" contêm atualizações, ofertas ou conteúdo compartilhado regularmente por e-mail para assinantes, mantendo-os informados e engajados.',
+                        'footer-title' => 'Título da Newsletter no Rodapé',
+                        'footer-subtitle' => 'Subtítulo da Newsletter no Rodapé',
                     ],
 
                     'email' => [

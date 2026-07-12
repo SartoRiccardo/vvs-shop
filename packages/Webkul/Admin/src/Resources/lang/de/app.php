@@ -4635,6 +4635,8 @@ return [
                         'subscription' => 'Newsletter-Abonnement erlauben',
                         'title' => 'Newsletter-Abonnement',
                         'title-info' => '"Newsletter-Informationen" enthält regelmäßig per E-Mail geteilte Updates, Angebote oder Inhalte, um Abonnenten auf dem Laufenden zu halten und zu engagieren.',
+                        'footer-title' => 'Newsletter-Titel im Footer',
+                        'footer-subtitle' => 'Newsletter-Untertitel im Footer',
                     ],
 
                     'email' => [

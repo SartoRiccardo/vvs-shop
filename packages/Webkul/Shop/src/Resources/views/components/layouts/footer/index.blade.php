@@ -97,11 +97,11 @@
                     role="heading"
                     aria-level="2"
                 >
-                    @lang('shop::app.components.layouts.footer.newsletter-text')
+                    {{ core()->getConfigData('customer.settings.newsletter.footer_title') ?: trans('shop::app.components.layouts.footer.newsletter-text') }}
                 </p>
 
                 <p class="text-xs">
-                    @lang('shop::app.components.layouts.footer.subscribe-stay-touch')
+                    {{ core()->getConfigData('customer.settings.newsletter.footer_subtitle') ?: trans('shop::app.components.layouts.footer.subscribe-stay-touch') }}
                 </p>
 
                 <div>

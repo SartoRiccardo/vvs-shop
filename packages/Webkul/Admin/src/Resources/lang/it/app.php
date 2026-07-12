@@ -4635,6 +4635,8 @@ return [
                         'subscription' => 'Consenti iscrizione alla newsletter',
                         'title' => 'Iscrizione alla newsletter',
                         'title-info' => '"Informazioni sulla newsletter" contiene aggiornamenti, offerte o contenuti condivisi regolarmente tramite e-mail agli abbonati, tenendoli informati e coinvolti.',
+                        'footer-title' => 'Titolo newsletter nel footer',
+                        'footer-subtitle' => 'Sottotitolo newsletter nel footer',
                     ],
 
                     'email' => [

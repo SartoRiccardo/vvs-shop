@@ -4635,6 +4635,8 @@ return [
                         'subscription' => 'Nieuwsbriefabonnement toestaan',
                         'title' => 'Nieuwsbriefabonnement',
                         'title-info' => '"Nieuwsbriefinformatie" bevat updates, aanbiedingen of regelmatig gedeelde inhoud via e-mails aan abonnees, om hen op de hoogte te houden en betrokken te houden.',
+                        'footer-title' => 'Nieuwsbriefstitel in de footer',
+                        'footer-subtitle' => 'Nieuwsbrief ondertitel in de footer',
                     ],
 
                     'email' => [

@@ -4635,6 +4635,8 @@ return [
                         'subscription' => 'Włącz subskrypcję newslettera',
                         'title' => 'Newsletter',
                         'title-info' => 'Zezwól klientom na zapisywanie się do bazy mailingowej, aby mogli otrzymywać informacje o nowościach i promocjach.',
+                        'footer-title' => 'Tytuł newslettera w stopce',
+                        'footer-subtitle' => 'Podtytuł newslettera w stopce',
                     ],
 
                     'email' => [

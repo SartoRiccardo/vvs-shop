@@ -1409,6 +1409,18 @@ return [
                 'info' => 'Enable subscription option for users in the footer section.',
                 'type' => 'boolean',
                 'default' => 1,
+            ], [
+                'name' => 'footer_title',
+                'title' => 'admin::app.configuration.index.customer.settings.newsletter.footer-title',
+                'type' => 'text',
+                'channel_based' => false,
+                'locale_based' => true,
+            ], [
+                'name' => 'footer_subtitle',
+                'title' => 'admin::app.configuration.index.customer.settings.newsletter.footer-subtitle',
+                'type' => 'text',
+                'channel_based' => false,
+                'locale_based' => true,
             ],
         ],
     ], [

@@ -4635,6 +4635,8 @@ return [
                         'subscription' => 'Permetre la subscripció al butlletí',
                         'title' => 'Subscripció al butlletí',
                         'title-info' => '"Informacions del butlletí" conté actualitzacions, ofertes o contingut compartit regularment per correu electrònic amb els subscriptors, mantenint-los informats i compromesos.',
+                        'footer-title' => 'Títol del butlletí al peu de pàgina',
+                        'footer-subtitle' => 'Subtítol del butlletí al peu de pàgina',
                     ],
 
                     'email' => [

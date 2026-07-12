@@ -4635,6 +4635,8 @@ return [
                         'subscription' => 'Izinkan Langganan Newsletter',
                         'title' => 'Langganan Newsletter',
                         'title-info' => '"Informasi Newsletter" berisi pembaruan, penawaran, atau konten yang dibagikan secara teratur melalui email kepada pelanggan, menjaga mereka tetap terinformasi dan terlibat.',
+                        'footer-title' => 'Judul Newsletter Footer',
+                        'footer-subtitle' => 'Subjudul Newsletter Footer',
                     ],
 
                     'email' => [

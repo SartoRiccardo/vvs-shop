@@ -4635,6 +4635,8 @@ return [
                         'subscription' => '允许订阅通讯信息',
                         'title' => '通讯信息',
                         'title-info' => '“通讯信息”是通过电子邮件定期向订阅者发送的更新、优惠或内容，帮助他们保持了解和参与。',
+                        'footer-title' => '页脚通讯标题',
+                        'footer-subtitle' => '页脚通讯副标题',
                     ],
 
                     'email' => [

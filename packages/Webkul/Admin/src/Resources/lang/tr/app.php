@@ -4635,6 +4635,8 @@ return [
                         'subscription' => 'Bülten Aboneliğine İzin Ver',
                         'title' => 'Bülten Aboneliği',
                         'title-info' => '"Bülten bilgileri", abonelere düzenli olarak e-posta yoluyla paylaşılan güncellemeleri, teklifleri veya içerikleri içerir ve onları bilgilendirir ve etkileşimde bulunur.',
+                        'footer-title' => 'Alt Bilgi Bülten Başlığı',
+                        'footer-subtitle' => 'Alt Bilgi Bülten Alt Başlığı',
                     ],
 
                     'email' => [

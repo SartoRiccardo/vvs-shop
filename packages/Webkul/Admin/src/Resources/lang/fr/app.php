@@ -4635,6 +4635,8 @@ return [
                         'subscription' => 'Autoriser l\'abonnement à la newsletter',
                         'title' => 'Abonnement à la newsletter',
                         'title-info' => '"Informations sur la newsletter" contient des mises à jour, des offres ou du contenu partagé régulièrement par e-mail aux abonnés, les tenant informés et engagés.',
+                        'footer-title' => 'Titre de la newsletter dans le pied de page',
+                        'footer-subtitle' => 'Sous-titre de la newsletter dans le pied de page',
                     ],
 
                     'email' => [

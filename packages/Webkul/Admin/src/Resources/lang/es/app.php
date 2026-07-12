@@ -4635,6 +4635,8 @@ return [
                         'subscription' => 'Permitir suscripción al boletín',
                         'title' => 'Suscripción al boletín',
                         'title-info' => '"Información del boletín" contiene actualizaciones, ofertas o contenido compartido regularmente a través de correos electrónicos a los suscriptores, manteniéndolos informados y comprometidos.',
+                        'footer-title' => 'Título del boletín en el pie de página',
+                        'footer-subtitle' => 'Subtítulo del boletín en el pie de página',
                     ],
 
                     'email' => [
