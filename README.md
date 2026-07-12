@@ -65,6 +65,15 @@ docker build -f docker/production/Dockerfile -t bagisto:local .
 docker compose -f docker-compose.prod.yml -f docker-compose.local.yml up -d
 ```
 
+## Domain Cutover (staging → production domain)
+
+The plan is to build out the site under a staging domain (`smallplushies.sarto.dev`) and later promote it to the real production domain (`www.smallplushies.com`). This is a single-instance promotion, not a dual-domain deployment — Bagisto's asset/image URLs are derived from a single static `APP_URL`, not per-request `Host` header, so one running instance can only serve one domain correctly at a time. No database migration is needed (image paths are stored relative; only the URL prefix is computed at read time), but the following must be updated at cutover:
+
+1. **`APP_URL`** in `.env.api` → `https://www.smallplushies.com`. This drives asset/image URLs (`config/filesystems.php`, `'url' => env('APP_URL').'/storage'`) and all `url()`/`asset()` output.
+2. **Channel `hostname`** (Admin → Settings → Channels) → update to `www.smallplushies.com`. This is what `Core::getCurrentChannel()` matches against the incoming `Host` header for theme/locale/currency resolution.
+3. **Re-cache config**: either restart/recreate the `app` container (the entrypoint runs `php artisan optimize` on every start), or from the admin UI use **Configuration → Cache Management → Cache Actions** (runs the same `optimize:clear`/`config:cache` commands without needing container exec access). `APP_URL` is baked into the config cache — a stale cache will keep serving old URLs.
+4. **Clear response cache**: `php artisan responsecache:clear` — **not** covered by the Cache Management UI action above (that only touches Laravel's config/route/view caches). The response cache (`spatie/laravel-responsecache`, wired up via Bagisto's FPC package) normally self-invalidates on channel/theme/category changes via event listeners, but a domain change isn't one of those triggers, so cached pages from the old domain need dropping manually via CLI.
+
 ## Credits
 
 Built on top of [Bagisto](https://github.com/bagisto/bagisto), an open-source Laravel e-commerce platform, licensed under the [MIT License](https://github.com/bagisto/bagisto/blob/master/LICENSE.txt).
