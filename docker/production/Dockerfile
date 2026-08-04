@@ -47,7 +47,14 @@ COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
 
 WORKDIR /var/www/bagisto
 
-COPY . .
+# composer.json declares Bagisto's own packages/ as local path repositories,
+# so they must be present for `composer install` to resolve at all — but
+# copying just the manifest + packages/ (not the rest of the app) still lets
+# this layer's cache survive edits to unrelated top-level dirs (config/,
+# routes/, resources/, docs, etc.), instead of invalidating on every change
+# in the repo the way a single `COPY . .` before install would.
+COPY composer.json composer.lock ./
+COPY packages/ packages/
 
 RUN composer install \
         --no-dev \
@@ -56,6 +63,8 @@ RUN composer install \
         --optimize-autoloader \
         --no-scripts \
     && rm -rf /root/.composer/cache
+
+COPY . .
 
 ##### Stage 2: slim runtime image #####
 FROM php:8.3-fpm-bookworm
