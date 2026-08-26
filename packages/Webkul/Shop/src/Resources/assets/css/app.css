@@ -2,6 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+/**
+ * Brand color defaults, as "R G B" triplets for Tailwind's rgb(var(...) / <alpha-value>)
+ * opacity syntax. These are overridden per-request by Admin > Settings > General >
+ * Design > Theme Colors — see components/layouts/index.blade.php.
+ */
+:root {
+    --color-primary: 6 12 59;
+    --color-bg-brand: 246 242 235;
+    --color-page-bg: 255 255 255;
+    --color-success: 64 153 74;
+    --color-link: 0 68 242;
+    --color-danger: 248 81 86;
+    --color-neutral: 113 113 122;
+    --color-neutral-mix-target: white;
+
+    /**
+     * Border and Subtle Background aren't stored colors — they're tints of
+     * Neutral blended toward --color-neutral-mix-target, so the whole gray
+     * family stays one hue at different brightness levels off a single
+     * admin-editable swatch. The mix target flips to black on a dark Page
+     * Background (computed server-side, see components/layouts/index.blade.php)
+     * so these stay a subtle surface variation instead of washing out to white.
+     */
+    --color-border: color-mix(in srgb, var(--color-neutral-mix-target) 80%, rgb(var(--color-neutral)) 20%);
+    --color-subtle-bg: color-mix(in srgb, var(--color-neutral-mix-target) 90%, rgb(var(--color-neutral)) 10%);
+}
+
 @font-face {
     font-family: "bagisto-shop";
     src: url("../fonts/bagisto-shop.woff") format("woff");
@@ -16,7 +43,7 @@ img.lazy {
 
 @layer components {
     ::selection {
-        background-color: rgba(6, 12, 59, .2);
+        background-color: rgb(var(--color-primary) / .2);
     }
 
     input {
@@ -435,7 +462,7 @@ img.lazy {
     }
 
     .secondary-button {
-        @apply flex gap-x-1.5 items-center place-content-center font-medium rounded-xl bg-white text-navyBlue border border-navyBlue px-8 py-4 max-w-max cursor-pointer transition-all hover:bg-[#050e3a0d];
+        @apply flex gap-x-1.5 items-center place-content-center font-medium rounded-xl bg-pageBg text-navyBlue border border-navyBlue px-8 py-4 max-w-max cursor-pointer transition-all hover:bg-navyBlue/5;
     }
 
     .shimmer {
@@ -492,7 +519,7 @@ img.lazy {
     .glow-404 {
         background-clip: text;
         -webkit-background-clip: text;
-        color: #060C3B;
+        color: rgb(var(--color-primary));
     }
 
     .glow-shadow-404 {

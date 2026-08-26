@@ -438,7 +438,7 @@
                             />
 
                             <x-shop::form.control-group>
-                                <div class="bg-white !pl-0 !pt-2">
+                                <div class="bg-pageBg !pl-0 !pt-2">
                                     <x-shop::form.control-group.control
                                         type="textarea"
                                         name="message"

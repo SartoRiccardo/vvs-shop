@@ -26,7 +26,7 @@
                     @lang("shop::app.errors.{$errorCode}.title")
                 </h1>
 
-                <p class="mt-4 text-lg text-zinc-500 max-md:text-sm">
+                <p class="mt-4 text-lg text-mutedText max-md:text-sm">
                     {{ 
                         $errorCode === 503 && core()->getCurrentChannel()->maintenance_mode_text != ""
                         ? core()->getCurrentChannel()->maintenance_mode_text : trans("shop::app.errors.{$errorCode}.description")

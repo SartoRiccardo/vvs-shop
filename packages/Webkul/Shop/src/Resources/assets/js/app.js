@@ -72,7 +72,7 @@ window.app = createApp({
                         
                         if (errorMessageElement) {
                             // Scroll to the parent container of the error message.
-                            scrollTarget = errorMessageElement.closest('.border') || errorMessageElement.closest('div[class*="bg-white"]') || errorMessageElement;
+                            scrollTarget = errorMessageElement.closest('.border') || errorMessageElement.closest('div[class*="bg-pageBg"]') || errorMessageElement;
                         }
                     }
 

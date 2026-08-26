@@ -4167,6 +4167,25 @@ return [
                         'sidebar' => 'Menú lateral',
                         'title' => 'Vista de la categoria del menú',
                     ],
+
+                    'theme-colors' => [
+                        'background' => 'Color de fons',
+                        'background-info' => 'S\'utilitza per al fons del peu de pàgina, incloent-hi el quadre del butlletí i la barra de drets d\'autor.',
+                        'danger' => 'Color de perill',
+                        'danger-info' => 'Encara no s\'aplica a cap element de la botiga — reservat per a un ús futur (p. ex. estats d\'error, insígnies de sense estoc).',
+                        'link' => 'Color de l\'enllaç',
+                        'link-info' => 'Encara no s\'aplica a cap element de la botiga — reservat per a un ús futur.',
+                        'neutral' => 'Neutre',
+                        'neutral-info' => 'Substitueix el color de text secundari/atenuat del lloc (l\'import ratllat dels preus, marques horàries, llegendes, recomptes de ressenyes). La vora predeterminada de targetes/separadors/taules i els fons clars de l\'esquelet de càrrega es deriven automàticament d\'aquest mateix color barrejant-lo amb blanc, de manera que una sola mostra controla tota la família de grisos neutres.',
+                        'page-background' => 'Fons de la pàgina',
+                        'page-background-info' => 'S\'utilitza per al llenç del lloc — el cos, la capçalera, el contenidor de contingut principal i la majoria de superfícies de targetes, modals i camps d\'entrada.',
+                        'primary' => 'Color primari',
+                        'primary-info' => 'S\'utilitza per als botons, enllaços, estats actius, caselles de selecció/ràdio, i tons subtils com la línia divisòria de la capçalera i l\'estat de passada del ratolí del botó secundari.',
+                        'success' => 'Color d\'èxit',
+                        'success-info' => 'Encara no s\'aplica a cap element de la botiga — reservat per a un ús futur (p. ex. bàners d\'èxit, insígnies d\'en estoc).',
+                        'title' => 'Colors del tema',
+                        'title-info' => 'Defineix els colors de marca de la botiga. Els canvis s\'apliquen immediatament sense reconstruir els recursos.',
+                    ],
                 ],
 
                 'gdpr' => [

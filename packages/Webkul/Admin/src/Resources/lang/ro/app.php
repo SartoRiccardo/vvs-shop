@@ -4167,6 +4167,25 @@ return [
                         'sidebar' => 'Sidebar Menu',
                         'title' => 'Menu Category View',
                     ],
+
+                    'theme-colors' => [
+                        'background' => 'Culoare de fundal',
+                        'background-info' => 'Folosit pentru fundalul subsolului, inclusiv caseta de newsletter și bara de drepturi de autor.',
+                        'danger' => 'Culoare de pericol',
+                        'danger-info' => 'Nu este încă aplicat niciunui element din magazin — rezervat pentru utilizare viitoare (de ex. stări de eroare, insigne stoc epuizat).',
+                        'link' => 'Culoare link',
+                        'link-info' => 'Nu este încă aplicat niciunui element din magazin — rezervat pentru utilizare viitoare.',
+                        'neutral' => 'Neutru',
+                        'neutral-info' => 'Înlocuiește culoarea textului secundar/estompat al site-ului (suma tăiată a prețurilor, marcajele de timp, subtitrările, numărul de recenzii). Bordura implicită a cardurilor/separatoarelor/tabelelor și fundalurile deschise ale skeleton-loader-ului sunt derivate automat din aceeași culoare prin amestecarea acesteia cu alb, astfel încât o singură mostră controlează întreaga familie de gri neutru.',
+                        'page-background' => 'Fundal pagină',
+                        'page-background-info' => 'Folosit pentru canvas-ul site-ului — body, antet, containerul principal de conținut și majoritatea suprafețelor cardurilor, ferestrelor modale și câmpurilor de introducere.',
+                        'primary' => 'Culoare primară',
+                        'primary-info' => 'Folosit pentru butoane, linkuri, stări active, casete de selectare/butoane radio și nuanțe subtile precum linia despărțitoare din antet și starea de hover a butonului secundar.',
+                        'success' => 'Culoare de succes',
+                        'success-info' => 'Nu este încă aplicat niciunui element din magazin — rezervat pentru utilizare viitoare (de ex. bannere de succes, insigne în stoc).',
+                        'title' => 'Culorile temei',
+                        'title-info' => 'Setați culorile de brand ale magazinului. Modificările se aplică imediat, fără a reconstrui activele.',
+                    ],
                 ],
 
                 'gdpr' => [

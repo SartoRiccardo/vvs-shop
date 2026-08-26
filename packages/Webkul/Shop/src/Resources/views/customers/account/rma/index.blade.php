@@ -21,7 +21,7 @@
 
             <a
                 href="{{ route('shop.customers.account.rma.create') }}"
-                class="secondary-button flex items-center gap-x-2 border-[#E9E9E9] px-5 py-3 font-normal"
+                class="secondary-button flex items-center gap-x-2 border-divider px-5 py-3 font-normal"
             >
                 @lang('shop::app.rma.customer.create.heading')
             </a>

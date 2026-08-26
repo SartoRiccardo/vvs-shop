@@ -78,6 +78,34 @@
 
         @stack('styles')
 
+        @php
+            $hexToRgbTriplet = fn ($hex) => implode(' ', array_map('hexdec', str_split(ltrim($hex ?: '000000', '#'), 2)));
+
+            // Perceived luminance (ITU-R BT.601) decides which way Border and Subtle
+            // Background lean when derived from Neutral — see app.css. On a light page
+            // they lighten toward white; on a dark page they'd only wash out doing that,
+            // so they darken toward black instead, staying a subtle surface variation.
+            $pageBackgroundHex = core()->getConfigData('general.design.theme_colors.page_background') ?: '#ffffff';
+            [$pageBgR, $pageBgG, $pageBgB] = array_map('hexdec', str_split(ltrim($pageBackgroundHex, '#'), 2));
+            $pageBgLuminance = (0.299 * $pageBgR + 0.587 * $pageBgG + 0.114 * $pageBgB) / 255;
+            $neutralMixTarget = $pageBgLuminance < 0.5 ? 'black' : 'white';
+        @endphp
+
+        <style>
+            :root {
+                --color-primary: {{ $hexToRgbTriplet(core()->getConfigData('general.design.theme_colors.primary')) }};
+                --color-bg-brand: {{ $hexToRgbTriplet(core()->getConfigData('general.design.theme_colors.background')) }};
+                --color-page-bg: {{ $hexToRgbTriplet(core()->getConfigData('general.design.theme_colors.page_background')) }};
+                --color-success: {{ $hexToRgbTriplet(core()->getConfigData('general.design.theme_colors.success')) }};
+                --color-link: {{ $hexToRgbTriplet(core()->getConfigData('general.design.theme_colors.link')) }};
+                --color-danger: {{ $hexToRgbTriplet(core()->getConfigData('general.design.theme_colors.danger')) }};
+                --color-neutral: {{ $hexToRgbTriplet(core()->getConfigData('general.design.theme_colors.neutral')) }};
+                --color-neutral-mix-target: {{ $neutralMixTarget }};
+
+                /* Border and Subtle Background derive from Neutral — see app.css. */
+            }
+        </style>
+
         <style>
             {!! core()->getConfigData('general.content.custom_scripts.custom_css') !!}
         </style>
@@ -96,7 +124,7 @@
 
     </head>
 
-    <body>
+    <body class="bg-pageBg">
         {!! view_render_event('bagisto.shop.layout.body.before') !!}
 
         <a
@@ -129,7 +157,7 @@
             {!! view_render_event('bagisto.shop.layout.content.before') !!}
 
             <!-- Page Content Blade Component -->
-            <main id="main" class="bg-white">
+            <main id="main" class="bg-pageBg">
                 {{ $slot }}
             </main>
 

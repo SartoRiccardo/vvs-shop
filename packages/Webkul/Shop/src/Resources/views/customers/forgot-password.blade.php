@@ -38,13 +38,13 @@
 
         <!-- Form Container -->
         <div
-            class="m-auto w-full max-w-[870px] rounded-xl border border-zinc-200 p-16 px-[90px] max-md:px-8 max-md:py-8 max-sm:border-none max-sm:p-0"
+            class="m-auto w-full max-w-[870px] rounded-xl border border-divider p-16 px-[90px] max-md:px-8 max-md:py-8 max-sm:border-none max-sm:p-0"
         >
             <h1 class="font-dmserif text-4xl max-md:text-3xl max-sm:text-xl">
                 @lang('shop::app.customers.forgot-password.title')
             </h1>
 
-            <p class="mt-4 text-xl text-zinc-500 max-sm:mt-0 max-sm:text-sm">
+            <p class="mt-4 text-xl text-mutedText max-sm:mt-0 max-sm:text-sm">
                 @lang('shop::app.customers.forgot-password.forgot-password-text')
             </p>
 
@@ -96,7 +96,7 @@
                         </button>
                     </div>
 
-                    <p class="mt-5 font-medium text-zinc-500 max-sm:text-center max-sm:text-sm">
+                    <p class="mt-5 font-medium text-mutedText max-sm:text-center max-sm:text-sm">
                         @lang('shop::app.customers.forgot-password.back')
 
                         <a 
@@ -116,7 +116,7 @@
 
         </div>
 
-        <p class="mb-4 mt-8 text-center text-xs text-zinc-500">
+        <p class="mb-4 mt-8 text-center text-xs text-mutedText">
             @lang('shop::app.customers.forgot-password.footer', ['current_year'=> date('Y') ])
         </p>
     </div>

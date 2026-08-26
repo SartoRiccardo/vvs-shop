@@ -5,7 +5,7 @@
 ])
 
 <v-product-ratings
-    {{ $attributes->merge(['class' => 'flex w-max items-center rounded-md border border-zinc-200 px-4 py-2']) }}
+    {{ $attributes->merge(['class' => 'flex w-max items-center rounded-md border border-divider px-4 py-2']) }}
     average="{{ $average }}"
     total="{{ $total }}"
 >

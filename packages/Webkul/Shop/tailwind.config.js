@@ -1,4 +1,19 @@
 /** @type {import('tailwindcss').Config} */
+
+/**
+ * Reads a brand color from the `--color-*` custom properties set at runtime
+ * from Admin > Settings > General > Design > Theme Colors, falling back to
+ * the CSS variable's own default (see src/Resources/assets/css/app.css)
+ * when Tailwind's opacity modifier isn't used.
+ */
+function withOpacity(variable) {
+    return ({ opacityValue }) => (
+        opacityValue === undefined
+            ? `rgb(var(${variable}))`
+            : `rgb(var(${variable}) / ${opacityValue})`
+    );
+}
+
 module.exports = {
     content: ["./src/Resources/**/*.blade.php", "./src/Resources/**/*.js"],
 
@@ -29,11 +44,18 @@ module.exports = {
 
         extend: {
             colors: {
-                navyBlue: "#060C3B",
-                lightOrange: "#F6F2EB",
-                darkGreen: '#40994A',
-                darkBlue: '#0044F2',
-                darkPink: '#F85156',
+                navyBlue: withOpacity("--color-primary"),
+                lightOrange: withOpacity("--color-bg-brand"),
+                pageBg: withOpacity("--color-page-bg"),
+                darkGreen: withOpacity("--color-success"),
+                darkBlue: withOpacity("--color-link"),
+                darkPink: withOpacity("--color-danger"),
+                mutedText: withOpacity("--color-neutral"),
+                // Border and Subtle Background are `color-mix()` results, not raw
+                // R-G-B triplets, so they can't go through withOpacity()'s rgb(var() / a)
+                // wrapper — reference them directly instead.
+                divider: "var(--color-border)",
+                subtleBg: "var(--color-subtle-bg)",
             },
 
             fontFamily: {

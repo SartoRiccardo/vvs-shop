@@ -4167,6 +4167,25 @@ return [
                         'sidebar' => 'Kenar Çubuğu Menüsü',
                         'title' => 'Menü Kategori Görünümü',
                     ],
+
+                    'theme-colors' => [
+                        'background' => 'Arka Plan Rengi',
+                        'background-info' => 'Bülten kutusu ve telif hakkı çubuğu dahil olmak üzere altbilgi arka planı için kullanılır.',
+                        'danger' => 'Tehlike Rengi',
+                        'danger-info' => 'Henüz hiçbir mağaza ön yüzü öğesine uygulanmadı — ileride kullanılmak üzere ayrılmıştır (örn. hata durumları, stokta yok rozetleri).',
+                        'link' => 'Bağlantı Rengi',
+                        'link-info' => 'Henüz hiçbir mağaza ön yüzü öğesine uygulanmadı — ileride kullanılmak üzere ayrılmıştır.',
+                        'neutral' => 'Nötr',
+                        'neutral-info' => 'Sitenin soluk/ikincil metin rengini (fiyatların üzeri çizili tutarı, zaman damgaları, açıklamalar, değerlendirme sayıları) değiştirir. Varsayılan kart/ayırıcı/tablo kenarlığı ve açık iskelet yükleyici arka planları, bu aynı renk beyazla harmanlanarak otomatik olarak türetilir, böylece tek bir renk örneği tüm nötr-gri aileyi kontrol eder.',
+                        'page-background' => 'Sayfa Arka Planı',
+                        'page-background-info' => 'Site tuvali için kullanılır — gövde, üstbilgi, ana içerik sarmalayıcısı ve çoğu kart, modal ve giriş yüzeyi.',
+                        'primary' => 'Birincil Renk',
+                        'primary-info' => 'Düğmeler, bağlantılar, aktif durumlar, onay kutuları/radyo düğmeleri ve üstbilginin ayırıcı çizgisi ile ikincil düğme hover durumu gibi ince tonlar için kullanılır.',
+                        'success' => 'Başarı Rengi',
+                        'success-info' => 'Henüz hiçbir mağaza ön yüzü öğesine uygulanmadı — ileride kullanılmak üzere ayrılmıştır (örn. başarı afişleri, stokta var rozetleri).',
+                        'title' => 'Tema Renkleri',
+                        'title-info' => 'Mağazanın marka renklerini ayarlayın. Değişiklikler, varlıklar yeniden oluşturulmadan hemen uygulanır.',
+                    ],
                 ],
 
                 'gdpr' => [

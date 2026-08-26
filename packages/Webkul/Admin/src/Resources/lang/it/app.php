@@ -4167,6 +4167,25 @@ return [
                         'sidebar' => 'Menu laterale',
                         'title' => 'Vista categoria menu',
                     ],
+
+                    'theme-colors' => [
+                        'background' => 'Colore di sfondo',
+                        'background-info' => 'Utilizzato per lo sfondo del footer, inclusi il riquadro della newsletter e la barra del copyright.',
+                        'danger' => 'Colore di pericolo',
+                        'danger-info' => 'Non ancora applicato a nessun elemento dello storefront — riservato per usi futuri (ad es. stati di errore, badge esaurito).',
+                        'link' => 'Colore del link',
+                        'link-info' => 'Non ancora applicato a nessun elemento dello storefront — riservato per usi futuri.',
+                        'neutral' => 'Neutro',
+                        'neutral-info' => 'Sostituisce il colore del testo attenuato/secondario del sito (l\'importo barrato dei prezzi, i timestamp, le didascalie, il numero di recensioni). Il bordo predefinito di card/divisori/tabelle e gli sfondi chiari degli skeleton-loader vengono derivati automaticamente da questo stesso colore miscelandolo con il bianco, quindi un solo swatch controlla l\'intera famiglia di grigi neutri.',
+                        'page-background' => 'Sfondo della pagina',
+                        'page-background-info' => 'Utilizzato per la superficie del sito — body, header, wrapper del contenuto principale e la maggior parte delle superfici di card, modali e campi di input.',
+                        'primary' => 'Colore primario',
+                        'primary-info' => 'Utilizzato per pulsanti, link, stati attivi, checkbox/radio e sfumature sottili come la linea divisoria dell\'header e lo stato hover del pulsante secondario.',
+                        'success' => 'Colore di successo',
+                        'success-info' => 'Non ancora applicato a nessun elemento dello storefront — riservato per usi futuri (ad es. banner di successo, badge disponibile).',
+                        'title' => 'Colori del tema',
+                        'title-info' => 'Imposta i colori del marchio del negozio. Le modifiche si applicano immediatamente senza dover ricompilare gli asset.',
+                    ],
                 ],
 
                 'gdpr' => [

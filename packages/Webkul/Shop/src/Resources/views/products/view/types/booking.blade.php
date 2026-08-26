@@ -27,7 +27,7 @@
 
                             <div class="grid grid-cols-1 gap-3">
                                 <p
-                                    class="text-[#6E6E6E]"
+                                    class="text-mutedText"
                                     v-pre
                                 >
                                     {{ $bookingProduct->location }}

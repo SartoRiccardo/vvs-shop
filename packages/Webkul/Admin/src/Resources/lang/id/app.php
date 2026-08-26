@@ -4167,6 +4167,25 @@ return [
                         'sidebar' => 'Menu Sidebar',
                         'title' => 'Tampilan Kategori Menu',
                     ],
+
+                    'theme-colors' => [
+                        'background' => 'Warna Latar Belakang',
+                        'background-info' => 'Digunakan untuk latar belakang footer, termasuk kotak buletinnya dan bar hak cipta.',
+                        'danger' => 'Warna Bahaya',
+                        'danger-info' => 'Belum diterapkan pada elemen storefront mana pun — dicadangkan untuk penggunaan mendatang (misalnya status error, lencana stok habis).',
+                        'link' => 'Warna Tautan',
+                        'link-info' => 'Belum diterapkan pada elemen storefront mana pun — dicadangkan untuk penggunaan mendatang.',
+                        'neutral' => 'Netral',
+                        'neutral-info' => 'Menggantikan warna teks sekunder/redup situs (jumlah harga yang dicoret, stempel waktu, keterangan, jumlah ulasan). Batas kartu/pemisah/tabel default dan latar belakang skeleton-loader terang secara otomatis diturunkan dari warna yang sama dengan mencampurnya dengan putih, sehingga satu swatch mengontrol seluruh keluarga abu-abu netral.',
+                        'page-background' => 'Latar Belakang Halaman',
+                        'page-background-info' => 'Digunakan untuk kanvas situs — body, header, pembungkus konten utama, dan sebagian besar permukaan kartu, modal, dan input.',
+                        'primary' => 'Warna Utama',
+                        'primary-info' => 'Digunakan untuk tombol, tautan, status aktif, kotak centang/radio, dan sentuhan halus seperti garis pemisah header dan status hover tombol sekunder.',
+                        'success' => 'Warna Sukses',
+                        'success-info' => 'Belum diterapkan pada elemen storefront mana pun — dicadangkan untuk penggunaan mendatang (misalnya banner sukses, lencana stok tersedia).',
+                        'title' => 'Warna Tema',
+                        'title-info' => 'Atur warna merek toko. Perubahan berlaku langsung tanpa perlu membangun ulang aset.',
+                    ],
                 ],
 
                 'gdpr' => [

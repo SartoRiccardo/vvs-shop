@@ -14,7 +14,7 @@
     >
         <div>
             <div
-                class="flex flex-row justify-center gap-8 bg-zinc-100 max-sm:gap-1.5"
+                class="flex flex-row justify-center gap-8 bg-subtleBg max-sm:gap-1.5"
                 :style="positionStyles"
             >
                 <div

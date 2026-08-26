@@ -261,7 +261,7 @@
                 ></label>
 
                 <label
-                    class="cursor-pointer select-none text-base text-zinc-500 max-md:text-sm ltr:pl-0 rtl:pr-0"
+                    class="cursor-pointer select-none text-base text-mutedText max-md:text-sm ltr:pl-0 rtl:pr-0"
                     for="is-subscribed"
                 >
                     @lang('shop::app.customers.account.profile.edit.subscribe-to-newsletter')

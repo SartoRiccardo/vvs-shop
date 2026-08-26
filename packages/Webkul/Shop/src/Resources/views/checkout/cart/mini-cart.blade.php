@@ -59,7 +59,7 @@
                         </p>
                     </div>
 
-                    <p class="text-base max-md:text-zinc-500 max-sm:text-xs">
+                    <p class="text-base max-md:text-mutedText max-sm:text-xs">
                         {{ core()->getConfigData('sales.checkout.mini_cart.offer_info')}}
                     </p>
 
@@ -122,7 +122,7 @@
                                         <p class="flex flex-col text-lg max-md:font-semibold max-sm:text-sm">
                                             @{{ item.formatted_price_incl_tax }}
 
-                                            <span class="text-xs font-normal text-zinc-500">
+                                            <span class="text-xs font-normal text-mutedText">
                                                 @lang('shop::app.checkout.cart.mini-cart.excl-tax')
 
                                                 <span class="font-medium text-black">@{{ item.formatted_price }}</span>
@@ -169,7 +169,7 @@
                                     >
                                         <template v-for="attribute in item.options">
                                             <div class="max-md:grid max-md:gap-0.5">
-                                                <p class="text-sm font-medium text-zinc-500 max-md:font-normal max-sm:text-xs">
+                                                <p class="text-sm font-medium text-mutedText max-md:font-normal max-sm:text-xs">
                                                     @{{ attribute.attribute_name + ':' }}
                                                 </p>
 
@@ -260,13 +260,13 @@
                     class="grid-col-1 grid gap-5 max-md:gap-2.5"
                 >
                     <div
-                        class="my-8 flex items-center justify-between border-b border-zinc-200 px-6 pb-2 max-md:my-0 max-md:border-t max-md:px-5 max-md:py-2"
+                        class="my-8 flex items-center justify-between border-b border-divider px-6 pb-2 max-md:my-0 max-md:border-t max-md:px-5 max-md:py-2"
                         :class="{'!justify-end': isLoading}"
                     >
                         {!! view_render_event('bagisto.shop.checkout.mini-cart.subtotal.before') !!}
 
                         <template v-if="! isLoading">
-                            <p class="text-sm font-medium text-zinc-500">
+                            <p class="text-sm font-medium text-mutedText">
                                 @lang('shop::app.checkout.cart.mini-cart.subtotal')
                             </p>
 
@@ -280,7 +280,7 @@
                             <p class="flex flex-col text-3xl font-semibold max-md:text-sm max-sm:text-right">
                                 @{{ cart.formatted_sub_total_incl_tax }}
 
-                                <span class="text-sm font-normal text-zinc-500 max-sm:text-xs">
+                                <span class="text-sm font-normal text-mutedText max-sm:text-xs">
                                     @lang('shop::app.checkout.cart.mini-cart.excl-tax')
 
                                     <span class="font-medium text-black">@{{ cart.formatted_sub_total }}</span>

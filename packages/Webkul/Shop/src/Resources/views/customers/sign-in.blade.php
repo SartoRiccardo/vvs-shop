@@ -37,12 +37,12 @@
         {!! view_render_event('bagisto.shop.customers.login.logo.after') !!}
 
         <!-- Form Container -->
-        <div class="m-auto w-full max-w-[870px] rounded-xl border border-zinc-200 p-16 px-[90px] max-md:px-8 max-md:py-8 max-sm:border-none max-sm:p-0">
+        <div class="m-auto w-full max-w-[870px] rounded-xl border border-divider p-16 px-[90px] max-md:px-8 max-md:py-8 max-sm:border-none max-sm:p-0">
             <h1 class="font-dmserif text-4xl max-md:text-3xl max-sm:text-xl">
                 @lang('shop::app.customers.login-form.page-title')
             </h1>
 
-            <p class="mt-4 text-xl text-zinc-500 max-sm:mt-0 max-sm:text-sm">
+            <p class="mt-4 text-xl text-mutedText max-sm:mt-0 max-sm:text-sm">
                 @lang('shop::app.customers.login-form.form-login-text')
             </p>
 
@@ -111,7 +111,7 @@
                             ></label>
 
                             <label
-                                class="cursor-pointer select-none text-base text-zinc-500 max-sm:text-sm ltr:pl-0 rtl:pr-0"
+                                class="cursor-pointer select-none text-base text-mutedText max-sm:text-sm ltr:pl-0 rtl:pr-0"
                                 for="show-password"
                             >
                                 @lang('shop::app.customers.login-form.show-password')
@@ -159,7 +159,7 @@
                 request()->cookie('enable-resend')
                 && request()->cookie('email-for-resend')
             )
-                <p class="mt-5 font-medium text-zinc-500 max-sm:text-center max-sm:text-sm">
+                <p class="mt-5 font-medium text-mutedText max-sm:text-center max-sm:text-sm">
                     <a
                         class="text-navyBlue"
                         href="{{ route('shop.customers.resend.verification_email', urlencode(request()->cookie('email-for-resend'))) }}"
@@ -169,7 +169,7 @@
                 </p>
             @endif
 
-            <p class="mt-5 font-medium text-zinc-500 max-sm:text-center max-sm:text-sm">
+            <p class="mt-5 font-medium text-mutedText max-sm:text-center max-sm:text-sm">
                 @lang('shop::app.customers.login-form.new-customer')
 
                 <a
@@ -181,7 +181,7 @@
             </p>
         </div>
 
-        <p class="mb-4 mt-8 text-center text-xs text-zinc-500">
+        <p class="mb-4 mt-8 text-center text-xs text-mutedText">
             @lang('shop::app.customers.login-form.footer', ['current_year'=> date('Y') ])
         </p>
     </div>

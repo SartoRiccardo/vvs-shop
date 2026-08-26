@@ -4167,6 +4167,25 @@ return [
                         'sidebar' => 'Menú lateral',
                         'title' => 'Vista de categoría del menú',
                     ],
+
+                    'theme-colors' => [
+                        'background' => 'Color de fondo',
+                        'background-info' => 'Se usa para el fondo del pie de página, incluyendo su cuadro de boletín y la barra de derechos de autor.',
+                        'danger' => 'Color de peligro',
+                        'danger-info' => 'Aún no aplicado a ningún elemento de la tienda — reservado para uso futuro (por ejemplo, estados de error, insignias de agotado).',
+                        'link' => 'Color de enlace',
+                        'link-info' => 'Aún no aplicado a ningún elemento de la tienda — reservado para uso futuro.',
+                        'neutral' => 'Neutro',
+                        'neutral-info' => 'Reemplaza el color de texto secundario/atenuado del sitio (el importe tachado de los precios, marcas de tiempo, leyendas, recuentos de reseñas). El borde predeterminado de tarjetas/divisores/tablas y los fondos claros del cargador esqueleto se derivan automáticamente de este mismo color mezclándolo con blanco, de modo que una sola muestra controla toda la familia de grises neutros.',
+                        'page-background' => 'Fondo de página',
+                        'page-background-info' => 'Se usa para el lienzo del sitio: cuerpo, encabezado, contenedor de contenido principal y la mayoría de las superficies de tarjetas, modales y campos de entrada.',
+                        'primary' => 'Color primario',
+                        'primary-info' => 'Se usa para botones, enlaces, estados activos, casillas de verificación/botones de opción y matices sutiles como la línea divisoria del encabezado y el estado hover del botón secundario.',
+                        'success' => 'Color de éxito',
+                        'success-info' => 'Aún no aplicado a ningún elemento de la tienda — reservado para uso futuro (por ejemplo, banners de éxito, insignias de en stock).',
+                        'title' => 'Colores del tema',
+                        'title-info' => 'Configura los colores de marca de la tienda. Los cambios se aplican de inmediato sin necesidad de reconstruir los recursos.',
+                    ],
                 ],
 
                 'gdpr' => [

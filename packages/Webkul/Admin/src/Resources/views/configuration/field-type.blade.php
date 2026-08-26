@@ -37,11 +37,11 @@
     >
         <x-admin::form.control-group class="last:!mb-0">
             <!-- Title of the input field -->
-            <div    
+            <div
                 v-if="field.is_visible"
-                class="flex justify-between"
+                class="flex items-center justify-between gap-3"
             >
-                <x-admin::form.control-group.label ::for="name">
+                <x-admin::form.control-group.label ::for="name" class="!mb-0">
                     @{{ label }} <span :class="isRequire"></span>
 
                     <span
@@ -50,7 +50,7 @@
                         v-text="JSON.parse(currentChannel).name"
                     >
                     </span>
-        
+
                     <span
                         v-if="field['locale_based']"
                         class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600"
@@ -58,8 +58,39 @@
                     >
                     </span>
                 </x-admin::form.control-group.label>
+
+                <!-- Color Input -->
+                <template v-if="field.type == 'color'">
+                    <div class="flex shrink-0 items-center gap-1.5">
+                        <v-field
+                            v-slot="{ field, errors }"
+                            :id="name"
+                            :name="name"
+                            :value="value != '' ? value : '#ffffff'"
+                            :label="label"
+                            :rules="validations"
+                        >
+                            <input
+                                type="color"
+                                v-bind="field"
+                                :class="[errors.length ? 'border-2 border-red-500' : 'border-gray-300 dark:border-gray-600']"
+                                class="h-8 w-8 shrink-0 cursor-pointer appearance-none rounded-md border p-0 transition-all hover:border-gray-400 dark:hover:border-gray-400"
+                            />
+                        </v-field>
+
+                        <!-- Default color, read-only reference -->
+                        <input
+                            type="color"
+                            disabled
+                            tabindex="-1"
+                            :value="field.default ?? '#ffffff'"
+                            title="Default color (not editable)"
+                            class="h-8 w-8 shrink-0 cursor-not-allowed appearance-none rounded-md border border-gray-200 p-0 opacity-60 dark:border-gray-700"
+                        />
+                    </div>
+                </template>
             </div>
-        
+
             <!-- Text input -->
             <template v-if="field.type == 'text' && field.is_visible">
                 <x-admin::form.control-group.control
@@ -100,25 +131,6 @@
                 />
             </template>
 
-            <!-- Color Input -->
-            <template v-if="field.type == 'color' && field.is_visible">
-                <v-field
-                    v-slot="{ field, errors }"
-                    :id="name"
-                    :name="name"
-                    :value="value != '' ? value : '#ffffff'"
-                    :label="label"
-                    :rules="validations"
-                >
-                    <input
-                        type="color"
-                        v-bind="field"
-                        :class="[errors.length ? 'border border-red-500' : '']"
-                        class="w-full appearance-none rounded-md border text-sm text-gray-600 transition-all hover:border-gray-400 dark:text-gray-300 dark:hover:border-gray-400"
-                    />
-                </v-field>
-            </template>
-        
             <!-- Textarea Input -->
             <template v-if="field.type == 'textarea' && field.is_visible">
                 <x-admin::form.control-group.control

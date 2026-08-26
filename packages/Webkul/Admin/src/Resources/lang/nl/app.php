@@ -4167,6 +4167,25 @@ return [
                         'sidebar' => 'Zijbalkmenu',
                         'title' => 'Menucategorie weergave',
                     ],
+
+                    'theme-colors' => [
+                        'background' => 'Achtergrondkleur',
+                        'background-info' => 'Wordt gebruikt voor de achtergrond van de footer, inclusief het nieuwsbriefvak en de copyrightbalk.',
+                        'danger' => 'Gevarenkleur',
+                        'danger-info' => 'Nog niet toegepast op enig storefront-element — gereserveerd voor toekomstig gebruik (bijv. foutstatussen, uitverkocht-badges).',
+                        'link' => 'Linkkleur',
+                        'link-info' => 'Nog niet toegepast op enig storefront-element — gereserveerd voor toekomstig gebruik.',
+                        'neutral' => 'Neutraal',
+                        'neutral-info' => 'Vervangt de gedempte/secundaire tekstkleur van de site (doorgestreept bedrag bij prijzen, tijdstempels, bijschriften, aantal reviews). De standaard kaart-/scheidings-/tabelrand en lichte skeleton-loader-achtergronden worden automatisch afgeleid van deze zelfde kleur door deze met wit te mengen, zodat één stalen de hele neutrale grijsfamilie bepaalt.',
+                        'page-background' => 'Paginaachtergrond',
+                        'page-background-info' => 'Wordt gebruikt voor het canvas van de site — body, header, hoofdinhoudwrapper en de meeste kaart-, modal- en invoervelden.',
+                        'primary' => 'Primaire kleur',
+                        'primary-info' => 'Wordt gebruikt voor knoppen, links, actieve statussen, selectievakjes/keuzerondjes en subtiele accenten zoals de scheidingslijn van de header en de hover-status van de secundaire knop.',
+                        'success' => 'Succeskleur',
+                        'success-info' => 'Nog niet toegepast op enig storefront-element — gereserveerd voor toekomstig gebruik (bijv. succesbanners, op-voorraad-badges).',
+                        'title' => 'Themakleuren',
+                        'title-info' => 'Stel de merkkleuren van de winkel in. Wijzigingen worden direct toegepast zonder de assets opnieuw te hoeven bouwen.',
+                    ],
                 ],
 
                 'gdpr' => [

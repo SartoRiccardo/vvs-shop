@@ -4167,6 +4167,25 @@ return [
                         'sidebar' => 'Menu lateral',
                         'title' => 'Visualização de categoria do menu',
                     ],
+
+                    'theme-colors' => [
+                        'background' => 'Cor de Fundo',
+                        'background-info' => 'Usado para o fundo do rodapé, incluindo sua caixa de newsletter e a barra de direitos autorais.',
+                        'danger' => 'Cor de Perigo',
+                        'danger-info' => 'Ainda não aplicado a nenhum elemento da loja — reservado para uso futuro (por exemplo, estados de erro, selos de esgotado).',
+                        'link' => 'Cor do Link',
+                        'link-info' => 'Ainda não aplicado a nenhum elemento da loja — reservado para uso futuro.',
+                        'neutral' => 'Neutro',
+                        'neutral-info' => 'Substitui a cor de texto secundária/suave do site (valor riscado dos preços, carimbos de data/hora, legendas, contagem de avaliações). A borda padrão de cartões/divisores/tabelas e os fundos claros do skeleton-loader são derivados automaticamente dessa mesma cor ao misturá-la com branco, então uma única amostra controla toda a família de cinza neutro.',
+                        'page-background' => 'Fundo da Página',
+                        'page-background-info' => 'Usado para a tela do site — corpo, cabeçalho, wrapper do conteúdo principal e a maioria das superfícies de cartões, modais e campos de entrada.',
+                        'primary' => 'Cor Primária',
+                        'primary-info' => 'Usado para botões, links, estados ativos, caixas de seleção/botões de opção e tons sutis, como a linha divisória do cabeçalho e o estado de foco do botão secundário.',
+                        'success' => 'Cor de Sucesso',
+                        'success-info' => 'Ainda não aplicado a nenhum elemento da loja — reservado para uso futuro (por exemplo, banners de sucesso, selos de em estoque).',
+                        'title' => 'Cores do Tema',
+                        'title-info' => 'Defina as cores da marca da loja. As alterações são aplicadas imediatamente, sem a necessidade de reconstruir os assets.',
+                    ],
                 ],
 
                 'gdpr' => [

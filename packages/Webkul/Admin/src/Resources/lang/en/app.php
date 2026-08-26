@@ -4170,6 +4170,25 @@ return [
                         'sidebar' => 'Sidebar Menu',
                         'title' => 'Menu Category View',
                     ],
+
+                    'theme-colors' => [
+                        'background' => 'Background Color',
+                        'background-info' => 'Used for the footer background, including its newsletter box and copyright bar.',
+                        'danger' => 'Danger Color',
+                        'danger-info' => 'Not yet applied to any storefront element — reserved for future use (e.g. error states, out-of-stock badges).',
+                        'link' => 'Link Color',
+                        'link-info' => 'Not yet applied to any storefront element — reserved for future use.',
+                        'neutral' => 'Neutral',
+                        'neutral-info' => 'Replaces the site\'s muted/secondary text color (prices\' struck-through amount, timestamps, captions, review counts). The default card/divider/table border and light skeleton-loader backgrounds are automatically derived from this same color by blending it with white, so one swatch controls the whole neutral-gray family.',
+                        'page-background' => 'Page Background',
+                        'page-background-info' => 'Used for the site canvas — body, header, main content wrapper, and most card, modal, and input surfaces.',
+                        'primary' => 'Primary Color',
+                        'primary-info' => 'Used for buttons, links, active states, checkboxes/radios, and subtle tints like the header\'s divider line and the secondary-button hover state.',
+                        'success' => 'Success Color',
+                        'success-info' => 'Not yet applied to any storefront element — reserved for future use (e.g. success banners, in-stock badges).',
+                        'title' => 'Theme Colors',
+                        'title-info' => 'Set the storefront\'s brand colors. Changes apply immediately without rebuilding assets.',
+                    ],
                 ],
 
                 'gdpr' => [

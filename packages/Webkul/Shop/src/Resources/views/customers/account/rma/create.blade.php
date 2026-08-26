@@ -37,7 +37,7 @@
 
             <a
                 href="{{ route('shop.customers.account.rma.index') }}"
-                class="secondary-button flex items-center gap-x-2 border-[#E9E9E9] px-5 max-lg:px-3 max-lg:text-xs py-3 font-normal"
+                class="secondary-button flex items-center gap-x-2 border-divider px-5 max-lg:px-3 max-lg:text-xs py-3 font-normal"
             >
                 @lang('shop::app.checkout.onepage.address.back')
             </a>
@@ -73,7 +73,7 @@
 
                             <template v-else>
                                 <div
-                                    class="row grid items-center gap-2.5 border-b border-zinc-200 bg-zinc-100 px-6 py-4 text-sm font-medium text-black max-md:p-4"
+                                    class="row grid items-center gap-2.5 border-b border-divider bg-subtleBg px-6 py-4 text-sm font-medium text-black max-md:p-4"
                                     style="grid-template-columns: repeat(6, minmax(0, 1fr));"
                                 >
                                     <div
@@ -190,7 +190,7 @@
 
                             <template v-else>
                                 <div
-                                    class="row grid items-center gap-2.5 border-b border-zinc-200 bg-zinc-100 px-6 py-4 text-sm font-medium text-black max-md:p-4"
+                                    class="row grid items-center gap-2.5 border-b border-divider bg-subtleBg px-6 py-4 text-sm font-medium text-black max-md:p-4"
                                     style="grid-template-columns: repeat(2, minmax(0, 1fr));"
                                 >
                                     <div
@@ -310,7 +310,7 @@
                             </x-slot>
 
                             <!-- Modal Content -->
-                            <x-slot:content class="bg-white p-4 max-sm:p-3">
+                            <x-slot:content class="bg-pageBg p-4 max-sm:p-3">
                                 <div class="overflow-auto" style="min-height: 400px; max-height: 400px;">
                                     <v-order-items-list :key="refreshComponent" :order-id="isSelect"></v-order-items-list>
                                 </div>

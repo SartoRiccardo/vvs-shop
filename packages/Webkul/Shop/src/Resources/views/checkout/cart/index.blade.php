@@ -111,7 +111,7 @@
                             {!! view_render_event('bagisto.shop.checkout.cart.cart_mass_actions.before') !!}
 
                             <!-- Cart Mass Action Container -->
-                            <div class="flex items-center justify-between border-b border-zinc-200 pb-2.5 max-md:py-2.5">
+                            <div class="flex items-center justify-between border-b border-divider pb-2.5 max-md:py-2.5">
                                 <div class="flex select-none items-center">
                                     <input
                                         type="checkbox"
@@ -150,7 +150,7 @@
                                     </span>
 
                                     @if (auth()->guard()->check())
-                                        <span class="mx-2.5 border-r-2 border-zinc-200"></span>
+                                        <span class="mx-2.5 border-r-2 border-divider"></span>
 
                                         <span
                                             class="cursor-pointer text-base text-blue-700 max-sm:text-xs"
@@ -173,7 +173,7 @@
                                 class="grid gap-y-6"
                                 v-for="item in cart?.items"
                             >
-                                <div class="flex justify-between gap-x-2.5 border-b border-zinc-200 pb-5">
+                                <div class="flex justify-between gap-x-2.5 border-b border-divider pb-5">
                                     <div class="flex gap-x-5">
                                         <div class="mt-11 select-none max-md:mt-9 max-sm:mt-7">
                                             <input
@@ -251,7 +251,7 @@
                                                 >
                                                     <template v-for="attribute in item.options">
                                                         <div class="max-md:grid max-md:gap-0.5">
-                                                            <p class="text-sm font-medium text-zinc-500 max-md:font-normal max-sm:text-xs">
+                                                            <p class="text-sm font-medium text-mutedText max-md:font-normal max-sm:text-xs">
                                                                 @{{ attribute.attribute_name + ':' }}
                                                             </p>
 

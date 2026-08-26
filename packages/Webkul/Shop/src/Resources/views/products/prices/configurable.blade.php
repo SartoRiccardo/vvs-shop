@@ -1,4 +1,4 @@
-<p class="price-label text-sm text-zinc-500 max-sm:text-xs max-sm:leading-4">
+<p class="price-label text-sm text-mutedText max-sm:text-xs max-sm:leading-4">
     @lang('shop::app.products.prices.configurable.as-low-as')
 </p>
 

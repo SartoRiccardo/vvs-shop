@@ -66,7 +66,7 @@
             <!-- For Mobile View -->
             <div class="hidden flex-wrap gap-2 max-sm:flex">
                 <span 
-                    class="flex cursor-pointer items-center justify-center rounded-full border border-navyBlue bg-white font-medium text-navyBlue"
+                    class="flex cursor-pointer items-center justify-center rounded-full border border-navyBlue bg-pageBg font-medium text-navyBlue"
                     v-for="term in searchedTerms"
                     @click="search(term)"
                 >

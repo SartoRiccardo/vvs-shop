@@ -4167,6 +4167,25 @@ return [
                         'sidebar' => 'Menu boczne',
                         'title' => 'Widok kategorii menu',
                     ],
+
+                    'theme-colors' => [
+                        'background' => 'Kolor tła',
+                        'background-info' => 'Używany dla tła stopki, w tym pola newslettera i paska praw autorskich.',
+                        'danger' => 'Kolor niebezpieczeństwa',
+                        'danger-info' => 'Jeszcze nieużywane w żadnym elemencie sklepu — zarezerwowane do przyszłego użytku (np. stany błędów, odznaki „brak w magazynie”).',
+                        'link' => 'Kolor linku',
+                        'link-info' => 'Jeszcze nieużywane w żadnym elemencie sklepu — zarezerwowane do przyszłego użytku.',
+                        'neutral' => 'Neutralny',
+                        'neutral-info' => 'Zastępuje przygaszony/drugorzędny kolor tekstu witryny (przekreślona kwota cen, znaczniki czasu, podpisy, liczba recenzji). Domyślna obwódka kart/separatorów/tabel oraz jasne tła skeleton-loadera są automatycznie wyprowadzane z tego samego koloru poprzez wymieszanie go z bielą, dzięki czemu jedna próbka koloru kontroluje całą neutralną szarą paletę.',
+                        'page-background' => 'Tło strony',
+                        'page-background-info' => 'Używany dla płótna witryny — treści strony, nagłówka, głównego kontenera treści oraz większości kart, okien modalnych i pól wejściowych.',
+                        'primary' => 'Kolor podstawowy',
+                        'primary-info' => 'Używany dla przycisków, linków, stanów aktywnych, checkboxów/radiobuttonów oraz subtelnych akcentów, takich jak linia separatora w nagłówku i stan najechania na przycisk drugorzędny.',
+                        'success' => 'Kolor sukcesu',
+                        'success-info' => 'Jeszcze nieużywane w żadnym elemencie sklepu — zarezerwowane do przyszłego użytku (np. banery sukcesu, odznaki „dostępne”).',
+                        'title' => 'Kolory motywu',
+                        'title-info' => 'Ustaw kolory marki sklepu. Zmiany są stosowane natychmiast bez konieczności ponownego budowania zasobów.',
+                    ],
                 ],
 
                 'gdpr' => [

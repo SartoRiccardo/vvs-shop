@@ -33,7 +33,7 @@
                     </span>
 
                     <span class="ml-2 mt-4 block">
-                        <span class="text-zinc-500 max-md:text-xs">
+                        <span class="text-mutedText max-md:text-xs">
                             @lang('shop::app.customers.account.rma.terms.terms')
                         </span>
                         

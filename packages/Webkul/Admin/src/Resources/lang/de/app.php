@@ -4167,6 +4167,25 @@ return [
                         'sidebar' => 'Seitenleistenmenü',
                         'title' => 'Menükategorie-Ansicht',
                     ],
+
+                    'theme-colors' => [
+                        'background' => 'Hintergrundfarbe',
+                        'background-info' => 'Wird für den Footer-Hintergrund verwendet, einschließlich des Newsletter-Feldes und der Copyright-Leiste.',
+                        'danger' => 'Gefahrenfarbe',
+                        'danger-info' => 'Noch auf kein Element im Shop angewendet — für zukünftige Verwendung vorgesehen (z. B. Fehlerzustände, Ausverkauft-Abzeichen).',
+                        'link' => 'Linkfarbe',
+                        'link-info' => 'Noch auf kein Element im Shop angewendet — für zukünftige Verwendung vorgesehen.',
+                        'neutral' => 'Neutral',
+                        'neutral-info' => 'Ersetzt die sekundäre/gedämpfte Textfarbe der Website (durchgestrichener Preisbetrag, Zeitstempel, Bildunterschriften, Anzahl der Bewertungen). Der standardmäßige Rahmen von Karten/Trennlinien/Tabellen und die hellen Skeleton-Loader-Hintergründe werden automatisch aus derselben Farbe abgeleitet, indem sie mit Weiß gemischt wird, sodass ein einziger Farbton die gesamte neutrale Graufamilie steuert.',
+                        'page-background' => 'Seitenhintergrund',
+                        'page-background-info' => 'Wird für die Seitenfläche verwendet — Body, Header, Hauptinhaltscontainer und die meisten Karten-, Modal- und Eingabeflächen.',
+                        'primary' => 'Primärfarbe',
+                        'primary-info' => 'Wird für Schaltflächen, Links, aktive Zustände, Kontrollkästchen/Optionsfelder und dezente Farbtöne wie die Trennlinie des Headers und den Hover-Zustand der sekundären Schaltfläche verwendet.',
+                        'success' => 'Erfolgsfarbe',
+                        'success-info' => 'Noch auf kein Element im Shop angewendet — für zukünftige Verwendung vorgesehen (z. B. Erfolgsbanner, Auf-Lager-Abzeichen).',
+                        'title' => 'Themenfarben',
+                        'title-info' => 'Legen Sie die Markenfarben des Shops fest. Änderungen werden sofort übernommen, ohne dass Assets neu erstellt werden müssen.',
+                    ],
                 ],
 
                 'gdpr' => [

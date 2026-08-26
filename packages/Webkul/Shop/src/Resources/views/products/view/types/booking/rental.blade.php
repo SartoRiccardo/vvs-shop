@@ -39,7 +39,7 @@
                         </label>
 
                         <label
-                            class="cursor-pointer text-[#6E6E6E]"
+                            class="cursor-pointer text-mutedText"
                             for="booking[daily]"
                         >
                             @lang('shop::app.products.view.type.booking.rental.daily-basis')
@@ -64,7 +64,7 @@
                         </label>
 
                         <label
-                            class="cursor-pointer text-[#6E6E6E]"
+                            class="cursor-pointer text-mutedText"
                             for="booking[hourly]"
                         >
                             @lang('shop::app.products.view.type.booking.rental.hourly-basis')
@@ -261,7 +261,7 @@
             </div>
 
             <!-- Rental Price Breakdown -->
-            <div class="mt-3 rounded-lg border border-zinc-200 bg-zinc-50 p-4 text-sm">
+            <div class="mt-3 rounded-lg border border-divider bg-subtleBg p-4 text-sm">
                 <p class="mb-3 font-semibold">
                     @lang('shop::app.products.view.type.booking.rental.summary-title')
                 </p>
@@ -302,7 +302,7 @@
                         </span>
                     </div>
 
-                    <div class="mt-3 flex items-center justify-between border-t border-zinc-200 pt-3">
+                    <div class="mt-3 flex items-center justify-between border-t border-divider pt-3">
                         <span class="font-semibold">
                             @lang('shop::app.products.view.type.booking.rental.total')
                         </span>
@@ -316,7 +316,7 @@
                 </template>
 
                 <template v-else>
-                    <p class="text-xs text-zinc-500">
+                    <p class="text-xs text-mutedText">
                         @lang('shop::app.products.view.type.booking.rental.select-dates-hint')
                     </p>
                 </template>

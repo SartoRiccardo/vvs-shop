@@ -4,7 +4,7 @@
 </h1>
 
 <!-- Cart Items -->
-<div class="mt-10 grid border-b border-zinc-200 max-md:mt-3 max-sm:mt-0">
+<div class="mt-10 grid border-b border-divider max-md:mt-3 max-sm:mt-0">
     <div
         class="flex gap-x-4 pb-5 max-md:gap-x-3 max-md:pb-4"
         v-for="item in cart.items"

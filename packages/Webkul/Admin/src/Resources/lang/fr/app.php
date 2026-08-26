@@ -4167,6 +4167,25 @@ return [
                         'sidebar' => 'Menu latéral',
                         'title' => 'Vue de la catégorie du menu',
                     ],
+
+                    'theme-colors' => [
+                        'background' => 'Couleur d\'arrière-plan',
+                        'background-info' => 'Utilisé pour l\'arrière-plan du pied de page, y compris son encadré newsletter et sa barre de copyright.',
+                        'danger' => 'Couleur de danger',
+                        'danger-info' => 'Pas encore appliqué à un élément de la boutique — réservé pour un usage futur (par exemple, états d\'erreur, badges de rupture de stock).',
+                        'link' => 'Couleur des liens',
+                        'link-info' => 'Pas encore appliqué à un élément de la boutique — réservé pour un usage futur.',
+                        'neutral' => 'Neutre',
+                        'neutral-info' => 'Remplace la couleur de texte secondaire/atténué du site (montant barré des prix, horodatages, légendes, nombre d\'avis). La bordure par défaut des cartes/séparateurs/tableaux et les arrière-plans clairs du chargement squelette sont automatiquement dérivés de cette même couleur en la mélangeant avec du blanc, ainsi une seule nuance contrôle toute la famille de gris neutres.',
+                        'page-background' => 'Arrière-plan de la page',
+                        'page-background-info' => 'Utilisé pour la toile du site — corps, en-tête, conteneur de contenu principal, et la plupart des surfaces de cartes, modales et champs de saisie.',
+                        'primary' => 'Couleur principale',
+                        'primary-info' => 'Utilisé pour les boutons, les liens, les états actifs, les cases à cocher/boutons radio et les nuances subtiles comme la ligne de séparation de l\'en-tête et l\'état de survol du bouton secondaire.',
+                        'success' => 'Couleur de succès',
+                        'success-info' => 'Pas encore appliqué à un élément de la boutique — réservé pour un usage futur (par exemple, bannières de succès, badges en stock).',
+                        'title' => 'Couleurs du thème',
+                        'title-info' => 'Définissez les couleurs de la marque de la boutique. Les modifications s\'appliquent immédiatement sans reconstruction des ressources.',
+                    ],
                 ],
 
                 'gdpr' => [
