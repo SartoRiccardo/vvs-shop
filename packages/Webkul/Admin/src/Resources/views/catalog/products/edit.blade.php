@@ -139,20 +139,68 @@
 
         {!! view_render_event('bagisto.admin.catalog.product.edit.actions.after', ['product' => $product]) !!}
 
+        @php
+            $groupedColumns = $product->attribute_family->attribute_groups->groupBy('column');
+
+            $isSingleColumn = $groupedColumns->count() !== 2;
+
+            $firstColumn = $groupedColumns->keys()->first();
+
+            $lastColumn = $groupedColumns->keys()->last();
+
+            /**
+             * Packages (e.g. SubscriberTags) hook extra panels onto the last
+             * column's `after` event; only show their tab when one does.
+             */
+            $hasAddonPanel = $lastColumn && app('events')->hasListeners(
+                "bagisto.admin.catalog.product.edit.form.column_{$lastColumn}.after"
+            );
+        @endphp
+
+        <!-- Panel Switcher -->
+        <div class="mt-3.5 flex flex-wrap items-center gap-2" id="product-edit-tabs">
+            @foreach ($groupedColumns as $column => $groups)
+                <button
+                    type="button"
+                    data-panel-target="{{ $column }}"
+                    onclick="switchProductEditPanel('{{ $column }}')"
+                    class="{{ $column == $firstColumn ? 'secondary-button' : 'transparent-button' }} rounded-full px-4 py-2 text-sm"
+                >
+                    {{ $groups->first()->name }}
+                </button>
+            @endforeach
+
+            @if ($isSingleColumn)
+                <button
+                    type="button"
+                    data-panel-target="extra"
+                    onclick="switchProductEditPanel('extra')"
+                    class="transparent-button rounded-full px-4 py-2 text-sm"
+                >
+                    @lang('admin::app.catalog.products.edit.channels.title')
+                </button>
+            @endif
+
+            @if ($hasAddonPanel)
+                <button
+                    type="button"
+                    data-panel-target="addons"
+                    onclick="switchProductEditPanel('addons')"
+                    class="transparent-button rounded-full px-4 py-2 text-sm"
+                >
+                    Add-ons
+                </button>
+            @endif
+        </div>
+
         <!-- body content -->
         {!! view_render_event('bagisto.admin.catalog.product.edit.form.before', ['product' => $product]) !!}
 
-        <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
-            @php
-                $groupedColumns = $product->attribute_family->attribute_groups->groupBy('column');
-
-                $isSingleColumn = $groupedColumns->count() !== 2;
-            @endphp
-
+        <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap" id="product-edit-panels">
             @foreach ($groupedColumns as $column => $groups)
                 {!! view_render_event("bagisto.admin.catalog.product.edit.form.column_{$column}.before", ['product' => $product]) !!}
 
-                <div class="flex flex-col gap-2 {{ $column == 1 ? 'flex-1 max-xl:flex-auto' : 'w-[360px] max-w-full max-sm:w-full' }}">
+                <div data-product-panel="{{ $column }}" class="w-full {{ $column == $firstColumn ? '' : 'hidden' }}">
                     @foreach ($groups as $group)
                         @php $customAttributes = $product->getEditableAttributes($group); @endphp
 
@@ -269,7 +317,7 @@
                 </div>
 
                 @if ($isSingleColumn && ($column == 1 || $column == 2))
-                    <div class="w-[360px] max-w-full max-sm:w-full">
+                    <div data-product-panel="extra" class="w-full {{ $column == $firstColumn ? 'hidden' : '' }}">
                         @if ($column == 2) 
                             <!-- Images View Blade File -->
                             @include('admin::catalog.products.edit.images')
@@ -297,7 +345,13 @@
                     </div>
                 @endif
 
-                {!! view_render_event("bagisto.admin.catalog.product.edit.form.column_{$column}.after", ['product' => $product]) !!}
+                @if ($hasAddonPanel && $column == $lastColumn)
+                    <div data-product-panel="addons" class="hidden w-full">
+                        {!! view_render_event("bagisto.admin.catalog.product.edit.form.column_{$column}.after", ['product' => $product]) !!}
+                    </div>
+                @else
+                    {!! view_render_event("bagisto.admin.catalog.product.edit.form.column_{$column}.after", ['product' => $product]) !!}
+                @endif
             @endforeach
         </div>
 
@@ -306,5 +360,27 @@
     </x-admin::form>
 
     {!! view_render_event('bagisto.admin.catalog.product.edit.after', ['product' => $product]) !!}
+
+    @pushOnce('scripts')
+        <script>
+            /**
+             * Product edit panels: show one full-width panel at a time.
+             * Hidden panels stay in the DOM, so the enclosing form still
+             * submits their inputs.
+             */
+            function switchProductEditPanel(target) {
+                document.querySelectorAll('[data-product-panel]').forEach((panel) => {
+                    panel.classList.toggle('hidden', panel.dataset.productPanel !== String(target));
+                });
+
+                document.querySelectorAll('#product-edit-tabs [data-panel-target]').forEach((tab) => {
+                    const isActive = tab.dataset.panelTarget === String(target);
+
+                    tab.classList.toggle('secondary-button', isActive);
+                    tab.classList.toggle('transparent-button', ! isActive);
+                });
+            }
+        </script>
+    @endPushOnce
 
 </x-admin::layouts>
