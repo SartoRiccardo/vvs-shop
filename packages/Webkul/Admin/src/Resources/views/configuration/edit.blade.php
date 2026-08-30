@@ -149,4 +149,42 @@
             @endforeach
         </div>
     </x-admin::form>
+
+    <!--
+        Code-editor treatment for the Custom CSS field (Configure → General →
+        Content → Custom Scripts): large monospace surface with code wrapping
+        behavior, and Tab inserts indentation instead of leaving the field.
+    -->
+    <style>
+        textarea[name$="[custom_css]"] {
+            min-height: 65vh;
+            resize: vertical;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            white-space: pre;
+            overflow-x: auto;
+            tab-size: 4;
+        }
+    </style>
+
+    <!--
+        Delegated listener so it also works before/after Vue mounts the field.
+    -->
+    <script>
+        document.addEventListener('keydown', (event) => {
+            if (event.key !== 'Tab' || ! event.target.matches?.('textarea[name$="[custom_css]"]')) {
+                return;
+            }
+
+            event.preventDefault();
+
+            const textarea = event.target;
+            const indent = '    ';
+            const { selectionStart, selectionEnd, value } = textarea;
+
+            textarea.value = value.slice(0, selectionStart) + indent + value.slice(selectionEnd);
+            textarea.selectionStart = textarea.selectionEnd = selectionStart + indent.length;
+        });
+    </script>
 </x-admin::layouts>
