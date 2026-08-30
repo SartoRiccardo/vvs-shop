@@ -59,6 +59,12 @@ done
 log "Running migrations..."
 php artisan migrate --force --no-interaction
 
+mkdir -p storage/app/public
+if [ ! -L public/storage ]; then
+    log "Creating public/storage symlink..."
+    ln -sfn "$APP_DIR/storage/app/public" public/storage
+fi
+
 # Cache
 log "Caching config/routes/views..."
 php artisan optimize
