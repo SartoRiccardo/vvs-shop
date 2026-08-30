@@ -5802,6 +5802,7 @@ return [
         'title' => 'Media',
         'upload-btn' => 'Upload',
         'upload-success' => 'Media uploaded successfully.',
+        'copy-btn' => 'Copy Link',
         'delete-btn' => 'Delete',
         'delete-confirm' => 'Delete this file? Anything referencing its URL will break.',
         'delete-success' => 'Media deleted successfully.',
