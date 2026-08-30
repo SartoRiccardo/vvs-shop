@@ -35,6 +35,11 @@ Route::group(['middleware' => ['admin', NoCacheMiddleware::class], 'prefix' => c
     require 'cms-routes.php';
 
     /**
+     * Media library routes.
+     */
+    require 'media-routes.php';
+
+    /**
      * Reporting routes.
      */
     require 'reporting-routes.php';

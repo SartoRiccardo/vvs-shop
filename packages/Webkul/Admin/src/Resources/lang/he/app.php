@@ -5749,4 +5749,21 @@ return [
             ],
         ],
     ],
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Media library
+    |--------------------------------------------------------------------------
+    */
+    'media' => [
+        'title' => 'Media',
+        'upload-btn' => 'Upload',
+        'upload-success' => 'Media uploaded successfully.',
+        'delete-btn' => 'Delete',
+        'delete-confirm' => 'Delete this file? Anything referencing its URL will break.',
+        'delete-success' => 'Media deleted successfully.',
+        'delete-failed' => 'Media deletion failed.',
+        'empty' => 'No media uploaded yet.',
+    ],
 ];

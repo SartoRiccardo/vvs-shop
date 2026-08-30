@@ -396,4 +396,15 @@ return [
         'sort' => 9,
         'icon' => 'icon-configuration',
     ],
+
+    /**
+     * Media library.
+     */
+    [
+        'key' => 'media',
+        'name' => 'Media',
+        'route' => 'admin.media.index',
+        'sort' => 13,
+        'icon' => 'icon-image',
+    ],
 ];

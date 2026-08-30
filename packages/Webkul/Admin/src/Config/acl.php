@@ -1179,4 +1179,19 @@ return [
         ],
         'sort' => 9,
     ],
+
+    /*
+     |--------------------------------------------------------------------------
+     | Media library
+     |--------------------------------------------------------------------------
+     |
+     | All ACLs related to the media library will be placed here.
+     |
+     */
+    [
+        'key' => 'media',
+        'name' => 'Media',
+        'route' => 'admin.media.index',
+        'sort' => 13,
+    ],
 ];
