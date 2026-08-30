@@ -402,7 +402,7 @@
                         type="text"
                         class="w-full border-b border-gray-200 bg-transparent text-[11px] text-gray-600 outline-none transition-all focus:border-gray-400 placeholder:text-gray-400 dark:border-gray-700 dark:text-gray-300"
                         placeholder="Alt text (SEO)"
-                        :name="image.is_new ? altBaseName + '_new[]' : altBaseName + '[' + image.id + ']'"
+                        :name="image.is_new ? altNewBaseName + '[]' : altBaseName + '[' + image.id + ']'"
                         v-model="image.alt"
                     />
                 </div>
@@ -670,11 +670,15 @@
                  * (existing images keyed by id, new ones sequential).
                  */
                 altBaseName() {
-                    return this.name.replace(/files$/, 'alt');
+                    return this.name.replace(/files\]$/, 'alt]');
+                },
+
+                altNewBaseName() {
+                    return this.name.replace(/files\]$/, 'alt_new]');
                 },
 
                 filenameBase() {
-                    return this.name.replace(/files$/, 'filename');
+                    return this.name.replace(/files\]$/, 'filename]');
                 },
             },
 
