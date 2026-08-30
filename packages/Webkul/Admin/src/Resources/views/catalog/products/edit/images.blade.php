@@ -19,6 +19,7 @@
         name="images[files]"
         allow-multiple="true"
         show-placeholders="true"
+        with-alt="true"
         :uploaded-images="$product->images"
     />
 

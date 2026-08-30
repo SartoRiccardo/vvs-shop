@@ -24,6 +24,7 @@ class ProductImage extends Model implements ProductImageContract
     protected $fillable = [
         'type',
         'path',
+        'alt',
         'product_id',
         'position',
     ];

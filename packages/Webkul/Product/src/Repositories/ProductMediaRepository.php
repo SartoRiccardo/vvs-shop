@@ -51,33 +51,59 @@ class ProductMediaRepository extends Repository
 
         $position = 0;
 
+        /**
+         * SEO-friendly file names: derive the base from the product name
+         * instead of a random hash, keeping a short random suffix so names
+         * stay unique (cache headers rely on it).
+         */
+        $baseName = Str::slug($product->name) ?: 'product';
+
+        $newFileIndex = 0;
+
+        $newAlts = array_values($data[$uploadFileType]['alt_new'] ?? []);
+
         if (! empty($data[$uploadFileType]['files'])) {
             foreach ($data[$uploadFileType]['files'] as $indexOrModelId => $file) {
                 if ($file instanceof UploadedFile) {
                     if (Str::contains($file->getMimeType(), 'image')) {
                         $encoded = image_manager()->read($file)->encodeByExtension('webp');
 
-                        $path = $this->getProductDirectory($product).'/'.Str::random(40).'.webp';
+                        $path = $this->getProductDirectory($product)
+                            .'/'.implode('-', array_filter([
+                                $baseName,
+                                ++$newFileIndex,
+                                Str::lower(Str::random(6)),
+                            ])).'.webp';
 
                         Storage::put($path, (string) $encoded);
                     } else {
                         $path = $file->store($this->getProductDirectory($product));
                     }
 
-                    $this->create([
+                    $attributes = [
                         'type' => $uploadFileType,
                         'path' => $path,
                         'product_id' => $product->id,
                         'position' => ++$position,
-                    ]);
+                    ];
+
+                    if (array_key_exists($newFileIndex - 1, $newAlts)) {
+                        $attributes['alt'] = trim((string) $newAlts[$newFileIndex - 1]) ?: null;
+                    }
+
+                    $this->create($attributes);
                 } else {
                     if (is_numeric($index = $previousIds->search($indexOrModelId))) {
                         $previousIds->forget($index);
                     }
 
-                    $this->update([
-                        'position' => ++$position,
-                    ], $indexOrModelId);
+                    $attributes = ['position' => ++$position];
+
+                    if (array_key_exists($indexOrModelId, $data[$uploadFileType]['alt'] ?? [])) {
+                        $attributes['alt'] = trim((string) $data[$uploadFileType]['alt'][$indexOrModelId]) ?: null;
+                    }
+
+                    $this->update($attributes, $indexOrModelId);
                 }
             }
         }

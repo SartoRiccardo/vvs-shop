@@ -13,6 +13,7 @@
     'allowMultiple'    => false,
     'showPlaceholders' => false,
     'uploadedImages'   => [],
+    'withAlt'          => false,
     'width'            => '120px',
     'height'           => '120px'
 ])
@@ -21,6 +22,7 @@
     name="{{ $name }}"
     v-bind:allow-multiple="{{ $allowMultiple ? 'true' : 'false' }}"
     v-bind:show-placeholders="{{ $showPlaceholders ? 'true' : 'false' }}"
+    v-bind:with-alt="{{ $withAlt ? 'true' : 'false' }}"
     :uploaded-images='{{ json_encode($uploadedImages) }}'
     width="{{ $width }}"
     height="{{ $height }}"
@@ -103,6 +105,7 @@
                             :name="name"
                             :index="index"
                             :image="element"
+                            :with-alt="withAlt"
                             :width="width"
                             :height="height"
                             @onRemove="remove($event)"
@@ -365,8 +368,21 @@
             />
 
             <div class="invisible absolute bottom-0 top-0 flex w-full flex-col justify-between bg-white p-3 opacity-80 transition-all group-hover:visible dark:bg-gray-900">
+                <!-- Alt Text (SEO) -->
+                <input
+                    v-if="withAlt"
+                    type="text"
+                    class="w-full border-b border-gray-200 bg-transparent text-[11px] text-gray-600 outline-none transition-all focus:border-gray-400 placeholder:text-gray-400 dark:border-gray-700 dark:text-gray-300"
+                    placeholder="Alt text (SEO)"
+                    :name="image.is_new ? altBaseName + '_new[]' : altBaseName + '[' + image.id + ']'"
+                    v-model="image.alt"
+                />
+
                 <!-- Image Name -->
-                <p class="break-all text-xs font-semibold text-gray-600 dark:text-gray-300"></p>
+                <p
+                    v-else
+                    class="break-all text-xs font-semibold text-gray-600 dark:text-gray-300"
+                ></p>
 
                 <!-- Actions -->
                 <div class="flex justify-between">
@@ -423,6 +439,11 @@
                 uploadedImages: {
                     type: Array,
                     default: () => []
+                },
+
+                withAlt: {
+                    type: Boolean,
+                    default: false,
                 },
 
                 width: {
@@ -522,6 +543,7 @@
                         this.images.push({
                             id: 'image_' + this.images.length,
                             url: '',
+                            alt: '',
                             file: file
                         });
                     });
@@ -560,6 +582,7 @@
                         this.images.push({
                             id: 'image_' + this.images.length,
                             url: '',
+                            alt: '',
                             file: this.getBase64ToFile(image.url, 'temp.png')
                         });
                     });
@@ -606,7 +629,17 @@
         app.component('v-media-image-item', {
             template: '#v-media-image-item-template',
 
-            props: ['index', 'image', 'name', 'width', 'height'],
+            props: ['index', 'image', 'name', 'withAlt', 'width', 'height'],
+
+            computed: {
+                /**
+                 * e.g. name "images[files]" → alt inputs under "images[alt]"
+                 * (existing images keyed by id, new ones sequential).
+                 */
+                altBaseName() {
+                    return this.name.replace(/files$/, 'alt');
+                },
+            },
 
             mounted() {
                 if (this.image.file instanceof File) {

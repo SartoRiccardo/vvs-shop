@@ -36,7 +36,9 @@ class ProductImage
                 continue;
             }
 
-            $images[] = $this->getCachedImageUrls($image->path);
+            $images[] = $this->getCachedImageUrls($image->path) + [
+                'alt' => $image->alt ?: $product->name,
+            ];
         }
 
         if (
