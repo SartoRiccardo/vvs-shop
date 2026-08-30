@@ -46,6 +46,45 @@
 
         @stack('meta')
 
+        @php
+            $seoHelper = app('Webkul\Shop\Helpers\Seo');
+        @endphp
+
+        {{-- Utility pages (checkout, account, search…) stay out of the index. --}}
+        @if ($seoHelper->shouldNoindex())
+            <meta
+                name="robots"
+                content="noindex, follow"
+            >
+        @endif
+
+        {{-- Canonical URL for every content page. --}}
+        @if (core()->getConfigData('general.seo.canonical.enable'))
+            <link
+                rel="canonical"
+                href="{{ $seoHelper->canonicalUrl() }}"
+            />
+        @endif
+
+        {{-- Open Graph / Twitter share tags (product pages emit their own). --}}
+        @foreach ($seoHelper->openGraphMeta() as $ogTag)
+            <meta
+                {{ $ogTag['attribute'] }}="{{ $ogTag['key'] }}"
+                content="{{ $ogTag['content'] }}"
+            >
+        @endforeach
+
+        {{-- Sitewide structured data: Organization + WebSite (with search action). --}}
+        @if (core()->getConfigData('catalog.rich_snippets.general.enable'))
+            <script type="application/ld+json">
+                {!! app('Webkul\Product\Helpers\SEO')->getOrganizationJsonLd() !!}
+            </script>
+
+            <script type="application/ld+json">
+                {!! app('Webkul\Product\Helpers\SEO')->getWebsiteJsonLd() !!}
+            </script>
+        @endif
+
         <link
             rel="icon"
             sizes="16x16"

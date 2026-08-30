@@ -157,23 +157,97 @@ class SEO
     }
 
     /**
-     * Returns product json ld data for category
+     * Returns breadcrumb list json ld data for a category, walking from the
+     * store root down to the category itself.
      *
      * @param  Category  $category
-     * @return array
+     * @return string
      */
-    public function getCategoryJsonLd($category)
+    public function getCategoryBreadcrumbJsonLd($category)
     {
-        $data = [
-            '@type' => 'WebSite',
-            '@context' => 'http://schema.org',
-            'url' => config('app.url'),
+        $items = [
+            [
+                '@type' => 'ListItem',
+                'position' => 1,
+                'name' => 'Home',
+                'item' => url('/'),
+            ],
         ];
 
-        if (core()->getConfigData('catalog.rich_snippets.categories.show_search_input_field')) {
+        $position = 2;
+
+        foreach ($category->ancestors as $ancestor) {
+            if (! $ancestor->parent_id) {
+                continue;
+            }
+
+            $items[] = [
+                '@type' => 'ListItem',
+                'position' => $position++,
+                'name' => $ancestor->name,
+                'item' => $ancestor->url,
+            ];
+        }
+
+        $items[] = [
+            '@type' => 'ListItem',
+            'position' => $position,
+            'name' => $category->name,
+            'item' => $category->url,
+        ];
+
+        return json_encode([
+            '@context' => 'https://schema.org',
+            '@type' => 'BreadcrumbList',
+            'itemListElement' => $items,
+        ]);
+    }
+
+    /**
+     * Returns organization json ld data for the current channel.
+     *
+     * @return string
+     */
+    public function getOrganizationJsonLd()
+    {
+        $channel = core()->getCurrentChannel();
+
+        $data = [
+            '@context' => 'https://schema.org',
+            '@type' => 'Organization',
+            'name' => $channel->name,
+            'url' => url('/'),
+        ];
+
+        if (! empty($channel->logo_url)) {
+            $data['logo'] = $channel->logo_url;
+        }
+
+        return json_encode($data);
+    }
+
+    /**
+     * Returns website json ld data for the current channel, with an optional
+     * search action so search engines can link straight to storefront search.
+     *
+     * @return string
+     */
+    public function getWebsiteJsonLd()
+    {
+        $data = [
+            '@context' => 'https://schema.org',
+            '@type' => 'WebSite',
+            'name' => core()->getCurrentChannel()->name,
+            'url' => url('/'),
+        ];
+
+        if (core()->getConfigData('catalog.rich_snippets.general.show_search_action')) {
             $data['potentialAction'] = [
                 '@type' => 'SearchAction',
-                'target' => config('app.url').'/search/?term={search_term_string}',
+                'target' => [
+                    '@type' => 'EntryPoint',
+                    'urlTemplate' => url('/search?query={search_term_string}'),
+                ],
                 'query-input' => 'required name=search_term_string',
             ];
         }

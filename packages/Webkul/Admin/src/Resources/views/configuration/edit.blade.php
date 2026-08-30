@@ -151,12 +151,15 @@
     </x-admin::form>
 
     <!--
-        Code-editor treatment for the Custom CSS field (Configure → General →
-        Content → Custom Scripts): large monospace surface with code wrapping
-        behavior, and Tab inserts indentation instead of leaving the field.
+        Code-editor treatment for code-ish config fields: the Custom CSS field
+        (Configure → General → Content → Custom Scripts) and the robots.txt
+        content (Configure → General → SEO → Robots.txt). Large monospace
+        surface with code wrapping behavior, and Tab inserts indentation
+        instead of leaving the field.
     -->
     <style>
-        textarea[name$="[custom_css]"] {
+        textarea[name$="[custom_css]"],
+        textarea[name="general[seo][robots][content]"] {
             min-height: 65vh;
             resize: vertical;
             font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
@@ -173,7 +176,7 @@
     -->
     <script>
         document.addEventListener('keydown', (event) => {
-            if (event.key !== 'Tab' || ! event.target.matches?.('textarea[name$="[custom_css]"]')) {
+            if (event.key !== 'Tab' || ! event.target.matches?.('textarea[name$="[custom_css]"], textarea[name="general[seo][robots][content]"]')) {
                 return;
             }
 

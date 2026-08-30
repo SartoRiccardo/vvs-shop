@@ -12,7 +12,7 @@
 
     @if (core()->getConfigData('catalog.rich_snippets.categories.enable'))
         <script type="application/ld+json">
-            {!! app('Webkul\Product\Helpers\SEO')->getCategoryJsonLd($category) !!}
+            {!! app('Webkul\Product\Helpers\SEO')->getCategoryBreadcrumbJsonLd($category) !!}
         </script>
     @endif
 @endPush

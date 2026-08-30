@@ -4267,6 +4267,42 @@ return [
                     ],
                 ],
 
+                'seo' => [
+                    'info' => 'Configure search engine optimization for your storefront.',
+                    'title' => 'SEO',
+
+                    'robots' => [
+                        'title' => 'Robots.txt',
+                        'title-info' => 'robots.txt tells crawlers which parts of your store they may access. It is served at /robots.txt.',
+                        'enable' => 'Enable Custom robots.txt',
+                        'content' => 'robots.txt Content',
+                        'content-info' => 'One rule per line. After generating your XML sitemap (Marketing → Search & SEO → Sitemaps), reference it here with a "Sitemap: https://your-store.com/storage/sitemap.xml" line.',
+                    ],
+
+                    'canonical' => [
+                        'title' => 'Canonical URLs',
+                        'title-info' => 'Canonical links tell search engines which URL represents a page, preventing duplicate-content issues such as paginated categories.',
+                        'enable' => 'Add Canonical Link Tags to Storefront Pages',
+                    ],
+
+                    'noindex' => [
+                        'title' => 'Noindex',
+                        'title-info' => 'Keep non-content pages out of search engine indexes.',
+                        'utility-pages' => 'Keep Utility Pages Out of Search Results',
+                        'utility-pages-info' => 'Adds a "noindex, follow" robots meta tag to cart, checkout, customer account and search pages.',
+                    ],
+
+                    'open-graph' => [
+                        'title' => 'Social Sharing (Open Graph)',
+                        'title-info' => 'Open Graph and Twitter card tags control how your pages look when shared on social media, messaging apps and chat clients.',
+                        'enable' => 'Enable Social Share Meta Tags',
+                        'site-name' => 'Site Name',
+                        'site-name-info' => 'Used for the "og:site_name" tag. Falls back to the channel name when empty.',
+                        'twitter-site' => 'Twitter/X Handle',
+                        'twitter-site-info' => 'Adds a "twitter:site" tag, e.g. "smallplushies".',
+                    ],
+                ],
+
                 'sitemap' => [
                     'info' => 'সাইটম্যাপ বিকল্প সেট করুন।',
                     'title' => 'সাইটম্যাপ',
@@ -4523,6 +4559,13 @@ return [
                 ],
 
                 'rich-snippets' => [
+                    'general' => [
+                        'title' => 'Sitewide',
+                        'title-info' => 'Organization and WebSite structured data emitted on every storefront page.',
+                        'enable' => 'Enable Sitewide Structured Data (Organization & WebSite)',
+                        'show-search-action' => 'Include Website Search Action',
+                    ],
+
                     'info' => 'পণ্য এবং বিভাগ সেট করুন।',
                     'title' => 'রিচ স্নিপেট',
 
@@ -4540,7 +4583,7 @@ return [
                     ],
 
                     'categories' => [
-                        'enable' => 'সক্ষম করুন',
+                        'enable' => 'Enable Breadcrumb Structured Data',
                         'show-search-input-field' => 'অনুসন্ধান ইনপুট ফিল্ড প্রদর্শন করুন',
                         'title' => 'বিভাগসমূহ',
                         'title-info' => 'বিভাগগুলি হল সমল বা শ্রেণীবিভাগ যা সমল বা আইটেমগুলি সহজে ব্রাউজ এবং নেভিগেশন করার জন্য সাহায্য করে।',
@@ -5749,7 +5792,6 @@ return [
             ],
         ],
     ],
-
 
     /*
     |--------------------------------------------------------------------------

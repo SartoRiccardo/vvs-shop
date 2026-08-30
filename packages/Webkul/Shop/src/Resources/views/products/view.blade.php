@@ -23,27 +23,48 @@
         </script>
     @endif
 
-    <?php $productBaseImage = product_image()->getProductBaseImage($product); ?>
+    @if (core()->getConfigData('general.seo.open_graph.enable'))
+        <?php
+            $productBaseImage = product_image()->getProductBaseImage($product);
 
-    <meta name="twitter:card" content="summary_large_image" />
+            $productImageAlt = $product->images->sortBy('position')->first()?->alt ?: $product->name;
 
-    <meta name="twitter:title" content="{{ $product->name }}" />
+            $ogSiteName = core()->getConfigData('general.seo.open_graph.site_name')
+                ?: core()->getCurrentChannel()->name;
 
-    <meta name="twitter:description" content="{!! htmlspecialchars(trim(strip_tags($product->description))) !!}" />
+            $twitterSite = core()->getConfigData('general.seo.open_graph.twitter_site');
 
-    <meta name="twitter:image:alt" content="" />
+            if ($twitterSite && ! str_starts_with($twitterSite, '@')) {
+                $twitterSite = '@'.$twitterSite;
+            }
+        ?>
 
-    <meta name="twitter:image" content="{{ $productBaseImage['medium_image_url'] }}" />
+        <meta name="twitter:card" content="summary_large_image" />
 
-    <meta property="og:type" content="og:product" />
+        <meta name="twitter:title" content="{{ $product->name }}" />
 
-    <meta property="og:title" content="{{ $product->name }}" />
+        <meta name="twitter:description" content="{!! htmlspecialchars(trim(strip_tags($product->description))) !!}" />
 
-    <meta property="og:image" content="{{ $productBaseImage['medium_image_url'] }}" />
+        <meta name="twitter:image:alt" content="{{ $productImageAlt }}" />
 
-    <meta property="og:description" content="{!! htmlspecialchars(trim(strip_tags($product->description))) !!}" />
+        <meta name="twitter:image" content="{{ $productBaseImage['medium_image_url'] }}" />
 
-    <meta property="og:url" content="{{ route('shop.product_or_category.index', $product->url_key) }}" />
+        @if ($twitterSite)
+            <meta name="twitter:site" content="{{ $twitterSite }}" />
+        @endif
+
+        <meta property="og:type" content="og:product" />
+
+        <meta property="og:site_name" content="{{ $ogSiteName }}" />
+
+        <meta property="og:title" content="{{ $product->name }}" />
+
+        <meta property="og:image" content="{{ $productBaseImage['medium_image_url'] }}" />
+
+        <meta property="og:description" content="{!! htmlspecialchars(trim(strip_tags($product->description))) !!}" />
+
+        <meta property="og:url" content="{{ route('shop.product_or_category.index', $product->url_key) }}" />
+    @endif
 @endPush
 
 <!-- Page Layout -->

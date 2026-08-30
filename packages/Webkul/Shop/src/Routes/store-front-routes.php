@@ -8,7 +8,14 @@ use Webkul\Shop\Http\Controllers\PageController;
 use Webkul\Shop\Http\Controllers\ProductController;
 use Webkul\Shop\Http\Controllers\ProductsCategoriesProxyController;
 use Webkul\Shop\Http\Controllers\SearchController;
+use Webkul\Shop\Http\Controllers\SeoController;
 use Webkul\Shop\Http\Controllers\SubscriptionController;
+
+/**
+ * robots.txt.
+ */
+Route::get('robots.txt', [SeoController::class, 'robots'])
+    ->name('shop.seo.robots');
 
 /**
  * CMS pages.

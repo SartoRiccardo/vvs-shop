@@ -327,6 +327,84 @@ return [
             ],
         ],
     ], [
+        'key' => 'general.seo',
+        'name' => 'admin::app.configuration.index.general.seo.title',
+        'info' => 'admin::app.configuration.index.general.seo.info',
+        'icon' => 'settings/sitemap.svg',
+        'sort' => 5,
+    ], [
+        'key' => 'general.seo.robots',
+        'name' => 'admin::app.configuration.index.general.seo.robots.title',
+        'info' => 'admin::app.configuration.index.general.seo.robots.title-info',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'enable',
+                'title' => 'admin::app.configuration.index.general.seo.robots.enable',
+                'type' => 'boolean',
+                'default' => true,
+            ], [
+                'name' => 'content',
+                'title' => 'admin::app.configuration.index.general.seo.robots.content',
+                'info' => 'admin::app.configuration.index.general.seo.robots.content-info',
+                'type' => 'textarea',
+                'default' => "User-agent: *\nDisallow:\n\n# After generating your sitemap (Marketing → Search & SEO → Sitemaps), add:\n# Sitemap: https://your-store.com/storage/sitemap.xml",
+                'depends' => 'enable:1',
+            ],
+        ],
+    ], [
+        'key' => 'general.seo.canonical',
+        'name' => 'admin::app.configuration.index.general.seo.canonical.title',
+        'info' => 'admin::app.configuration.index.general.seo.canonical.title-info',
+        'sort' => 2,
+        'fields' => [
+            [
+                'name' => 'enable',
+                'title' => 'admin::app.configuration.index.general.seo.canonical.enable',
+                'type' => 'boolean',
+                'default' => true,
+            ],
+        ],
+    ], [
+        'key' => 'general.seo.noindex',
+        'name' => 'admin::app.configuration.index.general.seo.noindex.title',
+        'info' => 'admin::app.configuration.index.general.seo.noindex.title-info',
+        'sort' => 3,
+        'fields' => [
+            [
+                'name' => 'utility_pages',
+                'title' => 'admin::app.configuration.index.general.seo.noindex.utility-pages',
+                'info' => 'admin::app.configuration.index.general.seo.noindex.utility-pages-info',
+                'type' => 'boolean',
+                'default' => true,
+            ],
+        ],
+    ], [
+        'key' => 'general.seo.open_graph',
+        'name' => 'admin::app.configuration.index.general.seo.open-graph.title',
+        'info' => 'admin::app.configuration.index.general.seo.open-graph.title-info',
+        'sort' => 4,
+        'fields' => [
+            [
+                'name' => 'enable',
+                'title' => 'admin::app.configuration.index.general.seo.open-graph.enable',
+                'type' => 'boolean',
+                'default' => true,
+            ], [
+                'name' => 'site_name',
+                'title' => 'admin::app.configuration.index.general.seo.open-graph.site-name',
+                'info' => 'admin::app.configuration.index.general.seo.open-graph.site-name-info',
+                'type' => 'text',
+                'validation' => 'max:120',
+            ], [
+                'name' => 'twitter_site',
+                'title' => 'admin::app.configuration.index.general.seo.open-graph.twitter-site',
+                'info' => 'admin::app.configuration.index.general.seo.open-graph.twitter-site-info',
+                'type' => 'text',
+                'validation' => 'max:60',
+            ],
+        ],
+    ], [
         'key' => 'general.exchange_rates',
         'name' => 'admin::app.configuration.index.general.exchange-rates.title',
         'info' => 'admin::app.configuration.index.general.exchange-rates.info',
@@ -1240,19 +1318,34 @@ return [
             ],
         ],
     ], [
+        'key' => 'catalog.rich_snippets.general',
+        'name' => 'admin::app.configuration.index.catalog.rich-snippets.general.title',
+        'info' => 'admin::app.configuration.index.catalog.rich-snippets.general.title-info',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'enable',
+                'title' => 'admin::app.configuration.index.catalog.rich-snippets.general.enable',
+                'type' => 'boolean',
+                'default' => true,
+            ], [
+                'name' => 'show_search_action',
+                'title' => 'admin::app.configuration.index.catalog.rich-snippets.general.show-search-action',
+                'type' => 'boolean',
+                'default' => true,
+            ],
+        ],
+    ], [
         'key' => 'catalog.rich_snippets.categories',
         'name' => 'admin::app.configuration.index.catalog.rich-snippets.categories.title',
         'info' => 'admin::app.configuration.index.catalog.rich-snippets.categories.title-info',
-        'sort' => 1,
+        'sort' => 2,
         'fields' => [
             [
                 'name' => 'enable',
                 'title' => 'admin::app.configuration.index.catalog.rich-snippets.categories.enable',
                 'type' => 'boolean',
-            ], [
-                'name' => 'show_search_input_field',
-                'title' => 'admin::app.configuration.index.catalog.rich-snippets.categories.show-search-input-field',
-                'type' => 'boolean',
+                'default' => true,
             ],
         ],
     ], [
@@ -2050,30 +2143,30 @@ return [
         'sort' => 4,
         'fields' => [
             [
-                'name'         => 'title',
-                'title'        => 'Title',
-                'type'         => 'text',
-                'default'      => 'FedEx International Connect Plus',
+                'name' => 'title',
+                'title' => 'Title',
+                'type' => 'text',
+                'default' => 'FedEx International Connect Plus',
                 'channel_based' => true,
                 'locale_based' => true,
             ], [
-                'name'         => 'active',
-                'title'        => 'Status',
-                'type'         => 'boolean',
+                'name' => 'active',
+                'title' => 'Status',
+                'type' => 'boolean',
                 'channel_based' => true,
                 'locale_based' => false,
             ], [
-                'name'         => 'fuel_surcharge_percentage',
-                'title'        => 'Fuel Surcharge %',
-                'type'         => 'text',
-                'default'      => '49.25',
+                'name' => 'fuel_surcharge_percentage',
+                'title' => 'Fuel Surcharge %',
+                'type' => 'text',
+                'default' => '49.25',
                 'channel_based' => false,
                 'locale_based' => false,
             ], [
-                'name'  => 'manage_link',
+                'name' => 'manage_link',
                 'title' => 'Zones & Rates',
-                'type'  => 'blade',
-                'path'  => 'fedex_shipping::configuration.manage-link',
+                'type' => 'blade',
+                'path' => 'fedex_shipping::configuration.manage-link',
             ],
         ],
     ], [

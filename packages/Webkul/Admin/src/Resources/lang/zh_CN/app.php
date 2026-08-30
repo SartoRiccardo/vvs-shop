@@ -4267,6 +4267,42 @@ return [
                     ],
                 ],
 
+                'seo' => [
+                    'info' => 'Configure search engine optimization for your storefront.',
+                    'title' => 'SEO',
+
+                    'robots' => [
+                        'title' => 'Robots.txt',
+                        'title-info' => 'robots.txt tells crawlers which parts of your store they may access. It is served at /robots.txt.',
+                        'enable' => 'Enable Custom robots.txt',
+                        'content' => 'robots.txt Content',
+                        'content-info' => 'One rule per line. After generating your XML sitemap (Marketing → Search & SEO → Sitemaps), reference it here with a "Sitemap: https://your-store.com/storage/sitemap.xml" line.',
+                    ],
+
+                    'canonical' => [
+                        'title' => 'Canonical URLs',
+                        'title-info' => 'Canonical links tell search engines which URL represents a page, preventing duplicate-content issues such as paginated categories.',
+                        'enable' => 'Add Canonical Link Tags to Storefront Pages',
+                    ],
+
+                    'noindex' => [
+                        'title' => 'Noindex',
+                        'title-info' => 'Keep non-content pages out of search engine indexes.',
+                        'utility-pages' => 'Keep Utility Pages Out of Search Results',
+                        'utility-pages-info' => 'Adds a "noindex, follow" robots meta tag to cart, checkout, customer account and search pages.',
+                    ],
+
+                    'open-graph' => [
+                        'title' => 'Social Sharing (Open Graph)',
+                        'title-info' => 'Open Graph and Twitter card tags control how your pages look when shared on social media, messaging apps and chat clients.',
+                        'enable' => 'Enable Social Share Meta Tags',
+                        'site-name' => 'Site Name',
+                        'site-name-info' => 'Used for the "og:site_name" tag. Falls back to the channel name when empty.',
+                        'twitter-site' => 'Twitter/X Handle',
+                        'twitter-site-info' => 'Adds a "twitter:site" tag, e.g. "smallplushies".',
+                    ],
+                ],
+
                 'sitemap' => [
                     'info' => '设置站点地图选项。',
                     'title' => '站点地图',
@@ -4523,6 +4559,13 @@ return [
                 ],
 
                 'rich-snippets' => [
+                    'general' => [
+                        'title' => 'Sitewide',
+                        'title-info' => 'Organization and WebSite structured data emitted on every storefront page.',
+                        'enable' => 'Enable Sitewide Structured Data (Organization & WebSite)',
+                        'show-search-action' => 'Include Website Search Action',
+                    ],
+
                     'info' => '设置产品和分类。',
                     'title' => '富媒体片段',
 
@@ -4540,7 +4583,7 @@ return [
                     ],
 
                     'categories' => [
-                        'enable' => '启用',
+                        'enable' => 'Enable Breadcrumb Structured Data',
                         'show-search-input-field' => '显示搜索输入框',
                         'title' => '分类',
                         'title-info' => '“分类”是指帮助组织和分组类似产品或物品，以便更轻松地浏览和导航的组或类别。',
@@ -5749,7 +5792,6 @@ return [
             ],
         ],
     ],
-
 
     /*
     |--------------------------------------------------------------------------
