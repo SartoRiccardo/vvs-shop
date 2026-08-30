@@ -107,6 +107,16 @@
                     original.style.display = 'none';
                 }
 
+                /**
+                 * Existing content is stored HTML: editing it in markdown mode
+                 * would pipe it through the markdown converter on save, so
+                 * fall back to HTML mode for HTML-looking content. The saved
+                 * mode preference is not overwritten.
+                 */
+                if (this.mode === 'markdown' && /<\/?[a-z][^>]*>/i.test(this.content)) {
+                    this.mode = 'html';
+                }
+
                 this.push();
             },
 
