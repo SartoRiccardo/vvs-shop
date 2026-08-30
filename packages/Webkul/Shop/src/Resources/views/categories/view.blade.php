@@ -40,6 +40,14 @@
 
     {!! view_render_event('bagisto.shop.categories.view.banner_path.after') !!}
 
+    @if (in_array($category->display_mode, [null, 'products_only', 'products_and_description']))
+        <!-- Category Vue Component -->
+        <v-category>
+            <!-- Category Shimmer Effect -->
+            <x-shop::shimmer.categories.view />
+        </v-category>
+    @endif
+
     {!! view_render_event('bagisto.shop.categories.view.description.before') !!}
 
     @if (in_array($category->display_mode, [null, 'description_only', 'products_and_description']))
@@ -51,14 +59,6 @@
     @endif
 
     {!! view_render_event('bagisto.shop.categories.view.description.after') !!}
-
-    @if (in_array($category->display_mode, [null, 'products_only', 'products_and_description']))
-        <!-- Category Vue Component -->
-        <v-category>
-            <!-- Category Shimmer Effect -->
-            <x-shop::shimmer.categories.view />
-        </v-category>
-    @endif
 
     @pushOnce('scripts')
         <script
