@@ -105,7 +105,7 @@ RUN mkdir -p /run/php /var/log/supervisor bootstrap/cache \
         storage/logs \
         storage/app/public \
     && ln -sfn storage/app/public public/storage \
-    && chown -R www-data:www-data /run/php /var/log/supervisor \
+    && chown -R www-data:www-data /run/php /var/log/supervisor storage bootstrap/cache \
     && chmod -R 775 storage bootstrap/cache \
     && find storage bootstrap/cache -type d -exec chmod g+s {} +
 

@@ -55,9 +55,11 @@ for i in $(seq 1 60); do
     sleep 1
 done
 
-# Migrate
+# Migrate (as www-data: booting Laravel touches the config cache, so root
+# runs would litter storage/framework/cache with root-owned shard dirs that
+# php-fpm can't write into later)
 log "Running migrations..."
-php artisan migrate --force --no-interaction
+runuser -u www-data -- php artisan migrate --force --no-interaction
 
 mkdir -p storage/app/public
 if [ ! -L public/storage ]; then
@@ -67,7 +69,7 @@ fi
 
 # Cache
 log "Caching config/routes/views..."
-php artisan optimize
+runuser -u www-data -- php artisan optimize
 
 # Migrate/optimize run as root, so anything they wrote in storage/bootstrap
 # cache needs handing back to www-data before php-fpm (running as www-data)
