@@ -5452,6 +5452,10 @@ return [
         ],
 
         'tinymce' => [
+            'html-hint' => 'Paste raw HTML — it is saved as written; unsafe tags are stripped server-side.',
+
+            'markdown-hint' => 'Write Markdown — it is converted to HTML when saved.',
+
             'ai-btn-tile' => 'Magia IA',
 
             'ai-generation' => [

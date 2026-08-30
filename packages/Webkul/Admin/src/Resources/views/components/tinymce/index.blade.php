@@ -1,22 +1,12 @@
-@php
-    use Webkul\MagicAI\AiProvider;
-
-    $enabledProviders = array_filter(explode(',', core()->getConfigData('magic_ai.admin_features.text_generation.providers') ?? ''));
-    
-    $models = AiProvider::modelsForProviders($enabledProviders, 'text');
-    
-    $defaultModel = $models[0]['value'] ?? '';
-@endphp
-
 <v-tinymce {{ $attributes }}></v-tinymce>
 
 @pushOnce('scripts')
     <!--
-        TODO (@devansh-webkul): Only this portion is pending; it just needs to be integrated using the Vite bundler. Currently,
-        there is an issue with relative paths in the plugins. I intend to address this task at the end.
+        Markdown conversion for markdown mode. Loaded as a classic script so
+        it executes before the deferred module below mounts any editors.
     -->
     <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.6.2/tinymce.min.js"
+        src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"
         crossorigin="anonymous"
         referrerpolicy="no-referrer"
     ></script>
@@ -25,356 +15,123 @@
         type="text/x-template"
         id="v-tinymce-template"
     >
-        <x-admin::form
-            v-slot="{ meta, errors, handleSubmit }"
-            as="div"
-        >
-            <form @submit="handleSubmit($event, generate)">
-                <!-- AI Content Generation Modal -->
-                <x-admin::modal ref="magicAIModal">
-                    <!-- Modal Header -->
-                    <x-slot:header>
-                        <p class="flex items-center gap-2.5 text-lg font-bold text-gray-800 dark:text-white">
-                            <span class="icon-magic text-2xl text-gray-800"></span>
+        <div>
+            <!-- Mode switcher -->
+            <div class="mb-1.5 inline-flex overflow-hidden rounded-md border border-gray-300 dark:border-gray-600">
+                <button
+                    type="button"
+                    @click="setMode('html')"
+                    :class="mode === 'html'
+                        ? 'bg-gray-800 font-semibold text-white dark:bg-gray-100 dark:text-gray-900'
+                        : 'bg-transparent text-gray-600 dark:text-gray-300'"
+                    class="px-3 py-1 text-xs transition-all"
+                >
+                    HTML
+                </button>
 
-                            @lang('admin::app.components.tinymce.ai-generation.title')
-                        </p>
-                    </x-slot>
+                <button
+                    type="button"
+                    @click="setMode('markdown')"
+                    :class="mode === 'markdown'
+                        ? 'bg-gray-800 font-semibold text-white dark:bg-gray-100 dark:text-gray-900'
+                        : 'bg-transparent text-gray-600 dark:text-gray-300'"
+                    class="px-3 py-1 text-xs transition-all"
+                >
+                    Markdown
+                </button>
+            </div>
 
-                    <!-- Modal Content -->
-                    <x-slot:content>
-                        <!-- Prompt -->
-                        <x-admin::form.control-group>
-                            <x-admin::form.control-group.label class="required">
-                                @lang('admin::app.components.tinymce.ai-generation.prompt')
-                            </x-admin::form.control-group.label>
+            <!-- Editor surface -->
+            <textarea
+                ref="editor"
+                v-model="content"
+                @input="push"
+                class="block min-h-[60vh] w-full resize-y rounded-md border border-gray-300 px-3 py-2.5 font-mono text-[13px] leading-relaxed text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
+            ></textarea>
 
-                            <x-admin::form.control-group.control
-                                type="textarea"
-                                class="h-[180px]"
-                                name="prompt"
-                                rules="required"
-                                v-model="ai.prompt"
-                                :label="trans('admin::app.components.tinymce.ai-generation.prompt')"
-                            />
+            <!-- Markdown live preview -->
+            <div
+                v-if="mode === 'markdown' && content"
+                class="mt-2 rounded-md border border-gray-200 p-4 text-sm leading-relaxed text-gray-600 dark:border-gray-800 dark:text-gray-300 [&_a]:underline [&_blockquote]:border-l-4 [&_blockquote]:border-gray-300 [&_blockquote]:pl-3 [&_code]:font-mono [&_img]:max-w-full [&_pre]:overflow-x-auto [&_pre]:rounded [&_pre]:bg-gray-100 [&_pre]:p-3 dark:[&_blockquote]:border-gray-700 dark:[&_pre]:bg-gray-800"
+                v-html="preview"
+            ></div>
 
-                            <x-admin::form.control-group.error control-name="prompt" />
-                        </x-admin::form.control-group>
+            <p class="mt-1 text-xs italic text-gray-600 dark:text-gray-300">
+                <span v-if="mode === 'markdown'">
+                    @lang('admin::app.components.tinymce.markdown-hint')
+                </span>
 
-                        <!-- Model Select -->
-                        <x-admin::form.control-group v-if="ai.models && ai.models.length">
-                            <x-admin::form.control-group.label>
-                                @lang('admin::app.components.tinymce.ai-generation.model')
-                            </x-admin::form.control-group.label>
-
-                            <x-admin::form.control-group.control
-                                type="select"
-                                name="model"
-                                v-model="ai.model"
-                                :label="trans('admin::app.components.tinymce.ai-generation.model')"
-                            >
-                                <option
-                                    v-for="option in ai.models"
-                                    :key="option.value"
-                                    :value="option.value"
-                                    v-text="option.title"
-                                ></option>
-                            </x-admin::form.control-group.control>
-                        </x-admin::form.control-group>
-
-                        <!-- Modal Submission -->
-                        <div class="flex items-center gap-x-2.5">
-                            <button
-                                type="submit"
-                                class="secondary-button"
-                            >
-                                <!-- Spinner -->
-                                <template v-if="isLoading">
-                                    <img
-                                        class="h-5 w-5 animate-spin"
-                                        src="{{ bagisto_asset('images/spinner.svg') }}"
-                                    />
-
-                                    @lang('admin::app.components.tinymce.ai-generation.generating')
-                                </template>
-
-                                <template v-else>
-                                    <span class="icon-magic text-2xl text-blue-600"></span>
-
-                                    @lang('admin::app.components.tinymce.ai-generation.generate')
-                                </template>
-                            </button>
-                        </div>
-
-                        <!-- Generated Content -->
-                        <x-admin::form.control-group class="mt-5">
-                            <x-admin::form.control-group.label class="text-left">
-                                @lang('admin::app.components.tinymce.ai-generation.generated-content')
-                            </x-admin::form.control-group.label>
-
-                            <x-admin::form.control-group.control
-                                type="textarea"
-                                class="h-[180px]"
-                                name="content"
-                                v-model="ai.content"
-                            />
-
-                            <span class="text-xs text-gray-500">
-                                @lang('admin::app.components.tinymce.ai-generation.generated-content-info')
-                            </span>
-                        </x-admin::form.control-group>
-                    </x-slot>
-
-                    <!-- Modal Footer -->
-                    <x-slot:footer>
-                        <!-- Save Button -->
-                        <x-admin::button
-                            button-type="button"
-                            class="primary-button"
-                            :title="trans('admin::app.components.media.images.ai-generation.apply')"
-                            ::disabled="! ai.content"
-                            @click="apply"
-                        />
-                    </x-slot>
-                </x-admin::modal>
-            </form>
-        </x-admin::form>
+                <span v-else>
+                    @lang('admin::app.components.tinymce.html-hint')
+                </span>
+            </p>
+        </div>
     </script>
 
     <script type="module">
         app.component('v-tinymce', {
             template: '#v-tinymce-template',
-                
-            props: ['selector', 'field', 'prompt'],
+
+            props: ['selector', 'field'],
 
             data() {
                 return {
-                    currentSkin: document.documentElement.classList.contains('dark') ? 'oxide-dark' : 'oxide',
+                    mode: localStorage.getItem('bagisto-editor-mode') || 'html',
 
-                    currentContentCSS: document.documentElement.classList.contains('dark') ? 'dark' : 'default',
-
-                    isLoading: false,
-
-                    ai: {
-                        enabled: Boolean("{{ core()->getConfigData('magic_ai.general.settings.enabled') && core()->getConfigData('magic_ai.admin_features.text_generation.enabled') }}"),
-
-                        models: {!! json_encode($models) !!},
-
-                        model: "{{ $defaultModel }}",
-
-                        prompt: null,
-
-                        content: null,
-                    },
+                    content: '',
                 };
             },
 
+            computed: {
+                preview() {
+                    if (this.mode !== 'markdown' || ! window.marked) {
+                        return '';
+                    }
+
+                    return window.marked.parse(this.content ?? '');
+                },
+            },
+
             mounted() {
-                this.init();
+                /**
+                 * The caller (control component / editor field type) renders a
+                 * vee-validate bound textarea holding the initial value; hide
+                 * it and take over, pushing values back through field.onInput
+                 * like TinyMCE did.
+                 */
+                const original = document.querySelector(this.selector);
 
-                this.$emitter.on('change-theme', (theme) => {
-                    tinymce.get(0).destroy();
+                if (original) {
+                    this.content = original.value;
 
-                    this.currentSkin = theme === 'dark' ? 'oxide-dark' : 'oxide';
-                    this.currentContentCSS = theme === 'dark' ? 'dark' : 'default';
+                    original.style.display = 'none';
+                }
 
-                    this.init();
-                });
+                this.push();
             },
 
             methods: {
-                init() {
-                    let self = this;
+                setMode(mode) {
+                    this.mode = mode;
 
-                    let tinyMCEHelper = {
-                        initTinyMCE: function(extraConfiguration) {
-                            let self2 = this;
+                    localStorage.setItem('bagisto-editor-mode', mode);
 
-                            let config = {  
-                                relative_urls: false,
-                                menubar: false,
-                                remove_script_host: false,
-                                document_base_url: '{{ asset('/') }}',
-                                uploadRoute: '{{ route('admin.tinymce.upload') }}',
-                                csrfToken: '{{ csrf_token() }}',
-                                ...extraConfiguration,
-                                skin: self.currentSkin,
-                                content_css: self.currentContentCSS,
-                            };
-
-                            const image_upload_handler = (blobInfo, progress) => new Promise((resolve, reject) => {
-                                self2.uploadImageHandler(config, blobInfo, resolve, reject, progress);
-                            });
-
-                            tinymce.init({
-                                ...config,
-
-                                file_picker_callback: function(cb, value, meta) {
-                                    self2.filePickerCallback(config, cb, value, meta);
-                                },
-
-                                images_upload_handler: image_upload_handler,
-                            });
-                        },
-
-                        filePickerCallback: function(config, cb, value, meta) {
-                            let input = document.createElement('input');
-                            input.setAttribute('type', 'file');
-                            input.setAttribute('accept', 'image/*');
-
-                            input.onchange = function() {
-                                let file = this.files[0];
-
-                                let reader = new FileReader();
-                                reader.readAsDataURL(file);
-                                reader.onload = function() {
-                                    let id = 'blobid' + new Date().getTime();
-                                    let blobCache = tinymce.activeEditor.editorUpload.blobCache;
-                                    let base64 = reader.result.split(',')[1];
-                                    let blobInfo = blobCache.create(id, file, base64);
-
-                                    blobCache.add(blobInfo);
-
-                                    cb(blobInfo.blobUri(), {
-                                        title: file.name
-                                    });
-                                };
-                            };
-
-                            input.click();
-                        },
-
-                        uploadImageHandler: function(config, blobInfo, resolve, reject, progress) {
-                            let xhr, formData;
-
-                            xhr = new XMLHttpRequest();
-
-                            xhr.withCredentials = false;
-
-                            xhr.open('POST', config.uploadRoute);
-
-                            xhr.upload.onprogress = ((e) => progress((e.loaded / e.total) * 100));
-
-                            xhr.onload = function() {
-                                let json;
-
-                                if (xhr.status === 403) {
-                                    reject("@lang('admin::app.components.tinymce.errors.http-error')", {
-                                        remove: true
-                                    });
-
-                                    return;
-                                }
-
-                                if (xhr.status < 200 || xhr.status >= 300) {
-                                    try {
-                                        json = JSON.parse(xhr.responseText);
-                                        
-                                        if (json.error) {
-                                            reject(json.error);
-                                        } else {
-                                            reject("@lang('admin::app.components.tinymce.errors.http-error')");
-                                        }
-                                    } catch (e) {
-                                        reject("@lang('admin::app.components.tinymce.errors.http-error')");
-                                    }
-
-                                    return;
-                                }
-
-                                json = JSON.parse(xhr.responseText);
-
-                                if (! json || typeof json.location != 'string') {
-                                    reject("@lang('admin::app.components.tinymce.errors.invalid-json')" + xhr.responseText);
-
-                                    return;
-                                }
-
-                                resolve(json.location);
-                            };
-
-                            xhr.onerror = (()=>reject("@lang('admin::app.components.tinymce.errors.upload-failed')"));
-
-                            formData = new FormData();
-                            formData.append('_token', config.csrfToken);
-                            formData.append('file', blobInfo.blob(), blobInfo.filename());
-
-                            xhr.send(formData);
-                        },
-                    };
-
-                    tinyMCEHelper.initTinyMCE({
-                        selector: this.selector,
-                        plugins: 'image media wordcount save fullscreen code table lists link',
-                        toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor image alignleft aligncenter alignright alignjustify | link hr |numlist bullist outdent indent  | removeformat | code | table | aibutton',
-                        image_advtab: true,
-                        directionality : "{{ core()->getCurrentLocale()->direction }}",
-
-                        setup: editor => {
-                            editor.ui.registry.addIcon('magic', '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"> <g clip-path="url(#clip0_3148_2242)"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1484 9.31989L9.31995 12.1483L19.9265 22.7549L22.755 19.9265L12.1484 9.31989ZM12.1484 10.7341L10.7342 12.1483L13.5626 14.9767L14.9768 13.5625L12.1484 10.7341Z" fill="#2563EB"/> <path d="M11.0877 3.30949L13.5625 4.44748L16.0374 3.30949L14.8994 5.78436L16.0374 8.25924L13.5625 7.12124L11.0877 8.25924L12.2257 5.78436L11.0877 3.30949Z" fill="#2563EB"/> <path d="M2.39219 2.39217L5.78438 3.95197L9.17656 2.39217L7.61677 5.78436L9.17656 9.17655L5.78438 7.61676L2.39219 9.17655L3.95198 5.78436L2.39219 2.39217Z" fill="#2563EB"/> <path d="M3.30947 11.0877L5.78434 12.2257L8.25922 11.0877L7.12122 13.5626L8.25922 16.0374L5.78434 14.8994L3.30947 16.0374L4.44746 13.5626L3.30947 11.0877Z" fill="#2563EB"/> </g> <defs> <clipPath id="clip0_3148_2242"> <rect width="24" height="24" fill="white"/> </clipPath> </defs> </svg>');
-
-                            editor.ui.registry.addButton('aibutton', {
-                                text: "@lang('admin::app.components.tinymce.ai-btn-tile')",
-                                icon: 'magic',
-                                enabled: self.ai.enabled,
-
-                                onAction: function () {
-                                    self.ai = {
-                                        models: self.ai.models,
-
-                                        model: self.ai.model,
-
-                                        prompt: self.prompt,
-
-                                        content: null,
-                                    };
-
-                                    self.$refs.magicAIModal.toggle()
-                                }
-                            });
-
-                            editor.on('keyup', () => {
-                                this.field.onInput(editor.getContent());
-                            });
-                        },
-                    });
+                    this.push();
                 },
 
-                generate(params, { resetForm, resetField, setErrors }) {
-                    this.isLoading = true;
+                push() {
+                    /**
+                     * Markdown converts to HTML before going up; HTML mode
+                     * sends the source verbatim. Server-side purification
+                     * (clean_content) still applies to whatever arrives.
+                     */
+                    const outgoing = this.mode === 'markdown' && window.marked
+                        ? window.marked.parse(this.content ?? '')
+                        : this.content;
 
-                    this.$axios.post("{{ route('admin.magic_ai.content') }}", {
-                        prompt: params['prompt'],
-                        model: this.ai.model,
-                    })
-                        .then(response => {
-                            this.isLoading = false;
-
-                            this.ai.content = response.data.content;
-                        })
-                        .catch(error => {
-                            this.isLoading = false;
-
-                            if (error.response.status == 422) {
-                                setErrors(error.response.data.errors);
-                            } else {
-                                this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
-                            }
-                        });
-                },
-
-                apply() {
-                    if (! this.ai.content) {
-                        return;
-                    }
-
-                    tinymce.get(this.selector.replace('textarea#', '')).setContent(this.ai.content.replace(/\r?\n/g, '<br />'))
-
-                    this.field.onInput(this.ai.content.replace(/\r?\n/g, '<br />'));
-
-                    this.$refs.magicAIModal.close();
+                    this.field?.onInput?.(outgoing);
                 },
             },
-        })
+        });
     </script>
 @endPushOnce
