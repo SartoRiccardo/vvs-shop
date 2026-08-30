@@ -20,6 +20,8 @@
         allow-multiple="true"
         show-placeholders="true"
         with-alt="true"
+        with-filename="true"
+        :regenerate-base="Str::slug($product->name)"
         :uploaded-images="$product->images"
     />
 

@@ -103,6 +103,35 @@ class ProductMediaRepository extends Repository
                         $attributes['alt'] = trim((string) $data[$uploadFileType]['alt'][$indexOrModelId]) ?: null;
                     }
 
+                    $submittedFilename = trim((string) ($data[$uploadFileType]['filename'][$indexOrModelId] ?? ''));
+
+                    if ($submittedFilename !== '') {
+                        $model = $this->find($indexOrModelId);
+
+                        if ($model) {
+                            $newBase = Str::slug($submittedFilename);
+
+                            $currentBase = pathinfo($model->path, PATHINFO_FILENAME);
+
+                            /**
+                             * Rename only when the submitted name actually
+                             * differs, so routine saves never churn image URLs.
+                             * A random suffix stays appended: unique names keep
+                             * the immutable cache headers safe.
+                             */
+                            if ($newBase !== '' && $newBase !== $currentBase && Storage::exists($model->path)) {
+                                $newPath = pathinfo($model->path, PATHINFO_DIRNAME)
+                                    .'/'.$newBase.'-'.Str::lower(Str::random(6)).'.'.pathinfo($model->path, PATHINFO_EXTENSION);
+
+                                if (! Storage::exists($newPath)) {
+                                    Storage::move($model->path, $newPath);
+
+                                    $attributes['path'] = $newPath;
+                                }
+                            }
+                        }
+                    }
+
                     $this->update($attributes, $indexOrModelId);
                 }
             }

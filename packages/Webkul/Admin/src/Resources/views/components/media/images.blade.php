@@ -14,6 +14,8 @@
     'showPlaceholders' => false,
     'uploadedImages'   => [],
     'withAlt'          => false,
+    'withFilename'     => false,
+    'regenerateBase'   => '',
     'width'            => '120px',
     'height'           => '120px'
 ])
@@ -23,6 +25,8 @@
     v-bind:allow-multiple="{{ $allowMultiple ? 'true' : 'false' }}"
     v-bind:show-placeholders="{{ $showPlaceholders ? 'true' : 'false' }}"
     v-bind:with-alt="{{ $withAlt ? 'true' : 'false' }}"
+    v-bind:with-filename="{{ $withFilename ? 'true' : 'false' }}"
+    :regenerate-base='{{ json_encode($regenerateBase) }}'
     :uploaded-images='{{ json_encode($uploadedImages) }}'
     width="{{ $width }}"
     height="{{ $height }}"
@@ -106,6 +110,8 @@
                             :index="index"
                             :image="element"
                             :with-alt="withAlt"
+                            :with-filename="withFilename"
+                            :regenerate-base="regenerateBase"
                             :width="width"
                             :height="height"
                             @onRemove="remove($event)"
@@ -367,22 +373,39 @@
                 :style="{'width': this.width, 'height': this.height}"
             />
 
-            <div class="invisible absolute bottom-0 top-0 flex w-full flex-col justify-between bg-white p-3 opacity-80 transition-all group-hover:visible dark:bg-gray-900">
-                <!-- Alt Text (SEO) -->
-                <input
-                    v-if="withAlt"
-                    type="text"
-                    class="w-full border-b border-gray-200 bg-transparent text-[11px] text-gray-600 outline-none transition-all focus:border-gray-400 placeholder:text-gray-400 dark:border-gray-700 dark:text-gray-300"
-                    placeholder="Alt text (SEO)"
-                    :name="image.is_new ? altBaseName + '_new[]' : altBaseName + '[' + image.id + ']'"
-                    v-model="image.alt"
-                />
+            <div class="invisible absolute bottom-0 top-0 flex w-full flex-col justify-between gap-1.5 bg-white p-3 opacity-80 transition-all group-hover:visible dark:bg-gray-900">
+                <div class="flex flex-col gap-1.5">
+                    <!-- File Name (SEO) — pre-filled with the current name; renaming is opt-in per save -->
+                    <div
+                        v-if="withFilename && ! image.is_new"
+                        class="flex items-center gap-1"
+                    >
+                        <input
+                            type="text"
+                            class="w-full border-b border-gray-200 bg-transparent text-[11px] text-gray-600 outline-none transition-all focus:border-gray-400 placeholder:text-gray-400 dark:border-gray-700 dark:text-gray-300"
+                            placeholder="File name (SEO)"
+                            :name="filenameBase + '[' + image.id + ']'"
+                            v-model="image.filename_input"
+                        />
 
-                <!-- Image Name -->
-                <p
-                    v-else
-                    class="break-all text-xs font-semibold text-gray-600 dark:text-gray-300"
-                ></p>
+                        <span
+                            v-if="regenerateBase"
+                            class="shrink-0 cursor-pointer text-sm text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200"
+                            title="Regenerate from product name"
+                            @click="regenerateFilename"
+                        >↻</span>
+                    </div>
+
+                    <!-- Alt Text (SEO) -->
+                    <input
+                        v-if="withAlt"
+                        type="text"
+                        class="w-full border-b border-gray-200 bg-transparent text-[11px] text-gray-600 outline-none transition-all focus:border-gray-400 placeholder:text-gray-400 dark:border-gray-700 dark:text-gray-300"
+                        placeholder="Alt text (SEO)"
+                        :name="image.is_new ? altBaseName + '_new[]' : altBaseName + '[' + image.id + ']'"
+                        v-model="image.alt"
+                    />
+                </div>
 
                 <!-- Actions -->
                 <div class="flex justify-between">
@@ -444,6 +467,16 @@
                 withAlt: {
                     type: Boolean,
                     default: false,
+                },
+
+                withFilename: {
+                    type: Boolean,
+                    default: false,
+                },
+
+                regenerateBase: {
+                    type: String,
+                    default: '',
                 },
 
                 width: {
@@ -629,7 +662,7 @@
         app.component('v-media-image-item', {
             template: '#v-media-image-item-template',
 
-            props: ['index', 'image', 'name', 'withAlt', 'width', 'height'],
+            props: ['index', 'image', 'name', 'withAlt', 'withFilename', 'regenerateBase', 'width', 'height'],
 
             computed: {
                 /**
@@ -639,9 +672,17 @@
                 altBaseName() {
                     return this.name.replace(/files$/, 'alt');
                 },
+
+                filenameBase() {
+                    return this.name.replace(/files$/, 'filename');
+                },
             },
 
             mounted() {
+                if (this.withFilename && ! this.image.is_new && this.image.path) {
+                    this.image.filename_input = this.image.path.split('/').pop().replace(/\.[^.]+$/, '');
+                }
+
                 if (this.image.file instanceof File) {
                     this.setFile(this.image.file);
 
@@ -650,6 +691,12 @@
             },
 
             methods: {
+                regenerateFilename() {
+                    const suffix = Math.random().toString(36).slice(2, 8);
+
+                    this.image.filename_input = [this.regenerateBase, suffix].filter(Boolean).join('-');
+                },
+
                 edit() {
                     let imageInput = this.$refs[this.$.uid + '_imageInput_' + this.index];
 
