@@ -71,8 +71,6 @@ class PageController extends Controller
             'meta_description',
         ]);
 
-        $data['html_content'] = clean_content($data['html_content']);
-
         $page = $this->pageRepository->create($data);
 
         Event::dispatch('cms.page.create.after', $page);
@@ -117,8 +115,6 @@ class PageController extends Controller
         Event::dispatch('cms.page.update.before', $id);
 
         $localeData = request()->input($locale);
-
-        $localeData['html_content'] = clean_content($localeData['html_content']);
 
         $page = $this->pageRepository->update([
             $locale => $localeData,

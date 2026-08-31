@@ -132,8 +132,7 @@
                 push() {
                     /**
                      * Markdown converts to HTML before going up; HTML mode
-                     * sends the source verbatim. Server-side purification
-                     * (clean_content) still applies to whatever arrives.
+                     * sends the source verbatim.
                      */
                     const outgoing = this.mode === 'markdown' && window.marked
                         ? window.marked.parse(this.content ?? '')

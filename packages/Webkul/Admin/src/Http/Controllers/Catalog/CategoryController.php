@@ -85,10 +85,6 @@ class CategoryController extends Controller
             'banner_path',
         ]);
 
-        if (! empty($data['description'])) {
-            $data['description'] = clean_content($data['description']);
-        }
-
         $category = $this->categoryRepository->create($data);
 
         Event::dispatch('catalog.category.create.after', $category);
@@ -126,10 +122,6 @@ class CategoryController extends Controller
         $locale = $categoryRequest->input('locale');
 
         $localeData = $categoryRequest->input($locale);
-
-        if (! empty($localeData['description'])) {
-            $localeData['description'] = clean_content($localeData['description']);
-        }
 
         $data = $categoryRequest->only(
             'locale',

@@ -198,25 +198,4 @@ class ProductForm extends FormRequest
             'variants.*.sku' => 'sku',
         ];
     }
-
-    /**
-     * Handle a passed validation attempt.
-     *
-     * @return void
-     */
-    protected function passedValidation()
-    {
-        $tinyMCEFields = $this->productEditableAttributes
-            ->filter(fn ($attribute) => $attribute->type === AttributeTypeEnum::TEXTAREA->value && $attribute->enable_wysiwyg)
-            ->pluck('code')
-            ->toArray();
-
-        foreach ($tinyMCEFields as $field) {
-            if ($this->has($field)) {
-                $this->merge([
-                    $field => clean_content($this->get($field)),
-                ]);
-            }
-        }
-    }
 }
