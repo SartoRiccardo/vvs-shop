@@ -4106,6 +4106,16 @@ return [
                         'info' => '知的財産を保護し、ブランド認知を高めるために、ウェブサイトのフッターに表示される著作権コンテンツを設定してください。',
                     ],
 
+                    'social-links' => [
+                        'title' => 'ソーシャルリンク',
+                        'info' => 'ウェブサイトのフッターに表示されるソーシャルメディアリンクを設定します。',
+                        'youtube' => 'YouTubeのURL',
+                        'facebook' => 'FacebookのURL',
+                        'twitter' => 'X（Twitter）のURL',
+                        'tiktok' => 'TikTokのURL',
+                        'instagram' => 'InstagramのURL',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => '投機ルールを有効にする',
                         'info' => '自動投機ロジックの有効化または無効化の設定を構成します。',

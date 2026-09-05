@@ -4106,6 +4106,16 @@ return [
                         'info' => 'Configurați conținutul drepturilor de autor afișat în subsolul site-ului dvs. pentru a vă proteja proprietatea intelectuală și a îmbunătăți recunoașterea brandului.',
                     ],
 
+                    'social-links' => [
+                        'title' => 'Linkuri sociale',
+                        'info' => 'Configurați linkurile de social media afișate în subsolul site-ului dvs.',
+                        'youtube' => 'URL YouTube',
+                        'facebook' => 'URL Facebook',
+                        'twitter' => 'URL X (Twitter)',
+                        'tiktok' => 'URL TikTok',
+                        'instagram' => 'URL Instagram',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => 'Enable Speculation Rules',
                         'info' => 'Configure settings for enabling or disabling automated speculation logic.',

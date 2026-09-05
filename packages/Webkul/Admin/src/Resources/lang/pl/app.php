@@ -4106,6 +4106,16 @@ return [
                         'info' => 'Skonfiguruj treść praw autorskich wyświetlaną w stopce swojej witryny, aby chronić swoją własność intelektualną i zwiększyć rozpoznawalność marki.',
                     ],
 
+                    'social-links' => [
+                        'title' => 'Linki społecznościowe',
+                        'info' => 'Skonfiguruj linki do mediów społecznościowych wyświetlane w stopce witryny.',
+                        'youtube' => 'Adres URL YouTube',
+                        'facebook' => 'Adres URL Facebooka',
+                        'twitter' => 'Adres URL X (Twitter)',
+                        'tiktok' => 'Adres URL TikTok',
+                        'instagram' => 'Adres URL Instagrama',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => 'Włącz wstępne wczytywanie',
                         'info' => 'Skonfiguruj mechanizm automatycznego wczytywania podstron w tle, aby przyspieszyć działanie sklepu.',

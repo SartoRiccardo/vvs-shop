@@ -4106,6 +4106,16 @@ return [
                         'info' => '配置在您网站页脚显示的版权内容，以保护您的知识产权并提升品牌知名度。',
                     ],
 
+                    'social-links' => [
+                        'title' => '社交媒体链接',
+                        'info' => '配置显示在网站页脚的社交媒体链接。',
+                        'youtube' => 'YouTube 链接',
+                        'facebook' => 'Facebook 链接',
+                        'twitter' => 'X（Twitter）链接',
+                        'tiktok' => 'TikTok 链接',
+                        'instagram' => 'Instagram 链接',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => '启用猜测规则',
                         'info' => '配置启用或禁用自动猜测逻辑的设置。',

@@ -4106,6 +4106,16 @@ return [
                         'info' => 'Configura el contingut de drets d\'autor que es mostra al peu de pàgina del teu lloc web per protegir la teva propietat intel·lectual i millorar el reconeixement de la marca.',
                     ],
 
+                    'social-links' => [
+                        'title' => 'Enllaços socials',
+                        'info' => 'Configureu els enllaços de xarxes socials que es mostren al peu de pàgina del vostre lloc web.',
+                        'youtube' => 'URL de YouTube',
+                        'facebook' => 'URL de Facebook',
+                        'twitter' => 'URL de X (Twitter)',
+                        'tiktok' => 'URL de TikTok',
+                        'instagram' => 'URL d\'Instagram',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => 'Habilita les regles d’especulació',
                         'info' => 'Configura els paràmetres per habilitar o deshabilitar la lògica automàtica d’especulació.',

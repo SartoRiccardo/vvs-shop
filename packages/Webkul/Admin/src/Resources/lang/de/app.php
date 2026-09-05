@@ -4106,6 +4106,16 @@ return [
                         'info' => 'Konfigurieren Sie den im Footer Ihrer Website angezeigten Urheberrechtsinhalt, um Ihr geistiges Eigentum zu schützen und die Markenbekanntheit zu stärken.',
                     ],
 
+                    'social-links' => [
+                        'title' => 'Soziale Links',
+                        'info' => 'Konfigurieren Sie die in der Fußzeile Ihrer Website angezeigten Social-Media-Links.',
+                        'youtube' => 'YouTube-URL',
+                        'facebook' => 'Facebook-URL',
+                        'twitter' => 'X (Twitter)-URL',
+                        'tiktok' => 'TikTok-URL',
+                        'instagram' => 'Instagram-URL',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => 'Spekulationsregeln aktivieren',
                         'info' => 'Konfigurieren Sie die Einstellungen zum Aktivieren oder Deaktivieren der automatischen Spekulationslogik.',

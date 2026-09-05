@@ -4106,6 +4106,16 @@ return [
                         'info' => 'Configureer de auteursrechtinhoud die in de voettekst van uw website wordt weergegeven om uw intellectuele eigendom te beschermen en de merkherkenning te verbeteren.',
                     ],
 
+                    'social-links' => [
+                        'title' => 'Sociale links',
+                        'info' => 'Configureer de socialmedia-links die in de voettekst van uw website worden weergegeven.',
+                        'youtube' => 'YouTube-URL',
+                        'facebook' => 'Facebook-URL',
+                        'twitter' => 'X (Twitter)-URL',
+                        'tiktok' => 'TikTok-URL',
+                        'instagram' => 'Instagram-URL',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => 'Speculatieregels inschakelen',
                         'info' => 'Stel instellingen in voor het in- of uitschakelen van geautomatiseerde speculatie-logica.',

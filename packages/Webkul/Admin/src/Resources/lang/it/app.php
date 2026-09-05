@@ -4106,6 +4106,16 @@ return [
                         'info' => 'Configura il contenuto del copyright visualizzato nel piè di pagina del tuo sito web per proteggere la tua proprietà intellettuale e migliorare il riconoscimento del marchio.',
                     ],
 
+                    'social-links' => [
+                        'title' => 'Link social',
+                        'info' => 'Configura i link dei social media visualizzati nel piè di pagina del tuo sito web.',
+                        'youtube' => 'URL di YouTube',
+                        'facebook' => 'URL di Facebook',
+                        'twitter' => 'URL di X (Twitter)',
+                        'tiktok' => 'URL di TikTok',
+                        'instagram' => 'URL di Instagram',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => 'Abilita regole di speculazione',
                         'info' => 'Configura le impostazioni per abilitare o disabilitare la logica di speculazione automatica.',

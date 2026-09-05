@@ -4106,6 +4106,16 @@ return [
                         'info' => 'Fikri mülkiyetinizi korumak ve marka bilinirliğini artırmak için web sitenizin alt bilgisinde görüntülenen telif hakkı içeriğini yapılandırın.',
                     ],
 
+                    'social-links' => [
+                        'title' => 'Sosyal Bağlantılar',
+                        'info' => 'Web sitenizin altbilgisinde görüntülenen sosyal medya bağlantılarını yapılandırın.',
+                        'youtube' => 'YouTube URL\'si',
+                        'facebook' => 'Facebook URL\'si',
+                        'twitter' => 'X (Twitter) URL\'si',
+                        'tiktok' => 'TikTok URL\'si',
+                        'instagram' => 'Instagram URL\'si',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => 'Spekülasyon Kurallarını Etkinleştir',
                         'info' => 'Otomatik spekülasyon mantığını etkinleştirmek veya devre dışı bırakmak için ayarları yapılandırın.',

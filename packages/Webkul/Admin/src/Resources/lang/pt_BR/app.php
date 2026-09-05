@@ -4106,6 +4106,16 @@ return [
                         'info' => 'Configure o conteúdo de direitos autorais exibido no rodapé do seu site para proteger sua propriedade intelectual e aumentar o reconhecimento da marca.',
                     ],
 
+                    'social-links' => [
+                        'title' => 'Links sociais',
+                        'info' => 'Configure os links de redes sociais exibidos no rodapé do seu site.',
+                        'youtube' => 'URL do YouTube',
+                        'facebook' => 'URL do Facebook',
+                        'twitter' => 'URL do X (Twitter)',
+                        'tiktok' => 'URL do TikTok',
+                        'instagram' => 'URL do Instagram',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => 'Ativar regras de especulação',
                         'info' => 'Configure as definições para ativar ou desativar a lógica automática de especulação.',

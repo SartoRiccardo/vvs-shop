@@ -4106,6 +4106,16 @@ return [
                         'info' => 'Configurez le contenu des droits d\'auteur affiché dans le pied de page de votre site web afin de protéger votre propriété intellectuelle et d\'améliorer la reconnaissance de votre marque.',
                     ],
 
+                    'social-links' => [
+                        'title' => 'Liens sociaux',
+                        'info' => 'Configurez les liens de réseaux sociaux affichés dans le pied de page de votre site web.',
+                        'youtube' => 'URL YouTube',
+                        'facebook' => 'URL Facebook',
+                        'twitter' => 'URL X (Twitter)',
+                        'tiktok' => 'URL TikTok',
+                        'instagram' => 'URL Instagram',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => 'Activer les règles de spéculation',
                         'info' => 'Configurer les paramètres pour activer ou désactiver la logique de spéculation automatique.',

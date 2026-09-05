@@ -4106,6 +4106,16 @@ return [
                         'info' => 'Configura il contenuto del copyright visualizzato nel piè di pagina del tuo sito web per proteggere la tua proprietà intellettuale e migliorare il riconoscimento del marchio.',
                     ],
 
+                    'social-links' => [
+                        'title' => 'Tautan Sosial',
+                        'info' => 'Konfigurasikan tautan media sosial yang ditampilkan di footer situs web Anda.',
+                        'youtube' => 'URL YouTube',
+                        'facebook' => 'URL Facebook',
+                        'twitter' => 'URL X (Twitter)',
+                        'tiktok' => 'URL TikTok',
+                        'instagram' => 'URL Instagram',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => 'Aktifkan Aturan Spekulasi',
                         'info' => 'Atur preferensi untuk mengaktifkan atau menonaktifkan logika spekulasi otomatis.',
