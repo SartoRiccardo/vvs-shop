@@ -4116,6 +4116,13 @@ return [
                         'instagram' => 'Instagram-URL',
                     ],
 
+                    'error-404' => [
+                        'title' => 'Inhoud 404-pagina',
+                        'info' => 'Stel aangepaste inhoud in voor de 404-foutpagina die in de winkel wordt getoond.',
+                        'content-title' => 'Inhoud 404-pagina',
+                        'content-info' => 'Aangepaste HTML die gecentreerd op de 404-pagina wordt weergegeven. Laat leeg om de standaardmelding te tonen.',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => 'Speculatieregels inschakelen',
                         'info' => 'Stel instellingen in voor het in- of uitschakelen van geautomatiseerde speculatie-logica.',

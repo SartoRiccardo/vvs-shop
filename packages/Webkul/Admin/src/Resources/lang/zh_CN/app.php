@@ -4116,6 +4116,13 @@ return [
                         'instagram' => 'Instagram 链接',
                     ],
 
+                    'error-404' => [
+                        'title' => '404 页面内容',
+                        'info' => '设置商店中显示的 404 错误页面的自定义内容。',
+                        'content-title' => '404 页面内容',
+                        'content-info' => '在 404 页面居中显示的自定义 HTML。留空则显示默认消息。',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => '启用猜测规则',
                         'info' => '配置启用或禁用自动猜测逻辑的设置。',

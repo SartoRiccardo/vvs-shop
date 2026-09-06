@@ -4116,6 +4116,13 @@ return [
                         'instagram' => 'Instagram URL\'si',
                     ],
 
+                    'error-404' => [
+                        'title' => '404 Sayfa İçeriği',
+                        'info' => 'Mağazada gösterilen 404 hata sayfası için özel içerik ayarlayın.',
+                        'content-title' => '404 Sayfa İçeriği',
+                        'content-info' => '404 sayfasında ortalanmış olarak gösterilen özel HTML. Varsayılan mesajı göstermek için boş bırakın.',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => 'Spekülasyon Kurallarını Etkinleştir',
                         'info' => 'Otomatik spekülasyon mantığını etkinleştirmek veya devre dışı bırakmak için ayarları yapılandırın.',

@@ -4116,6 +4116,13 @@ return [
                         'instagram' => 'URL Instagram',
                     ],
 
+                    'error-404' => [
+                        'title' => 'Conținutul paginii 404',
+                        'info' => 'Setați conținutul personalizat pentru pagina de eroare 404 afișată în magazin.',
+                        'content-title' => 'Conținutul paginii 404',
+                        'content-info' => 'HTML personalizat afișat centrat pe pagina 404. Lăsați gol pentru a afișa mesajul implicit.',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => 'Enable Speculation Rules',
                         'info' => 'Configure settings for enabling or disabling automated speculation logic.',

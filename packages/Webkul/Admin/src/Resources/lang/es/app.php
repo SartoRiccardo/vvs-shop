@@ -4116,6 +4116,13 @@ return [
                         'instagram' => 'URL de Instagram',
                     ],
 
+                    'error-404' => [
+                        'title' => 'Contenido de la página 404',
+                        'info' => 'Establece el contenido personalizado para la página de error 404 mostrada en la tienda.',
+                        'content-title' => 'Contenido de la página 404',
+                        'content-info' => 'HTML personalizado que se muestra centrado en la página 404. Déjalo vacío para mostrar el mensaje predeterminado.',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => 'Habilitar reglas de especulación',
                         'info' => 'Configura los ajustes para habilitar o deshabilitar la lógica de especulación automática.',

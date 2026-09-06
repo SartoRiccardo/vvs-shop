@@ -137,6 +137,21 @@ return [
             ],
         ],
     ], [
+        'key' => 'general.content.error_404',
+        'name' => 'admin::app.configuration.index.general.content.error-404.title',
+        'info' => 'admin::app.configuration.index.general.content.error-404.info',
+        'sort' => 4,
+        'fields' => [
+            [
+                'name' => 'content',
+                'title' => 'admin::app.configuration.index.general.content.error-404.content-title',
+                'info' => 'admin::app.configuration.index.general.content.error-404.content-info',
+                'type' => 'editor',
+                'channel_based' => true,
+                'locale_based' => true,
+            ],
+        ],
+    ], [
         'key' => 'general.content.speculation_rules',
         'name' => 'admin::app.configuration.index.general.content.speculation-rules.title',
         'info' => 'admin::app.configuration.index.general.content.speculation-rules.info',

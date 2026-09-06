@@ -4116,6 +4116,13 @@ return [
                         'instagram' => 'URL Instagram',
                     ],
 
+                    'error-404' => [
+                        'title' => 'Konten Halaman 404',
+                        'info' => 'Atur konten kustom untuk halaman kesalahan 404 yang ditampilkan di toko.',
+                        'content-title' => 'Konten Halaman 404',
+                        'content-info' => 'HTML kustom yang ditampilkan di tengah halaman 404. Biarkan kosong untuk menampilkan pesan bawaan.',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => 'Aktifkan Aturan Spekulasi',
                         'info' => 'Atur preferensi untuk mengaktifkan atau menonaktifkan logika spekulasi otomatis.',

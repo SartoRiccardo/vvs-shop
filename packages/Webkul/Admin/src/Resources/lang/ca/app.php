@@ -4116,6 +4116,13 @@ return [
                         'instagram' => 'URL d\'Instagram',
                     ],
 
+                    'error-404' => [
+                        'title' => 'Contingut de la pàgina 404',
+                        'info' => 'Establiu el contingut personalitzat de la pàgina d’error 404 mostrada a la botiga.',
+                        'content-title' => 'Contingut de la pàgina 404',
+                        'content-info' => 'HTML personalitzat que es mostra centrat a la pàgina 404. Deixeu-ho buit per mostrar el missatge per defecte.',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => 'Habilita les regles d’especulació',
                         'info' => 'Configura els paràmetres per habilitar o deshabilitar la lògica automàtica d’especulació.',

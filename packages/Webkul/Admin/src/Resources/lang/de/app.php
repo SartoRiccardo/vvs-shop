@@ -4116,6 +4116,13 @@ return [
                         'instagram' => 'Instagram-URL',
                     ],
 
+                    'error-404' => [
+                        'title' => 'Inhalt der 404-Seite',
+                        'info' => 'Lege benutzerdefinierte Inhalte für die im Shop angezeigte 404-Fehlerseite fest.',
+                        'content-title' => 'Inhalt der 404-Seite',
+                        'content-info' => 'Benutzerdefinierter HTML-Inhalt, der mittig auf der 404-Seite angezeigt wird. Leer lassen, um die Standardmeldung anzuzeigen.',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => 'Spekulationsregeln aktivieren',
                         'info' => 'Konfigurieren Sie die Einstellungen zum Aktivieren oder Deaktivieren der automatischen Spekulationslogik.',

@@ -4116,6 +4116,13 @@ return [
                         'instagram' => 'Adres URL Instagrama',
                     ],
 
+                    'error-404' => [
+                        'title' => 'Zawartość strony 404',
+                        'info' => 'Ustaw niestandardową zawartość strony błędu 404 wyświetlanej w sklepie.',
+                        'content-title' => 'Zawartość strony 404',
+                        'content-info' => 'Niestandardowy kod HTML wyświetlany na środku strony 404. Pozostaw puste, aby wyświetlić domyślny komunikat.',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => 'Włącz wstępne wczytywanie',
                         'info' => 'Skonfiguruj mechanizm automatycznego wczytywania podstron w tle, aby przyspieszyć działanie sklepu.',
