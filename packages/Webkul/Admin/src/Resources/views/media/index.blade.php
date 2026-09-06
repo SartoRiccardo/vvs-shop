@@ -20,7 +20,7 @@
                 type="file"
                 name="files[]"
                 multiple
-                accept="image/*"
+                accept="image/*,video/*"
                 required
                 class="text-sm text-gray-600 dark:text-gray-300 file:mr-3 file:cursor-pointer file:rounded-md file:border-0 file:bg-gray-100 file:px-3 file:py-2 file:text-sm file:font-semibold file:text-gray-700 dark:file:bg-gray-800 dark:file:text-gray-300"
             />
@@ -59,12 +59,22 @@
                     class="group relative aspect-square overflow-hidden rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-800 dark:bg-gray-900"
                     title="{{ $file['name'] }}"
                 >
-                    <img
-                        src="{{ $file['url'] }}"
-                        class="h-full w-full object-contain"
-                        loading="lazy"
-                        alt="{{ $file['name'] }}"
-                    />
+                    @if ($file['type'] === 'video')
+                        <video
+                            src="{{ $file['url'] }}"
+                            class="h-full w-full object-contain"
+                            muted
+                            playsinline
+                            preload="metadata"
+                        ></video>
+                    @else
+                        <img
+                            src="{{ $file['url'] }}"
+                            class="h-full w-full object-contain"
+                            loading="lazy"
+                            alt="{{ $file['name'] }}"
+                        />
+                    @endif
 
                     <!-- Open in a new tab -->
                     <a

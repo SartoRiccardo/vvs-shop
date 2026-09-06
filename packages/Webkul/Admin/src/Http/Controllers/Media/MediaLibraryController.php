@@ -23,7 +23,14 @@ class MediaLibraryController extends Controller
      *
      * @var array
      */
-    const ALLOWED_EXTENSIONS = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'avif', 'svg', 'ico'];
+    const ALLOWED_EXTENSIONS = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'avif', 'svg', 'ico', 'mp4', 'webm', 'mov', 'm4v'];
+
+    /**
+     * Extensions rendered as videos instead of images.
+     *
+     * @var array
+     */
+    const VIDEO_EXTENSIONS = ['mp4', 'webm', 'mov', 'm4v'];
 
     /**
      * Display the media library.
@@ -34,13 +41,18 @@ class MediaLibraryController extends Controller
     {
         $files = collect(Storage::disk('public')->files(self::DIRECTORY))
             ->filter(fn ($path) => in_array(strtolower(pathinfo($path, PATHINFO_EXTENSION)), self::ALLOWED_EXTENSIONS))
-            ->map(fn ($path) => [
-                'path' => $path,
-                'name' => basename($path),
-                'url' => Storage::disk('public')->url($path),
-                'size' => Storage::disk('public')->size($path),
-                'modified_at' => Storage::disk('public')->lastModified($path),
-            ])
+            ->map(function ($path) {
+                $extension = strtolower(pathinfo($path, PATHINFO_EXTENSION));
+
+                return [
+                    'path' => $path,
+                    'name' => basename($path),
+                    'url' => Storage::disk('public')->url($path),
+                    'size' => Storage::disk('public')->size($path),
+                    'type' => in_array($extension, self::VIDEO_EXTENSIONS) ? 'video' : 'image',
+                    'modified_at' => Storage::disk('public')->lastModified($path),
+                ];
+            })
             ->sortByDesc('modified_at')
             ->values();
 
@@ -55,7 +67,7 @@ class MediaLibraryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'files.*' => 'required|file|mimes:'.implode(',', self::ALLOWED_EXTENSIONS).'|max:20480',
+            'files.*' => 'required|file|mimes:'.implode(',', self::ALLOWED_EXTENSIONS).'|max:51200',
         ]);
 
         foreach ($request->file('files', []) as $file) {

@@ -62,10 +62,6 @@ log "Running migrations..."
 runuser -u www-data -- php artisan migrate --force --no-interaction
 
 mkdir -p storage/app/public
-if [ ! -L public/storage ]; then
-    log "Creating public/storage symlink..."
-    ln -sfn "$APP_DIR/storage/app/public" public/storage
-fi
 
 # Cache
 log "Caching config/routes/views..."
@@ -75,6 +71,7 @@ runuser -u www-data -- php artisan optimize
 # cache needs handing back to www-data before php-fpm (running as www-data)
 # tries to write to the same files.
 chown -R www-data:www-data storage bootstrap/cache
+runuser -u www-data -- php artisan storage:link
 
 log "Starting supervisor..."
 exec "$@"
