@@ -4709,6 +4709,15 @@ return [
                         'title-info' => '"Informazioni sulla newsletter" contiene aggiornamenti, offerte o contenuti condivisi regolarmente tramite e-mail agli abbonati, tenendoli informati e coinvolti.',
                         'footer-title' => 'Titolo newsletter nel footer',
                         'footer-subtitle' => 'Sottotitolo newsletter nel footer',
+                        'page-title' => 'Titolo della pagina newsletter',
+                        'page-subtitle' => 'Sottotitolo della pagina newsletter',
+                        'page-meta-title' => 'Meta titolo della pagina newsletter',
+                        'page-meta-description' => 'Meta descrizione della pagina newsletter',
+                        'page-meta-keywords' => 'Meta parole chiave della pagina newsletter',
+                        'page-content-before' => 'Contenuto della pagina newsletter (prima del modulo)',
+                        'page-content-after' => 'Contenuto della pagina newsletter (dopo il modulo)',
+                        'page-content-before-info' => 'Contenuto HTML personalizzato visualizzato sopra il modulo di iscrizione nella pagina newsletter.',
+                        'page-content-after-info' => 'Contenuto HTML personalizzato visualizzato sotto il modulo di iscrizione nella pagina newsletter.',
                     ],
 
                     'email' => [

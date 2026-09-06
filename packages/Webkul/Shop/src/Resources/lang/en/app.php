@@ -1299,6 +1299,9 @@ return [
         'already' => 'You are already subscribed to our newsletter.',
         'subscribe-success' => 'You have successfully subscribed to our newsletter.',
         'unsubscribe-success' => 'You have successfully unsubscribed to our newsletter.',
+        'page-title' => 'Newsletter Subscription',
+        'page-subtitle' => 'Subscribe to our newsletter and stay in touch.',
+        'page-meta-title' => 'Newsletter Subscription',
     ],
 
     'emails' => [

@@ -4712,6 +4712,15 @@ return [
                         'title-info' => '"Newsletter information" contains updates, offers, or content shared regularly through emails to subscribers, keeping them informed and engaged.',
                         'footer-title' => 'Footer Newsletter Title',
                         'footer-subtitle' => 'Footer Newsletter Subtitle',
+                        'page-title' => 'Newsletter Page Title',
+                        'page-subtitle' => 'Newsletter Page Subtitle',
+                        'page-meta-title' => 'Newsletter Page Meta Title',
+                        'page-meta-description' => 'Newsletter Page Meta Description',
+                        'page-meta-keywords' => 'Newsletter Page Meta Keywords',
+                        'page-content-before' => 'Newsletter Page Content (Before Form)',
+                        'page-content-after' => 'Newsletter Page Content (After Form)',
+                        'page-content-before-info' => 'Custom HTML content displayed above the subscription form on the newsletter page.',
+                        'page-content-after-info' => 'Custom HTML content displayed below the subscription form on the newsletter page.',
                     ],
 
                     'email' => [

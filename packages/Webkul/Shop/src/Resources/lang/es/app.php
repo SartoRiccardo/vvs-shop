@@ -1299,6 +1299,9 @@ return [
         'already' => 'Ya está suscrito a nuestro boletín.',
         'subscribe-success' => 'Se ha suscrito con éxito a nuestro boletín.',
         'unsubscribe-success' => 'Se ha dado de baja con éxito de nuestro boletín.',
+        'page-title' => 'Suscripción al boletín',
+        'page-subtitle' => 'Suscríbete a nuestro boletín y mantente en contacto.',
+        'page-meta-title' => 'Suscripción al boletín',
     ],
 
     'emails' => [

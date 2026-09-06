@@ -1299,6 +1299,9 @@ return [
         'already' => 'Ja està subscrit al nostre butlletí.',
         'subscribe-success' => 'S\'ha subscrit correctament al nostre butlletí.',
         'unsubscribe-success' => 'S\'ha donat de baixa correctament del nostre butlletí.',
+        'page-title' => 'Subscripció al butlletí',
+        'page-subtitle' => 'Subscriu-te al nostre butlletí i mantén-te en contacte.',
+        'page-meta-title' => 'Subscripció al butlletí',
     ],
 
     'emails' => [

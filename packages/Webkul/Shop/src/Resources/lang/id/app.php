@@ -1299,6 +1299,9 @@ return [
         'already' => 'Anda sudah berlangganan newsletter kami.',
         'subscribe-success' => 'Anda berhasil berlangganan newsletter kami.',
         'unsubscribe-success' => 'Anda berhasil berhenti berlangganan newsletter kami.',
+        'page-title' => 'Berlangganan Newsletter',
+        'page-subtitle' => 'Berlangganan newsletter kami dan tetap terhubung.',
+        'page-meta-title' => 'Berlangganan Newsletter',
     ],
 
     'emails' => [

@@ -4709,6 +4709,15 @@ return [
                         'title-info' => '"Newsletter-Informationen" enthält regelmäßig per E-Mail geteilte Updates, Angebote oder Inhalte, um Abonnenten auf dem Laufenden zu halten und zu engagieren.',
                         'footer-title' => 'Newsletter-Titel im Footer',
                         'footer-subtitle' => 'Newsletter-Untertitel im Footer',
+                        'page-title' => 'Newsletter-Seitentitel',
+                        'page-subtitle' => 'Newsletter-Seitenuntertitel',
+                        'page-meta-title' => 'Newsletter-Seiten-Meta-Titel',
+                        'page-meta-description' => 'Newsletter-Seiten-Meta-Beschreibung',
+                        'page-meta-keywords' => 'Newsletter-Seiten-Meta-Keywords',
+                        'page-content-before' => 'Newsletter-Seiteninhalt (vor dem Formular)',
+                        'page-content-after' => 'Newsletter-Seiteninhalt (nach dem Formular)',
+                        'page-content-before-info' => 'Benutzerdefinierter HTML-Inhalt, der über dem Abonnementformular auf der Newsletter-Seite angezeigt wird.',
+                        'page-content-after-info' => 'Benutzerdefinierter HTML-Inhalt, der unter dem Abonnementformular auf der Newsletter-Seite angezeigt wird.',
                     ],
 
                     'email' => [

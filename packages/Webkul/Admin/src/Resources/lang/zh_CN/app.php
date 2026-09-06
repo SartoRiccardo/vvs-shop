@@ -4709,6 +4709,15 @@ return [
                         'title-info' => '“通讯信息”是通过电子邮件定期向订阅者发送的更新、优惠或内容，帮助他们保持了解和参与。',
                         'footer-title' => '页脚通讯标题',
                         'footer-subtitle' => '页脚通讯副标题',
+                        'page-title' => '新闻通讯页面标题',
+                        'page-subtitle' => '新闻通讯页面副标题',
+                        'page-meta-title' => '新闻通讯页面 Meta 标题',
+                        'page-meta-description' => '新闻通讯页面 Meta 描述',
+                        'page-meta-keywords' => '新闻通讯页面 Meta 关键词',
+                        'page-content-before' => '新闻通讯页面内容（表单前）',
+                        'page-content-after' => '新闻通讯页面内容（表单后）',
+                        'page-content-before-info' => '显示在新闻通讯页面订阅表单上方的自定义 HTML 内容。',
+                        'page-content-after-info' => '显示在新闻通讯页面订阅表单下方的自定义 HTML 内容。',
                     ],
 
                     'email' => [

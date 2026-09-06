@@ -1299,6 +1299,9 @@ return [
         'already' => 'Je bent al geabonneerd op onze nieuwsbrief.',
         'subscribe-success' => 'Je bent succesvol geabonneerd op onze nieuwsbrief.',
         'unsubscribe-success' => 'Je hebt je succesvol afgemeld voor onze nieuwsbrief.',
+        'page-title' => 'Nieuwsbriefabonnement',
+        'page-subtitle' => 'Abonneer u op onze nieuwsbrief en blijf in contact.',
+        'page-meta-title' => 'Nieuwsbriefabonnement',
     ],
 
     'emails' => [

@@ -4709,6 +4709,15 @@ return [
                         'title-info' => '"Informações de newsletter" contêm atualizações, ofertas ou conteúdo compartilhado regularmente por e-mail para assinantes, mantendo-os informados e engajados.',
                         'footer-title' => 'Título da Newsletter no Rodapé',
                         'footer-subtitle' => 'Subtítulo da Newsletter no Rodapé',
+                        'page-title' => 'Título da página de newsletter',
+                        'page-subtitle' => 'Subtítulo da página de newsletter',
+                        'page-meta-title' => 'Meta título da página de newsletter',
+                        'page-meta-description' => 'Meta descrição da página de newsletter',
+                        'page-meta-keywords' => 'Meta palavras-chave da página de newsletter',
+                        'page-content-before' => 'Conteúdo da página de newsletter (antes do formulário)',
+                        'page-content-after' => 'Conteúdo da página de newsletter (depois do formulário)',
+                        'page-content-before-info' => 'Conteúdo HTML personalizado exibido acima do formulário de assinatura na página de newsletter.',
+                        'page-content-after-info' => 'Conteúdo HTML personalizado exibido abaixo do formulário de assinatura na página de newsletter.',
                     ],
 
                     'email' => [

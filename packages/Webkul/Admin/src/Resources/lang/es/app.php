@@ -4709,6 +4709,15 @@ return [
                         'title-info' => '"Información del boletín" contiene actualizaciones, ofertas o contenido compartido regularmente a través de correos electrónicos a los suscriptores, manteniéndolos informados y comprometidos.',
                         'footer-title' => 'Título del boletín en el pie de página',
                         'footer-subtitle' => 'Subtítulo del boletín en el pie de página',
+                        'page-title' => 'Título de la página del boletín',
+                        'page-subtitle' => 'Subtítulo de la página del boletín',
+                        'page-meta-title' => 'Meta título de la página del boletín',
+                        'page-meta-description' => 'Meta descripción de la página del boletín',
+                        'page-meta-keywords' => 'Meta palabras clave de la página del boletín',
+                        'page-content-before' => 'Contenido de la página del boletín (antes del formulario)',
+                        'page-content-after' => 'Contenido de la página del boletín (después del formulario)',
+                        'page-content-before-info' => 'Contenido HTML personalizado que se muestra encima del formulario de suscripción en la página del boletín.',
+                        'page-content-after-info' => 'Contenido HTML personalizado que se muestra debajo del formulario de suscripción en la página del boletín.',
                     ],
 
                     'email' => [

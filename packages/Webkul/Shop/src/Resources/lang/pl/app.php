@@ -1299,6 +1299,9 @@ return [
         'already' => 'Jesteś już zapisany do naszego newslettera.',
         'subscribe-success' => 'Zostałeś pomyślnie zapisany do naszego newslettera.',
         'unsubscribe-success' => 'Zostałeś pomyślnie wypisany z naszego newslettera.',
+        'page-title' => 'Subskrypcja newslettera',
+        'page-subtitle' => 'Zapisz się do naszego newslettera i bądź na bieżąco.',
+        'page-meta-title' => 'Subskrypcja newslettera',
     ],
 
     'emails' => [

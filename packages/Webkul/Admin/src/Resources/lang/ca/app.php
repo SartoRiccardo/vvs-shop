@@ -4709,6 +4709,15 @@ return [
                         'title-info' => '"Informacions del butlletí" conté actualitzacions, ofertes o contingut compartit regularment per correu electrònic amb els subscriptors, mantenint-los informats i compromesos.',
                         'footer-title' => 'Títol del butlletí al peu de pàgina',
                         'footer-subtitle' => 'Subtítol del butlletí al peu de pàgina',
+                        'page-title' => 'Títol de la pàgina del butlletí',
+                        'page-subtitle' => 'Subtítol de la pàgina del butlletí',
+                        'page-meta-title' => 'Meta títol de la pàgina del butlletí',
+                        'page-meta-description' => 'Meta descripció de la pàgina del butlletí',
+                        'page-meta-keywords' => 'Meta paraules clau de la pàgina del butlletí',
+                        'page-content-before' => 'Contingut de la pàgina del butlletí (abans del formulari)',
+                        'page-content-after' => 'Contingut de la pàgina del butlletí (després del formulari)',
+                        'page-content-before-info' => 'Contingut HTML personalitzat que es mostra a sobre del formulari de subscripció a la pàgina del butlletí.',
+                        'page-content-after-info' => 'Contingut HTML personalitzat que es mostra a sota del formulari de subscripció a la pàgina del butlletí.',
                     ],
 
                     'email' => [

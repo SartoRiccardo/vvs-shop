@@ -1299,6 +1299,9 @@ return [
         'already' => '您已经订阅了我们的新闻通讯。',
         'subscribe-success' => '您已成功订阅我们的新闻通讯。',
         'unsubscribe-success' => '您已成功取消订阅我们的新闻通讯。',
+        'page-title' => '订阅新闻通讯',
+        'page-subtitle' => '订阅我们的新闻通讯，保持联系。',
+        'page-meta-title' => '订阅新闻通讯',
     ],
 
     'emails' => [

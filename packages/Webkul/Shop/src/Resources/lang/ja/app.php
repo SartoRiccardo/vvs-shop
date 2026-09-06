@@ -1299,6 +1299,9 @@ return [
         'already' => '既にニュースレターに登録されています。',
         'subscribe-success' => 'ニュースレターに正常に登録されました。',
         'unsubscribe-success' => 'ニュースレターの登録を解除しました。',
+        'page-title' => 'ニュースレター購読',
+        'page-subtitle' => 'ニュースレターを購読して、最新情報をお届けします。',
+        'page-meta-title' => 'ニュースレター購読',
     ],
 
     'emails' => [

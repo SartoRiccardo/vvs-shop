@@ -1299,6 +1299,9 @@ return [
         'already' => 'Sie sind bereits für unseren Newsletter angemeldet.',
         'subscribe-success' => 'Sie haben sich erfolgreich für unseren Newsletter angemeldet.',
         'unsubscribe-success' => 'Sie haben sich erfolgreich von unserem Newsletter abgemeldet.',
+        'page-title' => 'Newsletter-Abonnement',
+        'page-subtitle' => 'Abonnieren Sie unseren Newsletter und bleiben Sie in Kontakt.',
+        'page-meta-title' => 'Newsletter-Abonnement',
     ],
 
     'emails' => [

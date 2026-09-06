@@ -4709,6 +4709,15 @@ return [
                         'title-info' => '"Bülten bilgileri", abonelere düzenli olarak e-posta yoluyla paylaşılan güncellemeleri, teklifleri veya içerikleri içerir ve onları bilgilendirir ve etkileşimde bulunur.',
                         'footer-title' => 'Alt Bilgi Bülten Başlığı',
                         'footer-subtitle' => 'Alt Bilgi Bülten Alt Başlığı',
+                        'page-title' => 'Bülten Sayfası Başlığı',
+                        'page-subtitle' => 'Bülten Sayfası Alt Başlığı',
+                        'page-meta-title' => 'Bülten Sayfası Meta Başlığı',
+                        'page-meta-description' => 'Bülten Sayfası Meta Açıklaması',
+                        'page-meta-keywords' => 'Bülten Sayfası Meta Anahtar Kelimeleri',
+                        'page-content-before' => 'Bülten Sayfası İçeriği (Form Öncesi)',
+                        'page-content-after' => 'Bülten Sayfası İçeriği (Form Sonrası)',
+                        'page-content-before-info' => 'Bülten sayfasında abonelik formunun üzerinde görüntülenen özel HTML içeriği.',
+                        'page-content-after-info' => 'Bülten sayfasında abonelik formunun altında görüntülenen özel HTML içeriği.',
                     ],
 
                     'email' => [

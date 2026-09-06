@@ -4709,6 +4709,15 @@ return [
                         'title-info' => '"Informasi Newsletter" berisi pembaruan, penawaran, atau konten yang dibagikan secara teratur melalui email kepada pelanggan, menjaga mereka tetap terinformasi dan terlibat.',
                         'footer-title' => 'Judul Newsletter Footer',
                         'footer-subtitle' => 'Subjudul Newsletter Footer',
+                        'page-title' => 'Judul Halaman Newsletter',
+                        'page-subtitle' => 'Subjudul Halaman Newsletter',
+                        'page-meta-title' => 'Meta Judul Halaman Newsletter',
+                        'page-meta-description' => 'Meta Deskripsi Halaman Newsletter',
+                        'page-meta-keywords' => 'Meta Kata Kunci Halaman Newsletter',
+                        'page-content-before' => 'Konten Halaman Newsletter (Sebelum Formulir)',
+                        'page-content-after' => 'Konten Halaman Newsletter (Setelah Formulir)',
+                        'page-content-before-info' => 'Konten HTML khusus yang ditampilkan di atas formulir langganan pada halaman newsletter.',
+                        'page-content-after-info' => 'Konten HTML khusus yang ditampilkan di bawah formulir langganan pada halaman newsletter.',
                     ],
 
                     'email' => [

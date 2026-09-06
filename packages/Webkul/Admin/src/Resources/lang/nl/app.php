@@ -4709,6 +4709,15 @@ return [
                         'title-info' => '"Nieuwsbriefinformatie" bevat updates, aanbiedingen of regelmatig gedeelde inhoud via e-mails aan abonnees, om hen op de hoogte te houden en betrokken te houden.',
                         'footer-title' => 'Nieuwsbriefstitel in de footer',
                         'footer-subtitle' => 'Nieuwsbrief ondertitel in de footer',
+                        'page-title' => 'Nieuwsbriefpaginatitel',
+                        'page-subtitle' => 'Nieuwsbriefpaginaondertitel',
+                        'page-meta-title' => 'Meta-titel van nieuwsbriefpagina',
+                        'page-meta-description' => 'Meta-beschrijving van nieuwsbriefpagina',
+                        'page-meta-keywords' => 'Meta-sleutelwoorden van nieuwsbriefpagina',
+                        'page-content-before' => 'Nieuwsbriefpagina-inhoud (voor het formulier)',
+                        'page-content-after' => 'Nieuwsbriefpagina-inhoud (na het formulier)',
+                        'page-content-before-info' => 'Aangepaste HTML-inhoud die boven het abonnementsformulier op de nieuwsbriefpagina wordt weergegeven.',
+                        'page-content-after-info' => 'Aangepaste HTML-inhoud die onder het abonnementsformulier op de nieuwsbriefpagina wordt weergegeven.',
                     ],
 
                     'email' => [

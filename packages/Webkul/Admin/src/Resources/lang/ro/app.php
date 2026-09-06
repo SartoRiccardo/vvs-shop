@@ -4709,6 +4709,15 @@ return [
                         'title-info' => '"Newsletter information" contains updates, offers, or content shared regularly through emails to subscribers, keeping them informed and engaged.',
                         'footer-title' => 'Titlu newsletter în subsol',
                         'footer-subtitle' => 'Subtitlu newsletter în subsol',
+                        'page-title' => 'Titlul paginii de newsletter',
+                        'page-subtitle' => 'Subtitlul paginii de newsletter',
+                        'page-meta-title' => 'Meta-titlul paginii de newsletter',
+                        'page-meta-description' => 'Meta-descrierea paginii de newsletter',
+                        'page-meta-keywords' => 'Meta-cuvintele-cheie ale paginii de newsletter',
+                        'page-content-before' => 'Conținutul paginii de newsletter (înainte de formular)',
+                        'page-content-after' => 'Conținutul paginii de newsletter (după formular)',
+                        'page-content-before-info' => 'Conținut HTML personalizat afișat deasupra formularului de abonare pe pagina de newsletter.',
+                        'page-content-after-info' => 'Conținut HTML personalizat afișat sub formularul de abonare pe pagina de newsletter.',
                     ],
 
                     'email' => [

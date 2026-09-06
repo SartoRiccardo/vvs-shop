@@ -4709,6 +4709,15 @@ return [
                         'title-info' => '「ニュースレター情報」は、定期的に購読者にメールで共有される更新情報、オファー、またはコンテンツを含み、彼らを情報提供と関与に保ちます。',
                         'footer-title' => 'フッターニュースレターのタイトル',
                         'footer-subtitle' => 'フッターニュースレターのサブタイトル',
+                        'page-title' => 'ニュースレターページのタイトル',
+                        'page-subtitle' => 'ニュースレターページのサブタイトル',
+                        'page-meta-title' => 'ニュースレターページのメタタイトル',
+                        'page-meta-description' => 'ニュースレターページのメタディスクリプション',
+                        'page-meta-keywords' => 'ニュースレターページのメタキーワード',
+                        'page-content-before' => 'ニュースレターページのコンテンツ（フォームの前）',
+                        'page-content-after' => 'ニュースレターページのコンテンツ（フォームの後）',
+                        'page-content-before-info' => 'ニュースレターページの購読フォームの上に表示されるカスタムHTMLコンテンツ。',
+                        'page-content-after-info' => 'ニュースレターページの購読フォームの下に表示されるカスタムHTMLコンテンツ。',
                     ],
 
                     'email' => [

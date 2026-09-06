@@ -4709,6 +4709,15 @@ return [
                         'title-info' => 'Zezwól klientom na zapisywanie się do bazy mailingowej, aby mogli otrzymywać informacje o nowościach i promocjach.',
                         'footer-title' => 'Tytuł newslettera w stopce',
                         'footer-subtitle' => 'Podtytuł newslettera w stopce',
+                        'page-title' => 'Tytuł strony newslettera',
+                        'page-subtitle' => 'Podtytuł strony newslettera',
+                        'page-meta-title' => 'Meta tytuł strony newslettera',
+                        'page-meta-description' => 'Meta opis strony newslettera',
+                        'page-meta-keywords' => 'Meta słowa kluczowe strony newslettera',
+                        'page-content-before' => 'Treść strony newslettera (przed formularzem)',
+                        'page-content-after' => 'Treść strony newslettera (po formularzu)',
+                        'page-content-before-info' => 'Niestandardowa treść HTML wyświetlana nad formularzem subskrypcji na stronie newslettera.',
+                        'page-content-after-info' => 'Niestandardowa treść HTML wyświetlana pod formularzem subskrypcji na stronie newslettera.',
                     ],
 
                     'email' => [

@@ -1299,6 +1299,9 @@ return [
         'already' => 'Sunteți deja abonat la newsletter-ul nostru.',
         'subscribe-success' => 'V-ați abonat cu succes la newsletter-ul nostru.',
         'unsubscribe-success' => 'V-ați dezabonat cu succes de la newsletter-ul nostru.',
+        'page-title' => 'Abonare la newsletter',
+        'page-subtitle' => 'Abonați-vă la newsletter-ul nostru și rămâneți în legătură.',
+        'page-meta-title' => 'Abonare la newsletter',
     ],
 
     'emails' => [

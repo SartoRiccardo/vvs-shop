@@ -1299,6 +1299,9 @@ return [
         'already' => 'Zaten bültenimize abonesiniz.',
         'subscribe-success' => 'Bültene başarıyla abone oldunuz.',
         'unsubscribe-success' => 'Abonelikten başarıyla ayrıldınız.',
+        'page-title' => 'Bülten Aboneliği',
+        'page-subtitle' => 'Bültenimize abone olun ve bağlantıda kalın.',
+        'page-meta-title' => 'Bülten Aboneliği',
     ],
 
     'emails' => [
