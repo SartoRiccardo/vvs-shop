@@ -59,6 +59,8 @@ Route::post('search/upload', [SearchController::class, 'upload'])->name('shop.se
  * Subscription routes.
  */
 Route::controller(SubscriptionController::class)->group(function () {
+    Route::get('newsletter', 'index')->name('shop.subscription.index');
+
     Route::post('subscription', 'store')->name('shop.subscription.store');
 
     Route::get('subscription/{token}', 'destroy')->name('shop.subscription.destroy');
