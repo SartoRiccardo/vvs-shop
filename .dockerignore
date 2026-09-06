@@ -1,7 +1,9 @@
 .git
 .github
 **/node_modules
-**/vendor
+# Root-anchored: `**/vendor` would also exclude resources/views/vendor/,
+# Laravel's package-view override path (e.g. the custom 404 page).
+/vendor
 storage/framework/cache
 storage/framework/sessions
 storage/framework/views
