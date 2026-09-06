@@ -15,7 +15,13 @@ function withOpacity(variable) {
 }
 
 module.exports = {
-    content: ["./src/Resources/**/*.blade.php", "./src/Resources/**/*.js"],
+    content: [
+        "./src/Resources/**/*.blade.php",
+        "./src/Resources/**/*.js",
+
+        // View overrides published to the app (e.g. resources/views/vendor/shop).
+        "../../../resources/views/**/*.blade.php",
+    ],
 
     theme: {
         container: {

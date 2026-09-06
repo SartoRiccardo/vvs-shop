@@ -7,7 +7,7 @@
     <!-- 404 Content, centered vertically & horizontally in the remaining viewport (header is min-h-[78px]) -->
     <div class="container flex min-h-[calc(100vh_-_78px)] items-center justify-center px-[60px] max-1180:px-8 max-md:px-4">
         @if ($content = core()->getConfigData('general.content.error_404.content'))
-            <div class="w-full py-16 max-md:py-10">
+            <div class="w-full py-16 text-center max-md:py-10">
                 {!! $content !!}
             </div>
         @else
