@@ -199,62 +199,36 @@ it('should update the theme customizations', function () {
     ]);
 });
 
-it('should sanitize malicious script tags from static content HTML when updating theme', function () {
+it('should preserve arbitrary HTML verbatim in static content when updating theme', function () {
     // Arrange.
     $theme = ThemeCustomization::factory()->create([
         'type' => 'static_content',
     ]);
 
-    $maliciousHtml = '<div>Safe content</div><script>alert("XSS")</script><p>More safe content</p>';
-
-    $safeCss = 'body { color: red; }';
-
-    $data = [
-        app()->getLocale() => [
-            'options' => [
-                'html' => $maliciousHtml,
-                'css' => $safeCss,
-            ],
-        ],
-        'locale' => app()->getLocale(),
-        'type' => 'static_content',
-        'name' => $name = fake()->name(),
-        'sort_order' => '1',
-        'channel_id' => core()->getCurrentChannel()->id,
-        'theme_code' => core()->getCurrentChannel()->theme,
-        'status' => 'on',
-    ];
-
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    postJson(route('admin.settings.themes.update', $theme->id), $data)
-        ->assertRedirect(route('admin.settings.themes.index'))
-        ->isRedirection();
-
-    $theme->refresh();
-    $translation = $theme->translate(app()->getLocale());
-
-    // Assert that script tag was removed.
-    expect($translation->options['html'])->not->toContain('<script>');
-    expect($translation->options['html'])->not->toContain('alert("XSS")');
-    expect($translation->options['html'])->toContain('Safe content');
-    expect($translation->options['html'])->toContain('More safe content');
-});
-
-it('should sanitize iframe tags from static content HTML when updating theme', function () {
-    // Arrange.
-    $theme = ThemeCustomization::factory()->create([
-        'type' => 'static_content',
-    ]);
-
-    $maliciousHtml = '<div>Content</div><iframe src="https://malicious.com"></iframe><p>More content</p>';
+    $rawHtml = <<<'HTML'
+<div><picture>
+  <source
+    media="(max-width: 767px)"
+    srcset="/storage/media/touhou-plushies-mobile-cjgh33.webp"
+    width="1000"
+    height="1250"
+  >
+  <img
+    src="/storage/media/touhou-plushies-lineup-pmu8in.webp"
+    width="2000"
+    height="1000"
+    fetchpriority="high"
+    decoding="async"
+    alt="Mini Kaguya and Mini Nareko plush dolls, front view"
+  >
+</picture></div><script>alert("XSS")</script><iframe src="https://malicious.com"></iframe><form action="/submit" method="post"><input name="data"></form><div onclick="alert('XSS')">Click me</div>
+HTML;
 
     $data = [
         app()->getLocale() => [
             'options' => [
-                'html' => $maliciousHtml,
-                'css' => '',
+                'html' => $rawHtml,
+                'css' => 'body { color: red; }',
             ],
         ],
         'locale' => app()->getLocale(),
@@ -276,52 +250,9 @@ it('should sanitize iframe tags from static content HTML when updating theme', f
     $theme->refresh();
     $translation = $theme->translate(app()->getLocale());
 
-    // Assert that iframe tag was removed.
-    expect($translation->options['html'])->not->toContain('<iframe');
-    expect($translation->options['html'])->not->toContain('malicious.com');
-    expect($translation->options['html'])->toContain('Content');
-    expect($translation->options['html'])->toContain('More content');
-});
-
-it('should sanitize form tags from static content HTML when updating theme', function () {
-    // Arrange.
-    $theme = ThemeCustomization::factory()->create([
-        'type' => 'static_content',
-    ]);
-
-    $maliciousHtml = '<div>Safe content</div><form action="/submit" method="post"><input name="data"></form><p>More content</p>';
-
-    $data = [
-        app()->getLocale() => [
-            'options' => [
-                'html' => $maliciousHtml,
-                'css' => '',
-            ],
-        ],
-        'locale' => app()->getLocale(),
-        'type' => 'static_content',
-        'name' => fake()->name(),
-        'sort_order' => '1',
-        'channel_id' => core()->getCurrentChannel()->id,
-        'theme_code' => core()->getCurrentChannel()->theme,
-        'status' => 'on',
-    ];
-
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    postJson(route('admin.settings.themes.update', $theme->id), $data)
-        ->assertRedirect(route('admin.settings.themes.index'))
-        ->isRedirection();
-
-    $theme->refresh();
-    $translation = $theme->translate(app()->getLocale());
-
-    // Assert that form tag was removed.
-    expect($translation->options['html'])->not->toContain('<form');
-    expect($translation->options['html'])->not->toContain('</form>');
-    expect($translation->options['html'])->toContain('Safe content');
-    expect($translation->options['html'])->toContain('More content');
+    // Assert that the markup is stored verbatim — picture/source, their
+    // responsive attributes, and script/iframe/form/handlers alike.
+    expect($translation->options['html'])->toBe($rawHtml);
 });
 
 it('should preserve safe HTML content in static content when updating theme', function () {
@@ -368,47 +299,6 @@ it('should preserve safe HTML content in static content when updating theme', fu
     expect($translation->options['html'])->toContain('<em>');
     expect($translation->options['html'])->toContain('<ul>');
     expect($translation->options['html'])->toContain('<li>');
-});
-
-it('should sanitize malicious event handlers from static content HTML when updating theme', function () {
-    // Arrange.
-    $theme = ThemeCustomization::factory()->create([
-        'type' => 'static_content',
-    ]);
-
-    $maliciousHtml = '<div onclick="alert(\'XSS\')">Click me</div><img src="x" onerror="alert(\'XSS\')">';
-
-    $data = [
-        app()->getLocale() => [
-            'options' => [
-                'html' => $maliciousHtml,
-                'css' => '',
-            ],
-        ],
-        'locale' => app()->getLocale(),
-        'type' => 'static_content',
-        'name' => fake()->name(),
-        'sort_order' => '1',
-        'channel_id' => core()->getCurrentChannel()->id,
-        'theme_code' => core()->getCurrentChannel()->theme,
-        'status' => 'on',
-    ];
-
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    postJson(route('admin.settings.themes.update', $theme->id), $data)
-        ->assertRedirect(route('admin.settings.themes.index'))
-        ->isRedirection();
-
-    $theme->refresh();
-    $translation = $theme->translate(app()->getLocale());
-
-    // Assert that malicious event handlers were removed.
-    expect($translation->options['html'])->not->toContain('onclick');
-    expect($translation->options['html'])->not->toContain('onerror');
-    expect($translation->options['html'])->not->toContain('alert(');
-    expect($translation->options['html'])->toContain('Click me');
 });
 
 it('should not sanitize HTML for non-static content theme types', function () {
