@@ -3,7 +3,13 @@
     title="{{ $title }}"
     navigation-link="{{ $navigationLink ?? '' }}"
 >
-    <x-shop::shimmer.products.carousel :navigation-link="$navigationLink ?? false" />
+    {{-- The slot (server-rendered fallback markup) shows until Vue mounts;
+         without one, fall back to the shimmer skeleton. --}}
+    @if ($slot->isEmpty())
+        <x-shop::shimmer.products.carousel :navigation-link="$navigationLink ?? false" />
+    @else
+        {{ $slot }}
+    @endif
 </v-products-carousel>
 
 @pushOnce('scripts')

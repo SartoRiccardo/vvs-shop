@@ -223,6 +223,26 @@ class SEO
             $data['logo'] = $channel->logo_url;
         }
 
+        /**
+         * Social profiles from the admin-configured links, so the list stays
+         * in sync with what the footer shows.
+         */
+        $sameAs = array_values(array_filter([
+            core()->getConfigData('general.content.social_links.instagram'),
+            core()->getConfigData('general.content.social_links.tiktok'),
+            core()->getConfigData('general.content.social_links.twitter'),
+            core()->getConfigData('general.content.social_links.youtube'),
+            core()->getConfigData('general.content.social_links.facebook'),
+        ]));
+
+        if ($sameAs) {
+            $data['sameAs'] = $sameAs;
+        }
+
+        if ($contactEmail = core()->getConfigData('emails.configure.email_settings.contact_email')) {
+            $data['email'] = $contactEmail;
+        }
+
         return json_encode($data);
     }
 

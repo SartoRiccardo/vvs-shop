@@ -4317,6 +4317,8 @@ return [
                         'site-name-info' => 'Used for the "og:site_name" tag. Falls back to the channel name when empty.',
                         'twitter-site' => 'Twitter/X Handle',
                         'twitter-site-info' => 'Adds a "twitter:site" tag, e.g. "smallplushies".',
+                        'default-image' => 'Default Share Image (og:image)',
+                        'default-image-info' => 'Used as the og:image on pages without one of their own (home, CMS pages, newsletter). 1200x630 recommended. Falls back to the channel logo when empty.',
                     ],
                 ],
 
@@ -4721,6 +4723,8 @@ return [
                         'page-meta-title' => 'न्यूज़लेटर पेज मेटा शीर्षक',
                         'page-meta-description' => 'न्यूज़लेटर पेज मेटा विवरण',
                         'page-meta-keywords' => 'न्यूज़लेटर पेज मेटा कीवर्ड',
+                        'page-og-image' => 'Newsletter Page Share Image (og:image)',
+                        'page-og-image-info' => 'Optional image used as the og:image on the newsletter page. Falls back to the default share image when empty.',
                         'page-content-before' => 'न्यूज़लेटर पेज सामग्री (फ़ॉर्म से पहले)',
                         'page-content-after' => 'न्यूज़लेटर पेज सामग्री (फ़ॉर्म के बाद)',
                         'page-content-before-info' => 'न्यूज़लेटर पेज पर सदस्यता फ़ॉर्म के ऊपर दिखाई देने वाली कस्टम HTML सामग्री।',

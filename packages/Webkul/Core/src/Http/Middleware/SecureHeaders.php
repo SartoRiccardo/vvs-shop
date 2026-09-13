@@ -42,7 +42,12 @@ class SecureHeaders
     {
         $response->headers->set('Referrer-Policy', 'no-referrer-when-downgrade');
         $response->headers->set('X-Content-Type-Options', 'nosniff');
-        $response->headers->set('X-XSS-Protection', '1; mode=block');
+        /**
+         * X-XSS-Protection is intentionally not set: the header is deprecated
+         * and ignored by modern browsers. Security headers are emitted here
+         * only — nginx must not duplicate them (that previously produced
+         * doubled, conflicting values like DENY + SAMEORIGIN).
+         */
         $response->headers->set('X-Frame-Options', 'DENY');
         $response->headers->set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
         $response->headers->set('X-Built-With', 'Bagisto');

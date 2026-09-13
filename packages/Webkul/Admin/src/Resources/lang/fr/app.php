@@ -4317,6 +4317,8 @@ return [
                         'site-name-info' => 'Used for the "og:site_name" tag. Falls back to the channel name when empty.',
                         'twitter-site' => 'Twitter/X Handle',
                         'twitter-site-info' => 'Adds a "twitter:site" tag, e.g. "smallplushies".',
+                        'default-image' => 'Default Share Image (og:image)',
+                        'default-image-info' => 'Used as the og:image on pages without one of their own (home, CMS pages, newsletter). 1200x630 recommended. Falls back to the channel logo when empty.',
                     ],
                 ],
 
@@ -4721,6 +4723,8 @@ return [
                         'page-meta-title' => 'Méta-titre de la page newsletter',
                         'page-meta-description' => 'Méta-description de la page newsletter',
                         'page-meta-keywords' => 'Méta-mots-clés de la page newsletter',
+                        'page-og-image' => 'Newsletter Page Share Image (og:image)',
+                        'page-og-image-info' => 'Optional image used as the og:image on the newsletter page. Falls back to the default share image when empty.',
                         'page-content-before' => 'Contenu de la page newsletter (avant le formulaire)',
                         'page-content-after' => 'Contenu de la page newsletter (après le formulaire)',
                         'page-content-before-info' => 'Contenu HTML personnalisé affiché au-dessus du formulaire d\'abonnement sur la page newsletter.',

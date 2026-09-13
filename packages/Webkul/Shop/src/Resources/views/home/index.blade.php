@@ -75,13 +75,44 @@
 
                 @break
             @case ($customization::PRODUCT_CAROUSEL)
+                @php
+                    /**
+                     * Server-rendered fallback so the raw HTML carries real
+                     * product links and images (mirrors the carousel's API
+                     * query: sort=created_at-desc&limit=12).
+                     */
+                    $ssrProducts = app(\Webkul\Product\Repositories\ProductRepository::class)
+                        ->getAll([
+                            'status'               => 1,
+                            'visible_individually' => 1,
+                            'channel_id'           => $channel->id,
+                            'sort'                 => 'created_at-desc',
+                            'limit'                => 12,
+                        ])
+                        ->items();
+
+                    $ssrCategory = app(\Webkul\Category\Repositories\CategoryRepository::class)
+                        ->findWhere([
+                            'status'    => 1,
+                            'parent_id' => null,
+                        ])
+                        ->sortBy('position')
+                        ->first();
+                @endphp
+
                 <!-- Product Carousel -->
                 <x-shop::products.carousel
                     :title="$data['title'] ?? ''"
                     :src="route('shop.api.products.index', $data['filters'] ?? [])"
                     :navigation-link="route('shop.search.index', $data['filters'] ?? [])"
                     aria-label="{{ trans('shop::app.home.index.product-carousel') }}"
-                />
+                >
+                    <x-shop::products.ssr-cards
+                        :products="$ssrProducts"
+                        :category="$ssrCategory"
+                        :title="$data['title'] ?? ''"
+                    />
+                </x-shop::products.carousel>
 
                 @break
         @endswitch

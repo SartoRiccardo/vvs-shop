@@ -2,6 +2,7 @@
 
 namespace Webkul\Shop\Helpers;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Webkul\Category\Models\Category;
 use Webkul\Category\Repositories\CategoryRepository;
@@ -107,6 +108,28 @@ class Seo
     }
 
     /**
+     * og:image for pages without an image of their own: the admin-configured
+     * default share image (Configure > General > SEO > Open Graph), falling
+     * back to the channel logo. Paths are stored relative to the public
+     * storage disk, so they get expanded to absolute URLs here.
+     *
+     * @param  string|null  $pageSpecific
+     * @return string|null
+     */
+    protected function resolveShareImage($pageSpecific = null)
+    {
+        if ($pageSpecific) {
+            return $pageSpecific;
+        }
+
+        $defaultImage = core()->getConfigData('general.seo.open_graph.default_image');
+
+        return $defaultImage
+            ? url(Storage::url($defaultImage))
+            : core()->getCurrentChannel()->logo_url;
+    }
+
+    /**
      * Open Graph / Twitter meta tags for the current page. Product pages
      * emit their own tags in the product view, so this covers everything
      * else that has real content: home, CMS pages and categories.
@@ -130,6 +153,7 @@ class Seo
             'shop.home.index' => $this->homeOpenGraphDetails($siteName),
             'shop.cms.page' => $this->cmsOpenGraphDetails($siteName),
             'shop.product_or_category.index' => $this->categoryOpenGraphDetails($siteName),
+            'shop.subscription.index' => $this->subscriptionOpenGraphDetails($siteName),
             default => null,
         };
 
@@ -195,7 +219,7 @@ class Seo
             'title' => $homeSeo['meta_title'] ?? $siteName,
             'description' => Str::limit(strip_tags($homeSeo['meta_description'] ?? '')) ?: $siteName,
             'url' => url('/'),
-            'image' => $channel->logo_url,
+            'image' => $this->resolveShareImage(),
         ];
     }
 
@@ -220,7 +244,36 @@ class Seo
             'title' => $page->meta_title ?: $page->page_title,
             'description' => Str::limit(strip_tags($page->meta_description ?: $page->html_content)),
             'url' => $this->canonicalUrl(),
-            'image' => core()->getCurrentChannel()->logo_url,
+            'image' => $this->resolveShareImage(),
+        ];
+    }
+
+    /**
+     * Newsletter subscription page share details, mirroring the CMS page
+     * shape but sourced from the newsletter settings (meta title/description
+     * are configured in Admin > Configure > Customer > Settings > Newsletter).
+     *
+     * @param  string  $siteName
+     * @return array
+     */
+    protected function subscriptionOpenGraphDetails($siteName)
+    {
+        $config = fn ($key) => core()->getConfigData("customer.settings.newsletter.$key");
+
+        $title = $config('page_meta_title') ?: $config('page_title') ?: $siteName;
+
+        $description = Str::limit(strip_tags(
+            $config('page_meta_description') ?: $config('page_content_before') ?: ''
+        )) ?: $siteName;
+
+        $ogImage = $config('page_og_image');
+
+        return [
+            'type' => 'website',
+            'title' => $title,
+            'description' => $description,
+            'url' => route('shop.subscription.index'),
+            'image' => $this->resolveShareImage($ogImage ? url(Storage::url($ogImage)) : null),
         ];
     }
 
@@ -244,7 +297,7 @@ class Seo
             'title' => $category->meta_title ?: $category->name,
             'description' => Str::limit(strip_tags($category->meta_description ?: $category->description)) ?: $siteName,
             'url' => $this->canonicalUrl(),
-            'image' => $category->banner_url ?: core()->getCurrentChannel()->logo_url,
+            'image' => $this->resolveShareImage($category->banner_url),
         ];
     }
 

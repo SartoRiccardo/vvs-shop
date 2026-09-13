@@ -19,6 +19,7 @@
                 ::attachments="attachments"
                 ::is-image-zooming="isImageZooming"
                 ::initial-index="`media_${activeIndex}`"
+                alt-text="{{ $product->name }}"
             />
         </div>
     </script>

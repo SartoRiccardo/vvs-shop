@@ -4317,6 +4317,8 @@ return [
                         'site-name-info' => 'Used for the "og:site_name" tag. Falls back to the channel name when empty.',
                         'twitter-site' => 'Twitter/X Handle',
                         'twitter-site-info' => 'Adds a "twitter:site" tag, e.g. "smallplushies".',
+                        'default-image' => 'Default Share Image (og:image)',
+                        'default-image-info' => 'Used as the og:image on pages without one of their own (home, CMS pages, newsletter). 1200x630 recommended. Falls back to the channel logo when empty.',
                     ],
                 ],
 
@@ -4721,6 +4723,8 @@ return [
                         'page-meta-title' => 'නිවුස්ලෙටර් පිටු මෙටා මාතෘකාව',
                         'page-meta-description' => 'නිවුස්ලෙටර් පිටු මෙටා විස්තරය',
                         'page-meta-keywords' => 'නිවුස්ලෙටර් පිටු මෙටා යතුරු පද',
+                        'page-og-image' => 'Newsletter Page Share Image (og:image)',
+                        'page-og-image-info' => 'Optional image used as the og:image on the newsletter page. Falls back to the default share image when empty.',
                         'page-content-before' => 'නිවුස්ලෙටර් පිටු අන්තර්ගතය (ෆෝරමයට පෙර)',
                         'page-content-after' => 'නිවුස්ලෙටර් පිටු අන්තර්ගතය (ෆෝරමයට පසු)',
                         'page-content-before-info' => 'නිවුස්ලෙටර් පිටුවේ දායකත්ව ෆෝරමයට ඉහළින් දර්ශනය වන අභිරුචි HTML අන්තර්ගතය.',

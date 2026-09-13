@@ -7,6 +7,10 @@
     <meta name="keywords" content="{{ $page->meta_keywords }}" />
 @endPush
 
+@if ($page->url_key === 'faq')
+    @include('shop::cms.faq-json-ld')
+@endif
+
 <!-- Page Layout -->
 <x-shop::layouts>
     <!-- Page Title -->

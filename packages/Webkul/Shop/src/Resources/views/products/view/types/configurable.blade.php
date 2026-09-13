@@ -131,6 +131,7 @@
                                         <img
                                             :src="option.swatch_value"
                                             :title="option.label"
+                                            :alt="option.label"
                                         />
                                     </label>
 

@@ -18,6 +18,12 @@ Route::get('robots.txt', [SeoController::class, 'robots'])
     ->name('shop.seo.robots');
 
 /**
+ * sitemap.xml.
+ */
+Route::get('sitemap.xml', [SeoController::class, 'sitemap'])
+    ->name('shop.seo.sitemap');
+
+/**
  * CMS pages.
  */
 Route::get('page/{slug}', [PageController::class, 'view'])

@@ -5,7 +5,8 @@
 
         <div class="relative max-w-[590px] max-1180:w-full max-1180:max-w-full max-1180:px-5">
             <div class="flex justify-between gap-4">
-                <h1 class="shimmer h-[46px] w-2/4"></h1>
+                {{-- Not an <h1>: this is the pre-hydration skeleton for the product name heading. --}}
+                <div class="shimmer h-[46px] w-2/4"></div>
 
                 <div class="shimmer h-[46px] w-[46px] rounded-full"></div>
             </div>

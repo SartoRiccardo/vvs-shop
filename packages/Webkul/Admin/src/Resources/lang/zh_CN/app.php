@@ -4317,6 +4317,8 @@ return [
                         'site-name-info' => 'Used for the "og:site_name" tag. Falls back to the channel name when empty.',
                         'twitter-site' => 'Twitter/X Handle',
                         'twitter-site-info' => 'Adds a "twitter:site" tag, e.g. "smallplushies".',
+                        'default-image' => 'Default Share Image (og:image)',
+                        'default-image-info' => 'Used as the og:image on pages without one of their own (home, CMS pages, newsletter). 1200x630 recommended. Falls back to the channel logo when empty.',
                     ],
                 ],
 
@@ -4721,6 +4723,8 @@ return [
                         'page-meta-title' => '新闻通讯页面 Meta 标题',
                         'page-meta-description' => '新闻通讯页面 Meta 描述',
                         'page-meta-keywords' => '新闻通讯页面 Meta 关键词',
+                        'page-og-image' => 'Newsletter Page Share Image (og:image)',
+                        'page-og-image-info' => 'Optional image used as the og:image on the newsletter page. Falls back to the default share image when empty.',
                         'page-content-before' => '新闻通讯页面内容（表单前）',
                         'page-content-after' => '新闻通讯页面内容（表单后）',
                         'page-content-before-info' => '显示在新闻通讯页面订阅表单上方的自定义 HTML 内容。',

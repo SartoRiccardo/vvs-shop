@@ -35,9 +35,10 @@
         {!! $config('page_content_before') !!}
 
         <div class="mx-auto mt-4 max-w-md">
-            <h1 class="text-center text-3xl italic leading-[45px] text-navyBlue max-md:text-2xl max-sm:text-lg">
+            {{-- H2, not H1: the page's CMS content above already carries the single H1. --}}
+            <h2 class="text-center text-3xl italic leading-[45px] text-navyBlue max-md:text-2xl max-sm:text-lg">
                 {{ $pageTitle }}
-            </h1>
+            </h2>
 
             <p class="mt-1 text-center text-xs">
                 {{ $config('page_subtitle') ?: trans('shop::app.subscription.page-subtitle') }}

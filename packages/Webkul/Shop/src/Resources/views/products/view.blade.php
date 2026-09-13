@@ -17,11 +17,7 @@
 
     <meta name="keywords" content="{{ $product->meta_keywords }}"/>
 
-    @if (core()->getConfigData('catalog.rich_snippets.products.enable'))
-        <script type="application/ld+json">
-            {!! app('Webkul\Product\Helpers\SEO')->getProductJsonLd($product) !!}
-        </script>
-    @endif
+    @include('shop::products.view.seo-json-ld')
 
     @if (core()->getConfigData('general.seo.open_graph.enable'))
         <?php
@@ -91,6 +87,21 @@
         <x-shop::shimmer.products.view />
     </v-product>
 
+    <!-- Description. Rendered once for all breakpoints — previously the full
+         description (and every media embed in it) was duplicated in a desktop
+         tab and a mobile accordion, doubling the DOM. -->
+    {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
+
+    @if (trim((string) $product->description) !== '')
+        <div class="container mt-[60px] max-lg:px-8 max-md:mt-8 max-sm:px-4">
+            <div class="description text-lg text-mutedText max-1180:text-sm">
+                {!! $product->description !!}
+            </div>
+        </div>
+    @endif
+
+    {!! view_render_event('bagisto.shop.products.view.description.after', ['product' => $product]) !!}
+
     <!-- Information Section -->
     <div class="1180:mt-20">
         <div class="max-1180:hidden">
@@ -98,24 +109,6 @@
                 position="center"
                 ref="productTabs"
             >
-                <!-- Description Tab -->
-                {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
-
-                <x-shop::tabs.item
-                    id="descritpion-tab"
-                    class="container mt-[60px] !p-0"
-                    :title="trans('shop::app.products.view.description')"
-                    :is-selected="true"
-                >
-                    <div class="container mt-[60px] max-1180:px-5">
-                        <div class="description text-lg text-mutedText max-1180:text-sm">
-                            {!! $product->description !!}
-                        </div>
-                    </div>
-                </x-shop::tabs.item>
-
-                {!! view_render_event('bagisto.shop.products.view.description.after', ['product' => $product]) !!}
-
                 <!-- Additional Information Tab -->
                 @if(count($attributeData))
                     <x-shop::tabs.item
@@ -149,6 +142,7 @@
                                                 <img
                                                     class="min-h-5 min-w-5 h-5 w-5"
                                                     src="{{ Storage::url($customAttributeValue['value']) }}"
+                                                    alt="{{ $customAttributeValue['label'] }}"
                                                 />
                                             </a>
                                         @else
@@ -180,24 +174,6 @@
 
     <!-- Information Section -->
     <div class="container mt-6 grid gap-3 !p-0 max-1180:px-5 1180:hidden">
-        <!-- Description Accordion -->
-        <x-shop::accordion
-            class="max-md:border-none"
-            :is-active="true"
-        >
-            <x-slot:header class="bg-gray-100 max-md:!py-3 max-sm:!py-2">
-                <p class="text-base font-medium 1180:hidden">
-                    @lang('shop::app.products.view.description')
-                </p>
-            </x-slot>
-
-            <x-slot:content class="max-sm:px-0">
-                <div class="description mb-5 text-lg text-mutedText max-1180:text-sm max-md:mb-1 max-md:px-4">
-                    {!! $product->description !!}
-                </div>
-            </x-slot>
-        </x-shop::accordion>
-
         <!-- Additional Information Accordion -->
         @if (count($attributeData))
             <x-shop::accordion
@@ -239,7 +215,7 @@
                                             <img
                                                 class="min-h-5 min-w-5 h-5 w-5"
                                                 src="{{ Storage::url($customAttributeValue['value']) }}"
-                                                alt="Product Image"
+                                                alt="{{ $customAttributeValue['label'] }}"
                                             />
                                         </a>
                                     @else

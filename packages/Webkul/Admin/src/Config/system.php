@@ -455,6 +455,13 @@ return [
                 'info' => 'admin::app.configuration.index.general.seo.open-graph.twitter-site-info',
                 'type' => 'text',
                 'validation' => 'max:60',
+            ], [
+                'name' => 'default_image',
+                'title' => 'admin::app.configuration.index.general.seo.open-graph.default-image',
+                'info' => 'admin::app.configuration.index.general.seo.open-graph.default-image-info',
+                'type' => 'image',
+                'channel_based' => true,
+                'validation' => 'mimes:bmp,jpeg,jpg,png,webp',
             ],
         ],
     ], [
@@ -1661,6 +1668,14 @@ return [
                 'type' => 'textarea',
                 'channel_based' => false,
                 'locale_based' => true,
+            ], [
+                'name' => 'page_og_image',
+                'title' => 'admin::app.configuration.index.customer.settings.newsletter.page-og-image',
+                'info' => 'admin::app.configuration.index.customer.settings.newsletter.page-og-image-info',
+                'type' => 'image',
+                'channel_based' => false,
+                'locale_based' => false,
+                'validation' => 'mimes:bmp,jpeg,jpg,png,webp',
             ], [
                 'name' => 'page_content_before',
                 'title' => 'admin::app.configuration.index.customer.settings.newsletter.page-content-before',

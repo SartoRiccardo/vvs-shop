@@ -265,6 +265,7 @@
                                 <img
                                 src="{{ auth()->user()?->image_url ??  bagisto_asset('images/user-placeholder.png') }}"
                                     class="h-[60px] w-[60px] rounded-full max-md:rounded-full"
+                                    alt=""
                                 >
                             </div>
 
