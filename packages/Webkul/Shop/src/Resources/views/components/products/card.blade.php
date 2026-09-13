@@ -34,7 +34,7 @@
                         ::index="product.id"
                         width="291"
                         height="300"
-                        ::alt="product.name"
+                        ::alt="product.base_image.alt || product.name"
                     />
                 </a>
 
@@ -206,7 +206,7 @@
                         ::index="product.id"
                         width="291"
                         height="300"
-                        ::alt="product.name"
+                        ::alt="product.base_image.alt || product.name"
                     />
                 </a>
 

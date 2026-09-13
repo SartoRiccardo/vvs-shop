@@ -90,8 +90,10 @@
                 attachments() {
                     return [...this.media.images, ...this.media.videos].map(media => ({
                         url: media.type === 'videos' ? media.video_url : media.original_image_url,
-                        
+
                         type: media.type === 'videos' ? 'video' : 'image',
+
+                        alt: media.type === 'videos' ? undefined : media.alt,
                     }));
                 },
             },

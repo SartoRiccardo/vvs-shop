@@ -111,9 +111,15 @@ class ProductImage
     {
         $images = $product?->images;
 
-        return $images && $images->count()
-            ? $this->getCachedImageUrls($images[0]->path)
-            : $this->getFallbackImageUrls();
+        if ($images && $images->count()) {
+            return $this->getCachedImageUrls($images[0]->path) + [
+                'alt' => $images[0]->alt ?: $product->name,
+            ];
+        }
+
+        return $this->getFallbackImageUrls() + [
+            'alt' => $product->name,
+        ];
     }
 
     /**
