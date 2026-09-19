@@ -3858,6 +3858,8 @@ return [
                 'edit' => 'Редагувати',
                 'featured' => 'Обране',
                 'filter-title' => 'Заголовок',
+                'view-more-link' => 'View More Link',
+                'view-more-link-info' => 'Optional. Overrides the target of the carousel View All button. Leave empty for the default.',
                 'filters' => 'Фільтри',
                 'footer-link' => 'Посилання У Підвалі',
                 'footer-link-description' => 'Переходьте за допомогою посилань у підвалі для безперервного перегляду веб-сайту та отримання інформації.',

@@ -3858,6 +3858,8 @@ return [
                 'edit' => 'Editar',
                 'featured' => 'Destacado',
                 'filter-title' => 'Título',
+                'view-more-link' => 'View More Link',
+                'view-more-link-info' => 'Optional. Overrides the target of the carousel View All button. Leave empty for the default.',
                 'filters' => 'Filtros',
                 'footer-link' => 'Links do Rodapé',
                 'footer-link-description' => 'Navegue por meio de links no rodapé para explorar o site de forma fácil e obter informações.',

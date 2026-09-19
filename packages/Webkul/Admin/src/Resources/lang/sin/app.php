@@ -3858,6 +3858,8 @@ return [
                 'edit' => 'සංස්කරණය',
                 'featured' => 'දැක්ක',
                 'filter-title' => 'මාතෘකාව',
+                'view-more-link' => 'View More Link',
+                'view-more-link-info' => 'Optional. Overrides the target of the carousel View All button. Leave empty for the default.',
                 'filters' => 'ශ්‍රිත',
                 'footer-link' => 'පිටු සල්ලි',
                 'footer-link-description' => 'සුබුසුවේදී වෙබ්‌වෙබ් සොයාගත කිරීමට සිවිල්ලාට සපයා ගන්න.',

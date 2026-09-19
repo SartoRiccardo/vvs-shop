@@ -3858,6 +3858,8 @@ return [
                 'edit' => 'Modifica',
                 'featured' => 'In primo piano',
                 'filter-title' => 'Titolo',
+                'view-more-link' => 'View More Link',
+                'view-more-link-info' => 'Optional. Overrides the target of the carousel View All button. Leave empty for the default.',
                 'filters' => 'Filtri',
                 'footer-link' => 'Link Piè di Pagina',
                 'footer-link-description' => 'Naviga attraverso i link nel piè di pagina per una navigazione e informazioni sul sito senza interruzioni.',

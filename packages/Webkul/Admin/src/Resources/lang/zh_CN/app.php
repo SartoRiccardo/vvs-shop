@@ -3858,6 +3858,8 @@ return [
                 'edit' => '编辑',
                 'featured' => '精选',
                 'filter-title' => '标题',
+                'view-more-link' => 'View More Link',
+                'view-more-link-info' => 'Optional. Overrides the target of the carousel View All button. Leave empty for the default.',
                 'filters' => '过滤器',
                 'footer-link' => '页脚链接',
                 'footer-link-description' => '通过页脚链接无缝浏览网站和获取信息。',

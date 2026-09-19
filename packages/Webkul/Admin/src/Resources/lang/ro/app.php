@@ -3858,6 +3858,8 @@ return [
                 'edit' => 'Edit',
                 'featured' => 'Featured',
                 'filter-title' => 'Title',
+                'view-more-link' => 'View More Link',
+                'view-more-link-info' => 'Optional. Overrides the target of the carousel View All button. Leave empty for the default.',
                 'filters' => 'Filters',
                 'footer-link' => 'Footer Links',
                 'footer-link-description' => 'Navigate via footer links for seamless website exploration and information.',

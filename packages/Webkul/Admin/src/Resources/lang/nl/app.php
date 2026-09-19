@@ -3858,6 +3858,8 @@ return [
                 'edit' => 'Bewerken',
                 'featured' => 'Uitgelicht',
                 'filter-title' => 'Titel',
+                'view-more-link' => 'View More Link',
+                'view-more-link-info' => 'Optional. Overrides the target of the carousel View All button. Leave empty for the default.',
                 'filters' => 'Filters',
                 'footer-link' => 'Voetteksten',
                 'footer-link-description' => 'Navigeer via voettekstlinks voor naadloze websiteverkenning en informatie.',

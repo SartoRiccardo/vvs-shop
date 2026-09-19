@@ -38,11 +38,15 @@ class SeoController extends Controller
      */
     public function sitemap()
     {
+        $channel = core()->getCurrentChannel();
+
         $urls = collect()
             ->push(url('/'))
             ->merge(
                 app(CategoryRepository::class)
                     ->findWhere(['status' => 1])
+                    // Skip the invisible tree root ("Root") — real categories only.
+                    ->reject(fn ($category) => $category->id == $channel->root_category_id)
                     ->pluck('url')
             )
             ->merge(
@@ -50,16 +54,23 @@ class SeoController extends Controller
                     ->getAll([
                         'status' => 1,
                         'visible_individually' => 1,
-                        'channel_id' => core()->getCurrentChannel()->id,
+                        'channel_id' => $channel->id,
                         'limit' => 1000,
                     ])
                     ->items())
-                    ->map(fn ($product) => route('shop.product_or_category.index', $product->url_key))
+                    // route() throws on a null parameter, so guard each entry.
+                    ->map(fn ($product) => $product->url_key
+                        ? route('shop.product_or_category.index', $product->url_key)
+                        : null)
             )
             ->merge(
+                // Channel scoping mirrors how PageController resolves pages.
                 app(PageRepository::class)
+                    ->whereHas('channels', fn ($query) => $query->where('id', $channel->id))
                     ->all()
-                    ->map(fn ($page) => route('shop.cms.page', $page->url_key))
+                    ->map(fn ($page) => $page->url_key
+                        ? route('shop.cms.page', $page->url_key)
+                        : null)
             )
             ->push(route('shop.subscription.index'))
             ->filter()

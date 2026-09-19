@@ -91,25 +91,35 @@
                         ])
                         ->items();
 
+                    // First real category under the channel root — the store's
+                    // top level. (parent_id null IS the invisible "Root"
+                    // category itself, slug "root", not a linkable page.)
                     $ssrCategory = app(\Webkul\Category\Repositories\CategoryRepository::class)
                         ->findWhere([
                             'status'    => 1,
-                            'parent_id' => null,
+                            'parent_id' => $channel->root_category_id,
                         ])
                         ->sortBy('position')
                         ->first();
+
+                    /**
+                     * Optional admin override (theme customization) for the
+                     * carousel's "View All" target. Empty = Vue keeps its
+                     * search link; SSR falls back to the top category.
+                     */
+                    $viewMoreLink = trim($data['view_more_link'] ?? '') ?: null;
                 @endphp
 
                 <!-- Product Carousel -->
                 <x-shop::products.carousel
                     :title="$data['title'] ?? ''"
                     :src="route('shop.api.products.index', $data['filters'] ?? [])"
-                    :navigation-link="route('shop.search.index', $data['filters'] ?? [])"
+                    :navigation-link="$viewMoreLink ?: route('shop.search.index', $data['filters'] ?? [])"
                     aria-label="{{ trans('shop::app.home.index.product-carousel') }}"
                 >
                     <x-shop::products.ssr-cards
                         :products="$ssrProducts"
-                        :category="$ssrCategory"
+                        :view-all-url="$viewMoreLink ?: ($ssrCategory?->url)"
                         :title="$data['title'] ?? ''"
                     />
                 </x-shop::products.carousel>

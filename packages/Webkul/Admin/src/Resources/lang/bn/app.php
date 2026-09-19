@@ -3858,6 +3858,8 @@ return [
                 'edit' => 'সম্পাদনা করুন',
                 'featured' => 'বৈশিষ্ট্যযুক্ত',
                 'filter-title' => 'শিরোনাম',
+                'view-more-link' => 'View More Link',
+                'view-more-link-info' => 'Optional. Overrides the target of the carousel View All button. Leave empty for the default.',
                 'filters' => 'ফিল্টার',
                 'footer-link' => 'ফুটার লিংক',
                 'footer-link-description' => 'সাইটের অবিচ্ছেদ্য ভ্রমণ এবং তথ্যের জন্য ফুটার লিংক দ্বারা ন্যাভিগেট করুন।',

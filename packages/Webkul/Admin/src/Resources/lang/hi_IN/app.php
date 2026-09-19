@@ -3858,6 +3858,8 @@ return [
                 'edit' => 'संपादित करें',
                 'featured' => 'विशेष',
                 'filter-title' => 'शीर्षक',
+                'view-more-link' => 'View More Link',
+                'view-more-link-info' => 'Optional. Overrides the target of the carousel View All button. Leave empty for the default.',
                 'filters' => 'फ़िल्टर्स',
                 'footer-link' => 'फ़ुटर लिंक्स',
                 'footer-link-description' => 'सुगम वेबसाइट अन्वेषण और जानकारी के लिए फ़ुटर लिंक्स के माध्यम से नेविगेट करें।',

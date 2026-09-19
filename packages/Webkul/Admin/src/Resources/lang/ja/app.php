@@ -3858,6 +3858,8 @@ return [
                 'edit' => '編集',
                 'featured' => '注目',
                 'filter-title' => 'タイトル',
+                'view-more-link' => 'View More Link',
+                'view-more-link-info' => 'Optional. Overrides the target of the carousel View All button. Leave empty for the default.',
                 'filters' => 'フィルター',
                 'footer-link' => 'フッターリンク',
                 'footer-link-description' => 'ウェブサイトのシームレスな探索と情報取得のために、フッターリンクを介してナビゲートします。',

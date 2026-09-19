@@ -3858,6 +3858,8 @@ return [
                 'edit' => 'Düzenle',
                 'featured' => 'Öne Çıkan',
                 'filter-title' => 'Başlık',
+                'view-more-link' => 'View More Link',
+                'view-more-link-info' => 'Optional. Overrides the target of the carousel View All button. Leave empty for the default.',
                 'filters' => 'Filtreler',
                 'footer-link' => 'Alt Bağlantıları',
                 'footer-link-description' => 'Sorunsuz web sitesi keşfi ve bilgi için alt bağlantılar aracılığıyla gezinin.',

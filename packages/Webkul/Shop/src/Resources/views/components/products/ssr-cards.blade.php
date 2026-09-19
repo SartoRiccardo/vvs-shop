@@ -1,6 +1,6 @@
 @props([
     'products' => [],
-    'category' => null,
+    'viewAllUrl' => null,
     'title' => '',
 ])
 
@@ -14,9 +14,9 @@
                 {{ $title }}
             </h2>
 
-            @if ($category)
+            @if ($viewAllUrl)
                 <a
-                    href="/{{ $category->slug }}"
+                    href="{{ $viewAllUrl }}"
                     class="hidden max-lg:flex"
                 >
                     <p class="items-center text-xl max-md:text-base max-sm:text-sm">
@@ -61,11 +61,11 @@
             @endforeach
         </div>
 
-        @if ($category)
+        @if ($viewAllUrl)
             <a
-                href="/{{ $category->slug }}"
+                href="{{ $viewAllUrl }}"
                 class="secondary-button mx-auto mt-5 block w-max rounded-2xl px-11 py-3 text-center text-base max-lg:mt-0 max-lg:hidden max-lg:py-3.5 max-md:rounded-lg"
-                aria-label="{{ $category->name }}"
+                aria-label="{{ $title }}"
             >
                 @lang('shop::app.components.products.carousel.view-all')
             </a>

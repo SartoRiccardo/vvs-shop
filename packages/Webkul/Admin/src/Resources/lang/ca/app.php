@@ -3858,6 +3858,8 @@ return [
                 'edit' => 'Editar',
                 'featured' => 'Destacat',
                 'filter-title' => 'Títol',
+                'view-more-link' => 'View More Link',
+                'view-more-link-info' => 'Optional. Overrides the target of the carousel View All button. Leave empty for the default.',
                 'filters' => 'Filtres',
                 'footer-link' => 'Enllaços del Peu de Pàgina',
                 'footer-link-description' => 'Navega pels enllaços del peu de pàgina per explorar el lloc web de manera fluïda i obtenir informació.',

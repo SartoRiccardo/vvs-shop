@@ -88,11 +88,12 @@ class Category extends TranslatableModel implements CategoryContract
      */
     public function getUrlAttribute()
     {
-        if ($categoryTranslation = $this->translate(core()->getCurrentLocale()->code)) {
-            return url($categoryTranslation->slug);
-        }
+        $slug = $this->translate(core()->getCurrentLocale()->code)?->slug
+            ?: $this->translate(core()->getDefaultLocaleCodeFromDefaultChannel())?->slug;
 
-        return url($this->translate(core()->getDefaultLocaleCodeFromDefaultChannel())?->slug);
+        // A category without any slug translation: url(null) would return the
+        // UrlGenerator instance itself (not a string), so fall back to home.
+        return $slug ? url($slug) : url('/');
     }
 
     /**

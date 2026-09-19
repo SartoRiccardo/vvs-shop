@@ -3858,6 +3858,8 @@ return [
                 'edit' => 'Editar',
                 'featured' => 'Destacado',
                 'filter-title' => 'Título',
+                'view-more-link' => 'View More Link',
+                'view-more-link-info' => 'Optional. Overrides the target of the carousel View All button. Leave empty for the default.',
                 'filters' => 'Filtros',
                 'footer-link' => 'Enlaces del Pie de Página',
                 'footer-link-description' => 'Navega a través de los enlaces del pie de página para explorar el sitio web de manera fluida y obtener información.',
