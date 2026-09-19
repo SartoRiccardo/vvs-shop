@@ -31,6 +31,14 @@
             name="viewport"
             content="width=device-width, initial-scale=1"
         >
+
+        {{-- Discord embed stripe + mobile browser chrome. Same admin-picked
+             color the --color-primary CSS var uses (Design > Theme Colors). --}}
+        <meta
+            name="theme-color"
+            content="{{ core()->getConfigData('general.design.theme_colors.primary') ?: '#060c3b' }}"
+        >
+
         <meta
             name="base-url"
             content="{{ url()->to('/') }}"
