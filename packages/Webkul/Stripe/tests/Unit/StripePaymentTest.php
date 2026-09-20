@@ -328,3 +328,66 @@ it('returns the correct redirect URL', function () {
     // Assert
     expect($url)->toBe(route('stripe.standard.redirect'));
 });
+
+it('builds line items in the cart currency using converted amounts', function () {
+    // Arrange
+    $cart = (object) [
+        'cart_currency_code' => 'EUR',
+        'items' => [
+            (object) [
+                'product' => (object) ['name' => 'Small Plushy'],
+                'price' => 90.00,
+                'base_price' => 100.00,
+                'quantity' => 2,
+            ],
+        ],
+        'shipping_amount' => 5.50,
+        'base_shipping_amount' => 10.00,
+        'tax_total' => 0,
+        'base_tax_total' => 0,
+    ];
+
+    // Act
+    $lineItems = (new ReflectionMethod(Stripe::class, 'prepareLineItems'))
+        ->invoke($this->stripe, $cart);
+
+    // Assert
+    expect($lineItems)->toHaveCount(2)
+        ->and($lineItems[0]['price_data']['currency'])->toBe('eur')
+        ->and($lineItems[0]['price_data']['unit_amount'])->toBe(9000)
+        ->and($lineItems[0]['quantity'])->toBe(2)
+        ->and($lineItems[1]['price_data']['product_data']['name'])->toBe('Shipping')
+        ->and($lineItems[1]['price_data']['currency'])->toBe('eur')
+        ->and($lineItems[1]['price_data']['unit_amount'])->toBe(550);
+});
+
+it('builds the tax line item in the cart currency', function () {
+    // Arrange
+    $cart = (object) [
+        'cart_currency_code' => 'GBP',
+        'items' => [
+            (object) [
+                'product' => (object) ['name' => 'Small Plushy'],
+                'price' => 80.00,
+                'base_price' => 100.00,
+                'quantity' => 1,
+            ],
+        ],
+        'shipping_amount' => 0,
+        'base_shipping_amount' => 0,
+        'tax_total' => 16.00,
+        'base_tax_total' => 20.00,
+    ];
+
+    // Act
+    $lineItems = (new ReflectionMethod(Stripe::class, 'prepareLineItems'))
+        ->invoke($this->stripe, $cart);
+
+    // Assert
+    expect($lineItems)->toHaveCount(2)
+        ->and($lineItems[0]['price_data']['currency'])->toBe('gbp')
+        ->and($lineItems[0]['price_data']['unit_amount'])->toBe(8000)
+        ->and($lineItems[1]['price_data']['product_data']['name'])->toBe('Tax')
+        ->and($lineItems[1]['price_data']['currency'])->toBe('gbp')
+        ->and($lineItems[1]['price_data']['unit_amount'])->toBe(1600);
+});

@@ -169,48 +169,50 @@ class Stripe extends Payment
     {
         $lineItems = [];
 
+        $currency = strtolower($cart->cart_currency_code);
+
         foreach ($cart->items as $item) {
             $lineItems[] = [
                 'price_data' => [
-                    'currency' => strtolower(core()->getBaseCurrencyCode()),
+                    'currency' => $currency,
 
                     'product_data' => [
                         'name' => $item->product->name,
                     ],
 
-                    'unit_amount' => (int) round($item->base_price * 100),
+                    'unit_amount' => (int) round($item->price * 100),
                 ],
 
                 'quantity' => $item->quantity,
             ];
         }
 
-        if ($cart->base_shipping_amount > 0) {
+        if ($cart->shipping_amount > 0) {
             $lineItems[] = [
                 'price_data' => [
-                    'currency' => strtolower(core()->getBaseCurrencyCode()),
+                    'currency' => $currency,
 
                     'product_data' => [
                         'name' => 'Shipping',
                     ],
 
-                    'unit_amount' => (int) round($cart->base_shipping_amount * 100),
+                    'unit_amount' => (int) round($cart->shipping_amount * 100),
                 ],
 
                 'quantity' => 1,
             ];
         }
 
-        if ($cart->base_tax_total > 0) {
+        if ($cart->tax_total > 0) {
             $lineItems[] = [
                 'price_data' => [
-                    'currency' => strtolower(core()->getBaseCurrencyCode()),
+                    'currency' => $currency,
 
                     'product_data' => [
                         'name' => 'Tax',
                     ],
 
-                    'unit_amount' => (int) round($cart->base_tax_total * 100),
+                    'unit_amount' => (int) round($cart->tax_total * 100),
                 ],
 
                 'quantity' => 1,
