@@ -40,7 +40,6 @@
                         <video
                             controls
                             width="100%"
-                            :alt="media.video_url"
                             :key="media.video_url"
                         >
                             <source

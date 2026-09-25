@@ -383,7 +383,6 @@
                             <video
                                 class="max-h-[50px] min-w-[50px] cursor-pointer rounded-xl"
                                 :src="file.url"
-                                :alt="review.name"
                                 :title="review.name"
                                 @click="isImageZooming = !isImageZooming; activeIndex = index"
                             >
@@ -502,7 +501,6 @@
                             <video
                                 class="min-w-20 max-h-20 cursor-pointer rounded-xl"
                                 :src="file.url"
-                                :alt="review.name"
                                 :title="review.name"
                             >
                             </video>

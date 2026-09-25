@@ -124,7 +124,6 @@
                             >
                                 <video
                                     :src="file.url"
-                                    :alt="file.name"
                                     class="max-h-12 min-w-12 rounded-xl max-sm:max-h-[60px] max-sm:min-w-[60px]"
                                     :class="{'opacity-25' : file.showDeleteButton}"
                                 >

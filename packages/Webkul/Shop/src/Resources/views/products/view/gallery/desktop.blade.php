@@ -23,7 +23,6 @@
                     v-if="media.type == 'videos'"
                     :class="`transparent max-h-[100px] min-w-[100px] cursor-pointer rounded-xl border ${isActiveMedia(index) ? 'pointer-events-none border-navyBlue' : 'border-pageBg'}`"
                     @click="change(media, index)"
-                    alt="{{ $product->name }}"
                     tabindex="0"
                 >
                     <source
@@ -90,7 +89,6 @@
             <video
                 controls
                 width="475"
-                alt="{{ $product->name }}"
                 @click="isImageZooming = !isImageZooming"
                 @loadeddata="onMediaLoad()"
                 :key="baseFile.path"
