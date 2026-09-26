@@ -1170,6 +1170,11 @@ return [
                     ],
                 ],
 
+                'currency' => [
+                    'converts-to' => 'Auto-converts to :price',
+                    'title' => 'Currency Prices',
+                ],
+
                 'inventories' => [
                     'pending-ordered-qty' => 'Quantitat pendent de comanda: :qty',
                     'pending-ordered-qty-info' => 'La quantitat pendent de comanda es deduirà de la font d\'inventari respectiva després de l\'enviament. En cas de cancel·lació, la quantitat pendent estarà disponible per a la venda.',

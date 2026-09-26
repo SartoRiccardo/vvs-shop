@@ -1170,6 +1170,11 @@ return [
                     ],
                 ],
 
+                'currency' => [
+                    'converts-to' => 'Otomatik dönüştürülür: :price',
+                    'title' => 'Para Birimi Fiyatları',
+                ],
+
                 'inventories' => [
                     'pending-ordered-qty' => 'Bekleyen Sipariş Miktarı: :qty',
                     'pending-ordered-qty-info' => 'Bekleyen sipariş miktarı, sevkiyat sonrası ilgili envanter kaynağından düşürülecektir. İptal durumunda bekleme miktarı satışa sunulacaktır.',

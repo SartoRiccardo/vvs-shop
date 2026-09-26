@@ -1170,6 +1170,11 @@ return [
                     ],
                 ],
 
+                'currency' => [
+                    'converts-to' => 'Convertito automaticamente in :price',
+                    'title' => 'Prezzi per valuta',
+                ],
+
                 'inventories' => [
                     'pending-ordered-qty' => 'Qtà Ordinata in Sospeso: :qty',
                     'pending-ordered-qty-info' => 'La quantità ordinata in sospeso verrà dedotta dalla relativa fonte di inventario dopo la spedizione. In caso di cancellazione, la quantità in sospeso sarà nuovamente disponibile per la vendita.',

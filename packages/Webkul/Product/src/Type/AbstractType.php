@@ -19,6 +19,7 @@ use Webkul\Product\Exceptions\InsufficientProductInventoryException;
 use Webkul\Product\Facades\ProductImage;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\Product\Repositories\ProductCurrencyPriceRepository;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
@@ -135,7 +136,8 @@ abstract class AbstractType
         protected ProductInventoryRepository $productInventoryRepository,
         protected ProductImageRepository $productImageRepository,
         protected ProductVideoRepository $productVideoRepository,
-        protected ProductCustomerGroupPriceRepository $productCustomerGroupPriceRepository
+        protected ProductCustomerGroupPriceRepository $productCustomerGroupPriceRepository,
+        protected ProductCurrencyPriceRepository $productCurrencyPriceRepository
     ) {}
 
     /**
@@ -203,6 +205,8 @@ abstract class AbstractType
         $this->productVideoRepository->upload($data, $product, 'videos');
 
         $this->productCustomerGroupPriceRepository->saveCustomerGroupPrices($data, $product);
+
+        $this->productCurrencyPriceRepository->saveCurrencyPrices($data, $product);
 
         return $product;
     }
@@ -745,10 +749,38 @@ abstract class AbstractType
             ],
 
             'final' => [
-                'price' => core()->convertPrice($minimalPrice = $this->getMinimalPrice()),
-                'formatted_price' => core()->currency($minimalPrice),
+                'price' => $this->convertPriceForProduct($minimalPrice = $this->getMinimalPrice()),
+                'formatted_price' => core()->formatPrice($this->getDisplayedMinimalPrice()),
             ],
         ];
+    }
+
+    /**
+     * Convert a product price to the current currency, honoring an explicit
+     * per-currency override for this product if one exists.
+     *
+     * @param  float  $amount
+     * @return float
+     */
+    public function convertPriceForProduct($amount)
+    {
+        $override = $this->product->currency_prices
+            ->firstWhere('currency_id', core()->getCurrentCurrency()->id);
+
+        return $override
+            ? (float) $override->amount
+            : core()->convertPrice($amount);
+    }
+
+    /**
+     * The minimal price as it should be displayed in the current currency:
+     * the per-currency override when set, otherwise the converted amount.
+     *
+     * @return float
+     */
+    public function getDisplayedMinimalPrice()
+    {
+        return $this->convertPriceForProduct($this->getMinimalPrice());
     }
 
     /**
@@ -802,7 +834,7 @@ abstract class AbstractType
                 'sku' => $this->product->sku,
                 'quantity' => $data['quantity'],
                 'name' => $this->product->name,
-                'price' => $convertedPrice = core()->convertPrice($price),
+                'price' => $convertedPrice = $this->convertPriceForProduct($price),
                 'price_incl_tax' => $convertedPrice,
                 'base_price' => $price,
                 'base_price_incl_tax' => $price,
@@ -932,13 +964,13 @@ abstract class AbstractType
         $item->base_price = $basePrice;
         $item->base_price_incl_tax = $basePrice;
 
-        $item->price = ($price = core()->convertPrice($basePrice));
+        $item->price = ($price = $this->convertPriceForProduct($basePrice));
         $item->price_incl_tax = $price;
 
         $item->base_total = $basePrice * $item->quantity;
         $item->base_total_incl_tax = $basePrice * $item->quantity;
 
-        $item->total = ($total = core()->convertPrice($basePrice * $item->quantity));
+        $item->total = ($total = $this->convertPriceForProduct($basePrice * $item->quantity));
         $item->total_incl_tax = $total;
 
         $item->save();

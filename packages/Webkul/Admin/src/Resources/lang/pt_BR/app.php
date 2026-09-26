@@ -1170,6 +1170,11 @@ return [
                     ],
                 ],
 
+                'currency' => [
+                    'converts-to' => 'Converte automaticamente para :price',
+                    'title' => 'Preços por moeda',
+                ],
+
                 'inventories' => [
                     'pending-ordered-qty' => 'Quantidade Pendente Encomendada: :qty',
                     'pending-ordered-qty-info' => 'A quantidade pendente encomendada será deduzida da fonte de inventário correspondente após o envio. Em caso de cancelamento, a quantidade pendente estará disponível para venda.',

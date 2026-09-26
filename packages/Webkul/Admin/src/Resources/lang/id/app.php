@@ -1170,6 +1170,11 @@ return [
                     ],
                 ],
 
+                'currency' => [
+                    'converts-to' => 'Otomatis dikonversi ke :price',
+                    'title' => 'Harga Mata Uang',
+                ],
+
                 'inventories' => [
                     'pending-ordered-qty' => 'Jumlah Pesanan Tertunda: :qty',
                     'pending-ordered-qty-info' => 'Jumlah pesanan tertunda akan dikurangkan dari sumber inventaris yang sesuai setelah pengiriman. Jika terjadi pembatalan, jumlah yang tertunda akan tersedia untuk dijual.',

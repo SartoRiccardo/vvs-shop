@@ -1170,6 +1170,11 @@ return [
                     ],
                 ],
 
+                'currency' => [
+                    'converts-to' => '自动转换为 :price',
+                    'title' => '货币价格',
+                ],
+
                 'inventories' => [
                     'pending-ordered-qty' => '待发货数量: :qty',
                     'pending-ordered-qty-info' => '待发货数量将在发货后从相应的库存来源中扣减。在取消的情况下，待处理数量将可供销售。',

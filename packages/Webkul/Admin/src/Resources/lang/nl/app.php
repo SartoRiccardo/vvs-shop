@@ -1170,6 +1170,11 @@ return [
                     ],
                 ],
 
+                'currency' => [
+                    'converts-to' => 'Converteert automatisch naar :price',
+                    'title' => 'Valutaprijzen',
+                ],
+
                 'inventories' => [
                     'pending-ordered-qty' => 'In afwachting van bestelde hoeveelheid: :qty',
                     'pending-ordered-qty-info' => 'De in afwachting van bestelde hoeveelheid wordt afgetrokken van de respectievelijke voorraadbron na de verzending. In geval van annulering zal de in afwachting van bestelde hoeveelheid weer beschikbaar zijn voor verkoop.',

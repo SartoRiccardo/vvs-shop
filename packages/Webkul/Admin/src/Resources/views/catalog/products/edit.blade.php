@@ -283,6 +283,8 @@
 
                                 @includeWhen($group->code == 'price', 'admin::catalog.products.edit.price.group')
 
+                                @includeWhen($group->code == 'price', 'admin::catalog.products.edit.price.currency')
+
                                 @includeWhen($group->code === 'inventories', 'admin::catalog.products.edit.inventories')                                
                             </div>
 

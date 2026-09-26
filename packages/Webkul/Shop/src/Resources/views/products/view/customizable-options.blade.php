@@ -20,7 +20,7 @@
         {!! view_render_event('bagisto.shop.products.view.customizable-options.before', ['product' => $product]) !!}
 
         <v-product-customizable-options
-            :initial-price="{{ core()->convertPrice($product->getTypeInstance()->getMinimalPrice()) }}"
+            :initial-price="{{ $product->getTypeInstance()->getDisplayedMinimalPrice() }}"
         >
         </v-product-customizable-options>
 

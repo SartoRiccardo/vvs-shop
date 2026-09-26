@@ -1170,6 +1170,11 @@ return [
                     ],
                 ],
 
+                'currency' => [
+                    'converts-to' => 'Automatycznie przelicza na :price',
+                    'title' => 'Ceny w walutach',
+                ],
+
                 'inventories' => [
                     'pending-ordered-qty' => 'Oczekująca ilość zamówiona: :qty',
                     'pending-ordered-qty-info' => 'Oczekująca ilość zamówienia zostanie odjęta z odpowiedniego źródła magazynu po wysyłce. W przypadku anulowania zamówienia oczekująca ilość będzie dostępna do sprzedaży.',

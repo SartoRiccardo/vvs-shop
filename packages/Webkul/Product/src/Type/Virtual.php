@@ -13,6 +13,7 @@ use Webkul\Product\Exceptions\InsufficientProductInventoryException;
 use Webkul\Product\Helpers\Indexers\Price\Virtual as VirtualIndexer;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
+use Webkul\Product\Repositories\ProductCurrencyPriceRepository;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
 use Webkul\Product\Repositories\ProductCustomizableOptionPriceRepository;
 use Webkul\Product\Repositories\ProductCustomizableOptionRepository;
@@ -67,6 +68,7 @@ class Virtual extends AbstractType
         ProductImageRepository $productImageRepository,
         ProductVideoRepository $productVideoRepository,
         ProductCustomerGroupPriceRepository $productCustomerGroupPriceRepository,
+        ProductCurrencyPriceRepository $productCurrencyPriceRepository,
         protected ProductGroupedProductRepository $productGroupedProductRepository,
         protected ProductBundleOptionProductRepository $productBundleOptionProductRepository,
         protected ProductCustomizableOptionRepository $productCustomizableOptionRepository,
@@ -80,7 +82,8 @@ class Virtual extends AbstractType
             $productInventoryRepository,
             $productImageRepository,
             $productVideoRepository,
-            $productCustomerGroupPriceRepository
+            $productCustomerGroupPriceRepository,
+            $productCurrencyPriceRepository
         );
     }
 
@@ -288,7 +291,7 @@ class Virtual extends AbstractType
                 'sku' => $this->product->sku,
                 'quantity' => $data['quantity'],
                 'name' => $this->product->name,
-                'price' => $convertedPrice = core()->convertPrice($price),
+                'price' => $convertedPrice = $this->convertPriceForProduct($price),
                 'price_incl_tax' => $convertedPrice,
                 'base_price' => $price,
                 'base_price_incl_tax' => $price,
@@ -356,13 +359,13 @@ class Virtual extends AbstractType
         $item->base_price = $basePrice;
         $item->base_price_incl_tax = $basePrice;
 
-        $item->price = ($price = core()->convertPrice($basePrice));
+        $item->price = ($price = $this->convertPriceForProduct($basePrice));
         $item->price_incl_tax = $price;
 
         $item->base_total = $basePrice * $item->quantity;
         $item->base_total_incl_tax = $basePrice * $item->quantity;
 
-        $item->total = ($total = core()->convertPrice($basePrice * $item->quantity));
+        $item->total = ($total = $this->convertPriceForProduct($basePrice * $item->quantity));
         $item->total_incl_tax = $total;
 
         $item->save();

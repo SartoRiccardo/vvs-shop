@@ -977,7 +977,7 @@ class Cart
 
                 $basePrice = ! is_null($item->custom_price) ? $item->custom_price : $itemBasePrice;
 
-                $price = core()->convertPrice($basePrice);
+                $price = $item->getTypeInstance()->convertPriceForProduct($basePrice);
 
                 /**
                  * Reset the item price every time to initial price if the inclusive price is enabled.
@@ -989,7 +989,7 @@ class Cart
                         'price_incl_tax' => $price,
                         'base_price' => $basePrice,
                         'base_price_incl_tax' => $basePrice,
-                        'total' => $total = core()->convertPrice($basePrice * $item->quantity),
+                        'total' => $total = $item->getTypeInstance()->convertPriceForProduct($basePrice * $item->quantity),
                         'total_incl_tax' => $total,
                         'base_total' => ($baseTotal = $basePrice * $item->quantity),
                         'base_total_incl_tax' => $baseTotal,

@@ -13,6 +13,7 @@ use Webkul\Product\Helpers\Indexers\Price\Bundle as BundleIndexer;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
 use Webkul\Product\Repositories\ProductBundleOptionRepository;
+use Webkul\Product\Repositories\ProductCurrencyPriceRepository;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
@@ -83,6 +84,7 @@ class Bundle extends AbstractType
         ProductImageRepository $productImageRepository,
         ProductVideoRepository $productVideoRepository,
         ProductCustomerGroupPriceRepository $productCustomerGroupPriceRepository,
+        ProductCurrencyPriceRepository $productCurrencyPriceRepository,
         protected ProductBundleOptionRepository $productBundleOptionRepository,
         protected ProductBundleOptionProductRepository $productBundleOptionProductRepository,
         protected BundleOption $bundleOptionHelper
@@ -95,7 +97,8 @@ class Bundle extends AbstractType
             $productInventoryRepository,
             $productImageRepository,
             $productVideoRepository,
-            $productCustomerGroupPriceRepository
+            $productCustomerGroupPriceRepository,
+            $productCurrencyPriceRepository
         );
     }
 
@@ -186,7 +189,7 @@ class Bundle extends AbstractType
                 ],
 
                 'final' => [
-                    'price' => core()->convertPrice($minimalPrice = $this->getMinimalPrice()),
+                    'price' => $this->convertPriceForProduct($minimalPrice = $this->getMinimalPrice()),
                     'formatted_price' => core()->currency($minimalPrice),
                 ],
             ],
@@ -198,7 +201,7 @@ class Bundle extends AbstractType
                 ],
 
                 'final' => [
-                    'price' => core()->convertPrice($maximumPrice = $this->getMaximumPrice()),
+                    'price' => $this->convertPriceForProduct($maximumPrice = $this->getMaximumPrice()),
                     'formatted_price' => core()->currency($maximumPrice),
                 ],
             ],
@@ -513,13 +516,13 @@ class Bundle extends AbstractType
         $item->base_price = $basePrice;
         $item->base_price_incl_tax = $basePrice;
 
-        $item->price = ($price = core()->convertPrice($basePrice));
+        $item->price = ($price = $this->convertPriceForProduct($basePrice));
         $item->price_incl_tax = $price;
 
         $item->base_total = $basePrice * $item->quantity;
         $item->base_total_incl_tax = $basePrice * $item->quantity;
 
-        $item->total = ($total = core()->convertPrice($basePrice * $item->quantity));
+        $item->total = ($total = $this->convertPriceForProduct($basePrice * $item->quantity));
         $item->total_incl_tax = $total;
 
         $item->additional = $this->getAdditionalOptions($item->additional);

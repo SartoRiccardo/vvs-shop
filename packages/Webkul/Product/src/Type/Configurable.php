@@ -345,7 +345,7 @@ class Configurable extends AbstractType
     {
         $regularMinPrice = $this->getRegularMinimalPrice();
 
-        $minPrice = $this->getMinimalPrice();
+        $minPrice = $this->convertPriceForProduct($this->getMinimalPrice());
 
         return [
             'regular' => [
@@ -355,7 +355,7 @@ class Configurable extends AbstractType
 
             'final' => [
                 'price' => $minPrice,
-                'formatted_price' => core()->currency($minPrice),
+                'formatted_price' => core()->formatPrice($minPrice),
             ],
         ];
     }
@@ -406,7 +406,7 @@ class Configurable extends AbstractType
                 'name' => $this->product->name,
                 'type' => $this->product->type,
                 'quantity' => $data['quantity'],
-                'price' => $convertedPrice = core()->convertPrice($price),
+                'price' => $convertedPrice = $childProduct->getTypeInstance()->convertPriceForProduct($price),
                 'price_incl_tax' => $convertedPrice,
                 'base_price' => $price,
                 'base_price_incl_tax' => $price,
@@ -548,13 +548,13 @@ class Configurable extends AbstractType
         $item->base_price = $basePrice;
         $item->base_price_incl_tax = $basePrice;
 
-        $item->price = ($price = core()->convertPrice($basePrice));
+        $item->price = ($price = $this->convertPriceForProduct($basePrice));
         $item->price_incl_tax = $price;
 
         $item->base_total = $basePrice * $item->quantity;
         $item->base_total_incl_tax = $basePrice * $item->quantity;
 
-        $item->total = ($total = core()->convertPrice($basePrice * $item->quantity));
+        $item->total = ($total = $this->convertPriceForProduct($basePrice * $item->quantity));
         $item->total_incl_tax = $total;
 
         $item->save();

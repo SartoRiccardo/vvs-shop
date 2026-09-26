@@ -24,7 +24,7 @@
             '@type' => 'Offer',
             'url' => route('shop.product_or_category.index', $product->url_key),
             'priceCurrency' => core()->getCurrentCurrencyCode(),
-            'price' => $typeInstance->getMinimalPrice(),
+            'price' => $typeInstance->getDisplayedMinimalPrice(),
             /**
              * Computed at render so it never goes stale; signals the price is
              * current. 90 days is the customary window.

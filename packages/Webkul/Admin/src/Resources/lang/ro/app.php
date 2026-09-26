@@ -1170,6 +1170,11 @@ return [
                     ],
                 ],
 
+                'currency' => [
+                    'converts-to' => 'Se convertesc automat în :price',
+                    'title' => 'Prețuri pe valută',
+                ],
+
                 'inventories' => [
                     'pending-ordered-qty' => 'Pending Ordered Qty: :qty',
                     'pending-ordered-qty-info' => 'Pending Ordered quantity will be deducted from the respective inventory source after the shipment. In case of cancellation pending quantity will be available for sale.',

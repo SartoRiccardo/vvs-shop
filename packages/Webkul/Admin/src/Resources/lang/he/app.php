@@ -1170,6 +1170,11 @@ return [
                     ],
                 ],
 
+                'currency' => [
+                    'converts-to' => 'Auto-converts to :price',
+                    'title' => 'Currency Prices',
+                ],
+
                 'inventories' => [
                     'pending-ordered-qty' => 'כמות ממתינה להזמנה: :qty',
                     'pending-ordered-qty-info' => 'כמות הממתינה להזמנה תוחתם ממקור המלאי הרלוונטי לאחר השילוח. במקרה של ביטול, הכמות הממתינה תהיה זמינה למכירה מחדש.',

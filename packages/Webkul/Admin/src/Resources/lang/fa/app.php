@@ -1170,6 +1170,11 @@ return [
                     ],
                 ],
 
+                'currency' => [
+                    'converts-to' => 'Auto-converts to :price',
+                    'title' => 'Currency Prices',
+                ],
+
                 'inventories' => [
                     'pending-ordered-qty' => 'موجودی در حال انتظار برای تعداد سفارشی: :qty',
                     'pending-ordered-qty-info' => 'تعداد در حال انتظار برای تعداد محصول سفارشی پس از ارسال از منبع موجودی مربوطه کم می‌شود. در صورت لغو، تعداد در حال انتظار برای فروش در دسترس خواهد بود.',

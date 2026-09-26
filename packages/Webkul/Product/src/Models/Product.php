@@ -100,6 +100,14 @@ class Product extends Model implements ProductContract
     }
 
     /**
+     * Get the per-currency price overrides that own the product.
+     */
+    public function currency_prices(): HasMany
+    {
+        return $this->hasMany(ProductCurrencyPriceProxy::modelClass());
+    }
+
+    /**
      * Get the product customer group prices that owns the product.
      */
     public function catalog_rule_prices(): HasMany

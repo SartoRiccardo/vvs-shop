@@ -1170,6 +1170,11 @@ return [
                     ],
                 ],
 
+                'currency' => [
+                    'converts-to' => '自動換算価格：:price',
+                    'title' => '通貨別価格',
+                ],
+
                 'inventories' => [
                     'pending-ordered-qty' => '保留中の注文数量: :qty',
                     'pending-ordered-qty-info' => '出荷後、対応する在庫ソースから保留中の注文数量が差し引かれます。キャンセルの場合、保留中の数量は販売可能になります。',

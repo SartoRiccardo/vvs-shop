@@ -14,6 +14,7 @@ use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Product\Exceptions\InsufficientProductInventoryException;
 use Webkul\Product\Helpers\Indexers\Price\Booking as BookingIndexer;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\Product\Repositories\ProductCurrencyPriceRepository;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
@@ -75,6 +76,7 @@ class Booking extends AbstractType
         protected ProductImageRepository $productImageRepository,
         protected ProductVideoRepository $productVideoRepository,
         protected ProductCustomerGroupPriceRepository $productCustomerGroupPriceRepository,
+        ProductCurrencyPriceRepository $productCurrencyPriceRepository,
         protected BookingProductRepository $bookingProductRepository,
         protected BookingHelper $bookingHelper
     ) {}
@@ -472,8 +474,8 @@ class Booking extends AbstractType
                 ],
 
                 'final' => [
-                    'price' => core()->convertPrice($finalFrom),
-                    'formatted_price' => core()->currency($finalFrom),
+                    'price' => $this->convertPriceForProduct($finalFrom),
+                    'formatted_price' => core()->formatPrice($this->convertPriceForProduct($finalFrom)),
                 ],
             ],
         ])->render();

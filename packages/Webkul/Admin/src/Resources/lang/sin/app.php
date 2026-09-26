@@ -1170,6 +1170,11 @@ return [
                     ],
                 ],
 
+                'currency' => [
+                    'converts-to' => 'Auto-converts to :price',
+                    'title' => 'Currency Prices',
+                ],
+
                 'inventories' => [
                     'pending-ordered-qty' => 'අමතර ඇණවුම් ප්‍රමය: :qty',
                     'pending-ordered-qty-info' => 'ස්ථිර ප්‍රමාණය ඉස්වීමේ පසු මෙම අනුමැතියෙන් සූදානමය කරනු ඇත. එක්සත් කිරීමට ස්ථිර විය හැකි අමතර ප්‍රමාණය වියයි.',

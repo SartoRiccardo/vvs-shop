@@ -1170,6 +1170,11 @@ return [
                     ],
                 ],
 
+                'currency' => [
+                    'converts-to' => 'Konvertiert automatisch zu :price',
+                    'title' => 'Währungspreise',
+                ],
+
                 'inventories' => [
                     'pending-ordered-qty' => 'Ausstehende Bestellmenge: :qty',
                     'pending-ordered-qty-info' => 'Die ausstehende Bestellmenge wird nach dem Versand von der jeweiligen Lagerquelle abgezogen. Im Falle einer Stornierung steht die ausstehende Menge zum Verkauf zur Verfügung.',

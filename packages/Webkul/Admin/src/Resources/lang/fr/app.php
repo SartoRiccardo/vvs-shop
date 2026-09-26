@@ -1170,6 +1170,11 @@ return [
                     ],
                 ],
 
+                'currency' => [
+                    'converts-to' => 'Converti automatiquement en :price',
+                    'title' => 'Prix par devise',
+                ],
+
                 'inventories' => [
                     'pending-ordered-qty' => 'Quantité commandée en attente : :qty',
                     'pending-ordered-qty-info' => 'La quantité en attente de commande sera déduite de la source d\'inventaire respective après l\'expédition. En cas d\'annulation, la quantité en attente sera disponible à la vente.',
