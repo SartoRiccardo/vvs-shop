@@ -8,6 +8,84 @@
         ->values()
         ->all();
 
+    /**
+     * Configured under Settings → Configuration → General → SEO → Return
+     * policy (schema.org). Needs a return window AND an applicable country
+     * (Google requires the latter); otherwise nothing is emitted.
+     */
+    $returnDays = core()->getConfigData('general.seo.return_policy.merchant_return_days');
+
+    $applicableCountry = core()->getConfigData('general.seo.return_policy.applicable_country')
+        ?: core()->getConfigData('sales.shipping.origin.country');
+
+    $returnPolicy = $returnDays !== null && $returnDays !== '' && $applicableCountry ? array_filter([
+        '@type' => 'MerchantReturnPolicy',
+        'applicableCountry' => $applicableCountry,
+        'returnPolicyCategory' => 'https://schema.org/MerchantReturnFiniteReturnWindow',
+        'merchantReturnDays' => (int) $returnDays,
+        'returnMethod' => 'https://schema.org/'.(core()->getConfigData('general.seo.return_policy.return_method') ?: 'ReturnByMail'),
+        'returnFees' => 'https://schema.org/'.(core()->getConfigData('general.seo.return_policy.return_fees') ?: 'FreeReturn'),
+        'merchantReturnLink' => core()->getConfigData('general.seo.return_policy.return_policy_url'),
+    ]) : null;
+
+    /**
+     * Geo-matched shipping details, configured under Sales → Shipping
+     * settings → Shipping details (schema.org). Destination is the geo
+     * header when present, else the fallback country; the rate is the
+     * cheapest active one for this product's weight. No rate for a country
+     * = nothing emitted.
+     */
+    $destinationCountry = request()->header('cf-ipcountry')
+        ?: core()->getConfigData('sales.shipping.schema.fallback_country')
+        ?: 'US';
+
+    $schemaShipping = class_exists(\Webkul\PosteShipping\Helpers\SchemaShipping::class)
+        ? app(\Webkul\PosteShipping\Helpers\SchemaShipping::class)->getCheapestRate(
+            $destinationCountry,
+            (float) $product->weight + 0.1
+        )
+        : null;
+
+    $handlingMin = core()->getConfigData('sales.shipping.schema.handling_days_min');
+    $handlingMax = core()->getConfigData('sales.shipping.schema.handling_days_max');
+    $transitMin = core()->getConfigData('sales.shipping.schema.transit_days_min');
+    $transitMax = core()->getConfigData('sales.shipping.schema.transit_days_max');
+
+    $deliveryTime = $handlingMin !== null && $handlingMin !== ''
+        && $handlingMax !== null && $handlingMax !== ''
+        && $transitMin !== null && $transitMin !== ''
+        && $transitMax !== null && $transitMax !== ''
+        ? [
+            '@type' => 'DeliveryTimeSpecification',
+            'handlingTime' => [
+                '@type' => 'QuantitativeValue',
+                'minValue' => (int) $handlingMin,
+                'maxValue' => (int) $handlingMax,
+                'unitCode' => 'DAY',
+            ],
+            'transitTime' => [
+                '@type' => 'QuantitativeValue',
+                'minValue' => (int) $transitMin,
+                'maxValue' => (int) $transitMax,
+                'unitCode' => 'DAY',
+            ],
+        ]
+        : null;
+
+    $shippingDetails = $schemaShipping ? array_filter([
+        '@type' => 'OfferShippingDetails',
+        'shippingRate' => [
+            '@type' => 'MonetaryAmount',
+            'value' => round($schemaShipping['price'], 2),
+            'currency' => core()->getCurrentCurrencyCode(),
+        ],
+        'shippingDestination' => [
+            '@type' => 'DefinedRegion',
+            'addressCountry' => $destinationCountry,
+        ],
+        'deliveryTime' => $deliveryTime,
+    ]) : null;
+
     $productJsonLd = array_filter([
         '@context' => 'https://schema.org',
         '@type' => 'Product',
@@ -20,7 +98,7 @@
             'name' => core()->getConfigData('general.seo.open_graph.site_name')
                 ?: core()->getCurrentChannel()->name,
         ],
-        'offers' => [
+        'offers' => array_filter([
             '@type' => 'Offer',
             'url' => route('shop.product_or_category.index', $product->url_key),
             'priceCurrency' => core()->getCurrentCurrencyCode(),
@@ -34,7 +112,9 @@
             'availability' => $typeInstance->isSaleable()
                 ? 'https://schema.org/InStock'
                 : 'https://schema.org/OutOfStock',
-        ],
+            'hasMerchantReturnPolicy' => $returnPolicy,
+            'shippingDetails' => $shippingDetails,
+        ]),
     ]);
 @endphp
 

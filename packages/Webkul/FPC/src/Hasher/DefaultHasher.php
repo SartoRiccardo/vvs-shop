@@ -38,6 +38,15 @@ class DefaultHasher extends BaseDefaultHasher
             .'-'.core()->getCurrentCurrency()->code
             .'-'.$this->cacheProfile->useCacheNameSuffix($request);
 
+        /**
+         * Product pages embed geo-matched shippingDetails in their structured
+         * data, so each visitor country needs its own cache entry. Absent
+         * header (internal traffic) keys as XX.
+         */
+        if ($request->routeIs('shop.product_or_category.*')) {
+            $cacheNameSuffix .= '-'.($request->header('cf-ipcountry') ?? 'XX');
+        }
+
         return $cacheNameSuffix;
     }
 }

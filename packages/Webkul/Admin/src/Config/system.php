@@ -465,6 +465,63 @@ return [
             ],
         ],
     ], [
+        'key' => 'general.seo.return_policy',
+        'name' => 'Return policy (schema.org)',
+        'info' => 'Emitted as MerchantReturnPolicy in product structured data. Leave the return window empty to omit it entirely.',
+        'sort' => 5,
+        'fields' => [
+            [
+                'name' => 'merchant_return_days',
+                'title' => 'Return window (days)',
+                'type' => 'text',
+                'validation' => 'integer|min:0',
+            ], [
+                'name' => 'return_fees',
+                'title' => 'Who pays return shipping',
+                'type' => 'select',
+                'default' => 'FreeReturn',
+                'options' => [
+                    [
+                        'title' => 'Free returns',
+                        'value' => 'FreeReturn',
+                    ], [
+                        'title' => 'Customer pays return shipping',
+                        'value' => 'ReturnFeesCustomerResponsibility',
+                    ], [
+                        'title' => 'Customer pays a flat fee',
+                        'value' => 'ReturnShippingFees',
+                    ],
+                ],
+            ], [
+                'name' => 'return_method',
+                'title' => 'How items are returned',
+                'type' => 'select',
+                'default' => 'ReturnByMail',
+                'options' => [
+                    [
+                        'title' => 'By mail',
+                        'value' => 'ReturnByMail',
+                    ], [
+                        'title' => 'In store',
+                        'value' => 'ReturnInStore',
+                    ], [
+                        'title' => 'At a pickup kiosk',
+                        'value' => 'ReturnAtKiosk',
+                    ],
+                ],
+            ], [
+                'name' => 'applicable_country',
+                'title' => 'Country the policy applies to',
+                'info' => 'Defaults to the shipping origin country.',
+                'type' => 'country',
+            ], [
+                'name' => 'return_policy_url',
+                'title' => 'Policy page URL',
+                'type' => 'text',
+                'validation' => 'urlnullable',
+            ],
+        ],
+    ], [
         'key' => 'general.exchange_rates',
         'name' => 'admin::app.configuration.index.general.exchange-rates.title',
         'info' => 'admin::app.configuration.index.general.exchange-rates.info',
@@ -2135,6 +2192,40 @@ return [
                 'title' => 'admin::app.configuration.index.sales.shipping-setting.origin.bank-name',
                 'type' => 'text',
                 'channel_based' => true,
+            ],
+        ],
+    ], [
+        'key' => 'sales.shipping.schema',
+        'name' => 'Shipping details (schema.org)',
+        'info' => 'Feeds the OfferShippingDetails structured data on product pages. The rate is computed live from your shipping tables for the visitor\'s country (geo header, else the fallback country). Delivery time fields are optional — leave them empty and no delivery time is emitted.',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'fallback_country',
+                'title' => 'Fallback country',
+                'info' => 'Used only when the geo header is missing (direct/internal traffic).',
+                'type' => 'country',
+                'default' => 'US',
+            ], [
+                'name' => 'handling_days_min',
+                'title' => 'Handling time, min days',
+                'type' => 'text',
+                'validation' => 'integer',
+            ], [
+                'name' => 'handling_days_max',
+                'title' => 'Handling time, max days',
+                'type' => 'text',
+                'validation' => 'integer',
+            ], [
+                'name' => 'transit_days_min',
+                'title' => 'Transit time, min days',
+                'type' => 'text',
+                'validation' => 'integer',
+            ], [
+                'name' => 'transit_days_max',
+                'title' => 'Transit time, max days',
+                'type' => 'text',
+                'validation' => 'integer',
             ],
         ],
     ], [
